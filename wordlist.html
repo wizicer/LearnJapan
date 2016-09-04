@@ -1,0 +1,44 @@
+---
+layout: minimal
+title: "Word List"
+permalink: /wordlist/index.html
+description: "Word List for your words"
+---
+
+<div id="words">
+  <input class="search" placeholder="Search" />
+  <table>
+      <tr>
+        <th><button class="sort" data-sort="lesson">lesson</button></th>
+        <th><button class="sort" data-sort="word">kana</button></th>
+        <th><button class="sort" data-sort="type">type</button></th>
+        <th><button class="sort" data-sort="description">description</button></th>
+      </tr>
+    <!-- IMPORTANT, class="list" have to be at tbody -->
+    <tbody class="list">
+    {% for word in site.data.words  %}
+      <tr>
+        <td class="lesson">{{ word.lesson }}</td>
+        {% if word.kanji != null %}
+        <td class="word"><ruby>{{ word.kanji }}<rt>{{ word.kana }}</rt></ruby></td>
+        {% else %}
+        <td class="word">{{ word.kana }}</td>
+        {% endif %}
+        <td class="type">{{ word.type }}</td>
+        <td class="description">{{ word.description }}</td>
+        <td class="kana" style="display:none;">{{ word.kana }}</td>
+        <td class="kanji" style="display:none;">{{ word.kanji }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+<script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+<script>
+var options = {
+  valueNames: [ 'lesson','word','type','description' ]
+};
+
+var userList = new List('words', options);
+</script>
