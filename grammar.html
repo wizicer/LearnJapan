@@ -1,0 +1,49 @@
+---
+layout: minimal
+title: "Grammar"
+permalink: /grammar/index.html
+description: "Grammars"
+---
+
+<div id="words">
+  <input class="search" placeholder="Search" />
+  <table>
+      <tr>
+        <th><button class="sort" data-sort="grammar">grammar</button></th>
+        <th><button class="sort" data-sort="auxiliary">auxiliary</button></th>
+        <th><button class="sort" data-sort="description">description</button></th>
+      </tr>
+    <tbody class="list">
+    {% for grammar in site.data.grammar  %}
+      <tr>
+        <td class="grammar">{{ grammar.grammar }}</td>
+        <td class="auxiliary">
+        {% for aux in grammar.auxiliary  %}
+        {{aux}}<br />
+        {% endfor %}
+        </td>
+        <td class="description">
+          <ul>
+          {% for explain in grammar.explains  %}
+          <li>
+          {{explain.explain}}<br />
+          {{explain.examplej}}<br />
+          {{explain.examplec}}
+          </li>
+          {% endfor %}
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+<script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+<script>
+var options = {
+  valueNames: [ 'grammar','auxiliary','description' ]
+};
+
+var userList = new List('words', options);
+</script>
