@@ -12,22 +12,20 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Your awesome title
-email: your-email@domain.com
+title: 冰河魔法师的标准日本语学习日志
+email: icer@icerdesign.com
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  冰河魔法师的标准日本语学习日志
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://example.com" # the base hostname & protocol for your site
+url: "http://japan.icerdesign.com" # the base hostname & protocol for your site
 
 # User settings
-username: Lorem Ipsum
-user_description: Developer at Lorem Ipsum Dolor
-twitter_username: jekyllrb
-github_username:  jekyll
-gplus_username:  lorem_ipsum
-disqus_username: lorem_ipsum
+username: 冰河魔法师
+user_description: C#资深架构师
+twitter_username: wizicer
+github_username:  wizicer
+# gplus_username:  lorem_ipsum
+# disqus_username: lorem_ipsum
 
 # Build settings
 markdown: kramdown
@@ -47,10 +45,14 @@ compress_html:
 links:
   - title: Home
     url: /
-  - title: Series
-    url: /series
-  - title: Tags
-    url: /tags
+  - title: Grammar
+    url: /grammar
+  - title: Word List
+    url: /wordlist
+  # - title: Series
+  #   url: /series
+  # - title: Tags
+  #   url: /tags
   - title: About Me
     url: /about
 
