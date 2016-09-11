@@ -26,6 +26,18 @@ $(document).ready(function() {
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
+
+                var search = $( '<input type="text" placeholder="Search" />' )
+                    .appendTo( $(column.footer()) )
+                    .on('keyup change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                        if ( column.search() !== val ) {
+                            column.search( val )
+                                .draw();
+                        }
+                    } );
             } );
         },
         pageLength: 10,
