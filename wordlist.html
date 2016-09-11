@@ -1,21 +1,23 @@
 ---
-layout: minimal
+layout: table
 title: "Word List"
 permalink: /wordlist/index.html
 description: "Word List for your words"
 ---
 
 <div id="words">
-  <input class="search" placeholder="Search" />
   <table>
+    <thead>
       <tr>
-        <th><button class="sort" data-sort="lesson">lesson</button></th>
-        <th><button class="sort" data-sort="word">kana</button></th>
-        <th><button class="sort" data-sort="type">type</button></th>
-        <th><button class="sort" data-sort="description">description</button></th>
+        <th>lesson</th>
+        <th>kana</th>
+        <th>type</th>
+        <th>description</th>
+        <th>kana</th>
+        <th>kanji</th>
       </tr>
-    <!-- IMPORTANT, class="list" have to be at tbody -->
-    <tbody class="list">
+    </thead>
+    <tbody>
     {% for word in site.data.words  %}
       <tr>
         <td class="lesson">{{ word.lesson }}</td>
@@ -26,18 +28,21 @@ description: "Word List for your words"
         {% endif %}
         <td class="type">{{ word.type }}</td>
         <td class="description">{{ word.description }}</td>
-        <td class="kana" style="display:none;">{{ word.kana }}</td>
-        <td class="kanji" style="display:none;">{{ word.kanji }}</td>
+        <td class="kana">{{ word.kana }}</td>
+        <td class="kanji">{{ word.kanji }}</td>
       </tr>
     {% endfor %}
     </tbody>
+    <tfoot>
+      <tr>
+        <td>lesson</td>
+        <td>kana</td>
+        <td>type</td>
+        <td>description</td>
+        <td>kana</td>
+        <td>kanji</td>
+      </tr>
+    </tfoot>
   </table>
 
 </div>
-<script>
-var options = {
-  valueNames: [ 'lesson','word','type','description' ]
-};
-
-var userList = new List('words', options);
-</script>

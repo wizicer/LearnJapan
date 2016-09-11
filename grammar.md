@@ -1,13 +1,10 @@
 ---
-layout: post
-title:  "grammar"
-introduction: 'grammar list'
-date:   2016-09-11 13:17:49 +0800
-main-class: 'class'
+layout: table
+title:  "句型、表达"
+permalink: /grammar/index.html
+description: "grammar"
 
 ---
-
-# 句型、表达
 
 | 句型、表达                                 | 解释                       | 课次 |
 | :---------------------------------------   | -------------------------- | ---: |
@@ -155,35 +152,3 @@ main-class: 'class'
 | ========================================   | ========================== | ==== |
 | 句型、表达                                 | 解释                       | 课次 |
 
-
-<script src="https://code.jquery.com/jquery-1.12.3.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('table').DataTable({
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
-                console.log(select);
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        },
-        pageLength: -1
-    });
-});
-</script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
