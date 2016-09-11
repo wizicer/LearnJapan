@@ -1,4 +1,4 @@
-(function( $, window, undefined ) {
+$(document).ready(function() {
   // Menu
   $("a#slide").click(function(){
     $("#sidebar,a#slide,#fade").addClass("slide");
@@ -73,4 +73,4 @@ if (screen.width > 1024) {
   window.addEventListener('scroll', scrollBanner);
 }
 
-})( Zepto, window );
+});
