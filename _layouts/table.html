@@ -7,7 +7,7 @@ layout: minimal
 
 <script>
 $(document).ready(function() {
-    $('table').DataTable({
+    table = $('table').DataTable({
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
@@ -28,7 +28,7 @@ $(document).ready(function() {
                 } );
             } );
         },
-        pageLength: -1,
+        pageLength: 10,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]]
     });
 });
