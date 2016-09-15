@@ -15,7 +15,7 @@ $padding-title-header
         max-width 100%
         margin rem(30px) auto
         display block
-    p, h1, h2, h3, h4,ul,ol, .tags, iframe, .button-post
+    p, h1, h2, h3, h4, .tags, iframe, .button-post
         center(rem(800px))
         padding 0 rem(20px)
         margin 0 auto rem(30px)
@@ -25,8 +25,16 @@ $padding-title-header
         letter-spacing 0.01rem
         +above(cut)
             font-size rem(20px)
+    ul,ol
+        center(rem(800px))
+        mainFont(300)
+        font-size rem(18px)
+        line-height 2
+        letter-spacing 0.01rem
+        +above(cut)
+            font-size rem(20px)
     li 
-        padding rem(10px) 0
+        padding 0
         ul 
         margin-bottom 0
     p,li
@@ -87,8 +95,8 @@ $padding-title-header
     blockquote
         center(rem(730px))
         border-left rem(5px) solid main
-        padding 0 rem(30px)
-        margin rem(50px) auto
+        padding 0 rem(10px)
+        margin rem(20px) auto
         +below(cut)
             width 90%
         p
