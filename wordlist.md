@@ -4,13 +4,6 @@ title: "Word List"
 permalink: /wordlist/index.html
 description: "Word List for your words"
 ---
-<style>
-.accent {
-  border-top: #FF6633 1px solid;
-  padding: 1px 0px 0px 0px;
-}
-</style>
-
 <div>
 显示列:
 - <a class="toggle-vis" data-column="0">假名</a>
@@ -881,10 +874,15 @@ description: "Word List for your words"
 ```
 
 <style>
-.japan {
-  font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+.japan, .japan a {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+.accent {
+  border-top: #FF6633 1px solid;
+  padding: 1px 0px 0px 0px;
 }
 </style>
+
 
 <script>
 $(document).ready(function() {
@@ -935,9 +933,15 @@ $(document).ready(function() {
       .draw();
   }
   setTimeout(inittable, 300);
+  $('table tbody tr td:nth-child(2)').each(function() {
+    var content = $(this).html();
+    if (content.trim() !== '&nbsp;') {
+      $(this).html('<a href="http://kanji.jitenon.jp/cat/search.php?getdata=' + content + '" target="_blank">' + content + '</a>');
+    }
+  });
   $('table tbody tr td:nth-child(5)')
-  .add('table tbody tr td:nth-child(0)')
   .add('table tbody tr td:nth-child(1)')
+  .add('table tbody tr td:nth-child(2)')
   .each(function() {
     $(this).addClass('japan');
   });
