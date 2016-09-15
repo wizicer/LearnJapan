@@ -4,6 +4,12 @@ title: "Word List"
 permalink: /wordlist/index.html
 description: "Word List for your words"
 ---
+<style>
+.accent {
+  border-top: #FF6633 1px solid;
+  padding: 1px 0px 0px 0px;
+}
+</style>
 
 <div>
 显示列:
@@ -808,8 +814,8 @@ description: "Word List for your words"
 | みじかい@3             | 短い               | 形1  | 短，短暂                   | !短(みじか)い                             | 16 |      | 50   |
 | かるい@0               | 軽い               | 形1  | 轻巧，轻，轻松，轻微       | !軽(かる)い                               | 16 |      | 51   |
 | やさしい@0             | 優しい             | 形1  | 和蔼，温和，体贴           | !優(やさ)しい                             | 16 |      | 52   |
-| ほそい                 | 細い               | 形1  | 小，细长，纤细             | !細(ほそ)い                               | 16 |      | 53   |
-| ふとい                 | 太い               | 形1  | 粗，胖                     | !太(ふと)い                               | 16 |      | 54   |
+| ほそい@2               | 細い               | 形1  | 小，细长，纤细             | !細(ほそ)い                               | 16 |      | 53   |
+| ふとい@2               | 太い               | 形1  | 粗，胖                     | !太(ふと)い                               | 16 |      | 54   |
 | くろい@2               | 黒い               | 形1  | 黑，黑色                   | !黒(くろ)い                               | 16 |      | 55   |
 | ユニーク@2             |                    | 形2  | 独特，唯一                 | ユニーク                                  | 16 |      | 56   |
 | あんぜん@0             | 安全               | 形2  | 安全                       | !安全(あんぜん)                           | 16 |      | 57   |
@@ -855,7 +861,7 @@ description: "Word List for your words"
 
 
 
-
+## 尚未录入的单词
 
 ```
 2:何なん～∕～歳さい
@@ -882,11 +888,37 @@ description: "Word List for your words"
 
 <script>
 $(document).ready(function() {
+  function getChar(sentence, start, len) {
+    if (len == undefined) {
+      len = "*";
+    } else {
+      len = "{" + len + "}"
+    }
+    var re = new RegExp("(.[ゅょゃュョャ]?){" + start + "}((.[ゅょゃュョャ]?)" + len + ")");
+    var result = re.exec(sentence)[2];
+    return result;
+  }
   $('td').each(function() {
     var content = $(this).html();
     if (content.indexOf('!') >= 0) {
       content = content.replace(/!(.*?)\((.*?)\)/g, '<rt></rt>$1<rt>$2</rt>');
       $(this).html('<ruby>' + content + '</ruby>');
+    } else if (content.indexOf('@') >= 0) {
+      var re = /(.*)@(\d)/g;
+      var match = re.exec(content);
+      var sen = match[1];
+      var num = match[2];
+      if (num == 0) {
+        content = getChar(sen, 0, 1) + "<span class='accent'>" + getChar(sen, 1) + "</span>";
+      } else if (num == 1) {
+        content = "<span class='accent'>" + getChar(sen, 0, 1) + "</span>"
+          + getChar(sen, num);
+      } else {
+        content = getChar(sen, 0, 1)
+          + "<span class='accent'>" + getChar(sen, 1, num - 1) + "</span>"
+          + getChar(sen, num);
+      }
+      $(this).html(content);
     }
   });
   $('a.toggle-vis').on('click', function(e) {
@@ -895,7 +927,6 @@ $(document).ready(function() {
     column.visible(!column.visible());
   });
   function inittable() {
-    table.column(0).visible(false);
     table.column(1).visible(false);
     table.column(6).visible(false);
     table.column(7).visible(false);
@@ -913,6 +944,7 @@ $(document).ready(function() {
 });
 </script>
 
+<!--
 ```
 exe "normal my" | '<,'>s/∕//g | exe "normal \<C-V>`yI1:\<Esc>"
 '<,'>s/\(.\{-}\):\(.\{-}\)\(（\(.\{-}\)）\)\? 〔\(.\{-}\)〕 \(.*\)/|\2|\4|\5|\6|!\4(\2)|\1||1|/g | '<,'>s/!(\(.*\))/\1/g
@@ -922,3 +954,4 @@ exe "normal my" | '<,'>s/∕//g | exe "normal \<C-V>`yI1:\<Esc>"
 '<,'>s/!\(.*\)い(\(.*\)い)/!\1(\2)い/g
 '<,'>s/!\(.*\)ます(\(.*\)ます)/!\1(\2)ます/g
 ```
+-->
