@@ -160,12 +160,6 @@ description: "grammar"
 | ========================================   | ==========================                                                     | ==== | ==  |
 | 句型、表达                                 | 解释                                                                           | 课次 | 序  |
 
-<style>
-.japan, .japan a {
-  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-}
-</style>
-
 <script>
 $(document).ready(function() {
   $('a.toggle-vis').on('click', function(e) {
