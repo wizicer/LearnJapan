@@ -58,3 +58,5 @@ links:
 
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules', 'site.vfs']
+
+la51_analytics: 17278963
