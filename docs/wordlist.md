@@ -1035,6 +1035,14 @@ $(document).ready(function() {
   .each(function() {
     $(this).addClass('japan');
   });
+  $('a.toggle-mode').on('click', function(e) {
+    e.preventDefault();
+    table.columns().visible(false);
+    $.each($(this).attr('data-column').split(/\|/), function (i, cnum) {
+        var column = table.column(cnum);
+        column.visible(true);
+    })
+  });
 });
 </script>
 
