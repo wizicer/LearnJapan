@@ -1,0 +1,12 @@
+grammar:
+    name: 语法
+    tag: grammar
+    theme: red
+word:
+    name: 单词
+    tag: word
+    theme: purple
+class:
+    name: 课文
+    tag: class
+    theme: orange

@@ -3,7 +3,7 @@ layout: compress
 ---
 
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage" {% if page.main-class %}class="post-{{ page.main-class }}"{% endif %}>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage" {% if site.data.category[page.category].theme %}class="post-{{ site.data.category[page.category].theme }}"{% endif %}>
     {% include head.html %}
     <body>
         {% include svg-icons.html %}

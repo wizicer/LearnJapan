@@ -3,9 +3,8 @@ layout: post
 title:  "词语之泉"
 introduction: '词语之泉'
 date:   2016-09-15 17:35:00 +0800
-main-class: 'class'
 tags: 词语
-categories: 初级
+category: word
 
 ---
 

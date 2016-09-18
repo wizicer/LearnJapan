@@ -3,9 +3,8 @@ layout: post
 title:  "相貌身材"
 introduction: '第十六课 补充知识 相貌身材'
 date:   2016-09-16 18:35:00 +0800
-main-class: 'class'
 tags: 补充知识
-categories: 初级
+category: word
 
 ---
 
