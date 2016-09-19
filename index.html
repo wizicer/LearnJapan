@@ -5,9 +5,9 @@ layout: default
 <main class="home" id="post" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
     <div id="grid" class="row flex-grid">
     {% for post in site.posts %}
-        <article class="box-item post-{{site.data.category[post.category].theme}}" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+        <article class="box-item post-{{site.categorythemes[post.category].theme}}" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
                 <span class="ribbon">
-                    <a href="{{site.baseurl}}/category/#{{site.data.category[post.category].tag}}"><span>{{site.data.category[post.category].name}}</span></a>
+                    <a href="{{site.baseurl}}/category/#{{site.categorythemes[post.category].tag}}"><span>{{site.categorythemes[post.category].name}}</span></a>
                 </span>
                 <div class="box-body">
                     <meta itemprop="datePublished" content="{{post.date | date_to_xmlschema }}">

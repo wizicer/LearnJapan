@@ -9,8 +9,8 @@ description: "Take a look at my series about lorem ipsum..."
 {% for tag in site.categories %}
   {% assign cate = tag[0] %}
   <a href="#tag[0]"></a>
-  {% if site.data.category[cate].name != null %}
-  <span class="tag-title" id="{{ tag[0] | slugify }}">{{site.data.category[cate].name}}</span>
+  {% if site.categorythemes[cate].name != null %}
+  <span class="tag-title" id="{{ tag[0] | slugify }}">{{site.categorythemes[cate].name}}</span>
   {% else %}
   <span class="tag-title" id="{{ tag[0] | slugify }}">{{ tag[0] | capitalize }}</span>
   {% endif %}
