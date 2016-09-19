@@ -983,6 +983,7 @@ description: "Word List for your words"
 | 假名                   | 汉字               | 词性 | 解释                       | 单词                                      | 课 | 记忆 | 序号 |
 
 
+<!--
 ## 尚未录入的单词
 
 ```
@@ -1003,6 +1004,7 @@ description: "Word List for your words"
 17:～中じゅうに
 19:～たち
 ```
+-->
 
 <script>
 $(document).ready(function() {
@@ -1043,8 +1045,48 @@ $(document).ready(function() {
         column.visible(true);
     })
   });
+  var quizdata;
+  var quizid;
+  $('a.toggle-hello').on('click', function(e) {
+    e.preventDefault();
+    quizdata = table.rows({filter: 'applied'}).data()
+      .map(function(p) { return [p[3], p[4]]})
+      .reduce(function(a, b){ return a.concat(b); });
+    quizid = 0;
+    $("#content").html(quizdata[quizid]);
+  });
+  $('a.toggle-next').on('click', function(e) {
+    e.preventDefault();
+    quizid++;
+    $("#content").html(quizdata[quizid]);
+  });
 });
 </script>
+<style>
+.card {
+  position: relative;
+  float: left;
+  margin-right: 10px;
+  width: 80%;
+  height: 150px;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  vertical-align: middle;
+}
+.card p {
+  text-align: center;
+  font: 22px Georgia, Times New Roman, serif;
+}
+</style>
+
+<a class="toggle-hello">start</a>
+<div class="card">
+<p id="content">
+</p>
+</div>
+<a class="toggle-next">next</a>
 
 <!--
 ```
