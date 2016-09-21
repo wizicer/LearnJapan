@@ -26,6 +26,7 @@ description: "Word List for your words"
 | {{word.kana}} | {{word.kanji}} | {{word.pos}} | {{word.desc}} | {{word.word}} | {{word.lesson}} |      | {{word.idx}} | {% endfor %}
 | ====          | ====           | ====         | ====          | ====          | ==              | ==== | ==           |
 | 假名          | 汉字           | 词性         | 解释          | 单词          | 课              | 记忆 | 序号         |
+{:.display width="100%"}
 
 
 <!--
