@@ -92,15 +92,15 @@ $(document).ready(function() {
   });
   var quizdata;
   var quizid;
-  $('a.toggle-hello').on('click', function(e) {
+  $('button.toggle-start').on('click', function(e) {
     e.preventDefault();
     quizdata = table.rows({filter: 'applied'}).data()
-      .map(function(p) { return [p[3], p[4]]})
+      .map(function(p) { return [p[3], "<span class='japan'>" + (p[1] == "&nbsp;" ? p[0] : p[4] + "<br />" + p[0]) + "</span>"]})
       .reduce(function(a, b){ return a.concat(b); });
     quizid = 0;
     $("#content").html(quizdata[quizid]);
   });
-  $('a.toggle-next').on('click', function(e) {
+  $('button.toggle-next').on('click', function(e) {
     e.preventDefault();
     quizid++;
     $("#content").html(quizdata[quizid]);
@@ -109,8 +109,6 @@ $(document).ready(function() {
 </script>
 <style>
 .card {
-  position: relative;
-  float: left;
   margin-right: 10px;
   width: 80%;
   height: 150px;
@@ -118,20 +116,36 @@ $(document).ready(function() {
   background: #fff;
   -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
   box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-  vertical-align: middle;
+  display: table;
+  margin: 0px auto;
 }
 .card p {
   text-align: center;
-  font: 22px Georgia, Times New Roman, serif;
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 22px;
+}
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+}
+button.toggle-next {
+  width: 80%;
 }
 </style>
 
-<a class="toggle-hello">start</a>
+<button class="toggle-start">start</button>
 <div class="card">
 <p id="content">
 </p>
 </div>
-<a class="toggle-next">next</a>
+<button class="toggle-next">next</button>
 
 <!--
 ```
