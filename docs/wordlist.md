@@ -9,17 +9,6 @@ description: "Word List for your words"
 - <a class="toggle-mode" data-column="0|2|3|4|5">普通浏览</a>
 - <a class="toggle-mode" data-column="2|3|5|6">看中文忆日文</a>
 </div>
-<div>
-显示列:
-- <a class="toggle-vis" data-column="0">假名</a>
-- <a class="toggle-vis" data-column="1">汉字</a>
-- <a class="toggle-vis" data-column="2">词性</a>
-- <a class="toggle-vis" data-column="3">解释</a>
-- <a class="toggle-vis" data-column="4">单词</a>
-- <a class="toggle-vis" data-column="5">课</a>
-- <a class="toggle-vis" data-column="6">记忆</a>
-- <a class="toggle-vis" data-column="7">序号</a>
-</div>
 
 | 假名          | 汉字           | 词性         | 解释          | 单词          | 课              | 记忆 | 序号         |
 | ----          | ----           | ----         | ----          | ----          | --              | --   | --           | {% for word in site.data.words %}
@@ -56,11 +45,6 @@ description: "Word List for your words"
 $(document).ready(function() {
   $('td').each(function() {
     $(this).html(japanruby($(this).html()));
-  });
-  $('a.toggle-vis').on('click', function(e) {
-    e.preventDefault();
-    var column = table.column( $(this).attr('data-column') );
-    column.visible(!column.visible());
   });
   function inittable() {
     table.column(1).visible(false);
@@ -106,6 +90,11 @@ $(document).ready(function() {
     quizid++;
     $("#content").html(quizdata[quizid]);
   });
+  $('button.toggle-previous').on('click', function(e) {
+    e.preventDefault();
+    quizid--;
+    $("#content").html(quizdata[quizid]);
+  });
 });
 </script>
 <style>
@@ -142,6 +131,7 @@ button.toggle-next {
 </style>
 
 <button class="toggle-start">start</button>
+<button class="toggle-previous">previous</button>
 <div class="card">
 <p id="content">
 </p>
