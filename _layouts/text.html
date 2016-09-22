@@ -52,7 +52,7 @@ $(document).ready(function() {
     $('.japan').toggleClass("hideruby");
   });
 
-  openTab("");
+  openTab("l0");
 });
 </script>
 
@@ -68,13 +68,16 @@ $(document).ready(function() {
 });
 </script>
 
+<div id="l0" class="lesson" markdown="1">
+click lesson to open it
+</div>
 {{ content }}
 
 <!--
 ```
 '<,'>s/[　：，。 ]\zs\ze[^　：，。!]\{-}(/!/g
 %s/<基本课文译文>/基本课文译文/g
-%s/<应用课文译文>/应用课文译文/g
+%s/<应用课文译文>/应用课文译文 /g
 '<,'>s/^* $/---/g
 ```
 -->
