@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: tablepost
 title:  "相貌身材"
 introduction: '第十六课 补充知识 相貌身材'
 date:   2016-09-16 18:35:00 +0800
@@ -17,11 +17,3 @@ category: word
 | !顔(かお)            | !大(おお)きい           | !小(ちい)さい             |
 | !背(せ)              | !高(たか)い             | !低(ひく)い               |
 {:.japan.hidden}
-
-<script>
-$(document).ready(function() {
-  $('td').each(function() {
-    $(this).html(japanruby($(this).html()));
-  });
-});
-</script>

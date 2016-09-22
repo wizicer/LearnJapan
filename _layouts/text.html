@@ -59,11 +59,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
   $('li').add('h1').add('h2').add('p').each(function() {
-    var content = $(this).html();
-    if (content.indexOf('!') >= 0) {
-      content = content.replace(/!(.*?)\((.*?)\)/g, '<rt></rt>$1<rt>$2</rt>');
-      $(this).html('<ruby>' + content + '</ruby>');
-    }
+    $(this).html(japanruby($(this).html()));
   });
 });
 </script>

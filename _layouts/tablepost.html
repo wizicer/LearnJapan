@@ -1,0 +1,34 @@
+---
+layout: post
+---
+<style>
+.japan.hideruby ruby rt {
+  color: white;
+}
+.japan.hideruby ruby rt:hover {
+  color: inherit;
+}
+</style>
+
+<div class="tags">
+  <a class="toggle-ruby" href="#">注音</a>
+  <a class="toggle-japan" href="#">原文</a>
+</div>
+
+{{ content }}
+
+<script>
+$(document).ready(function() {
+  $('td').each(function() {
+    $(this).html(japanruby($(this).html()));
+  });
+  $('a.toggle-japan').on('click', function(e) {
+    e.preventDefault();
+    $('.japan').toggleClass("hidden");
+  });
+  $('a.toggle-ruby').on('click', function(e) {
+    e.preventDefault();
+    $('.japan').toggleClass("hideruby");
+  });
+});
+</script>
