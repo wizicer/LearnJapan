@@ -1,0 +1,80 @@
+---
+layout: post
+---
+
+<style>
+.tags {
+  position: fixed;
+  top: 60px;
+}
+.tags a {
+  background: white;
+}
+.lesson {
+  display: none;
+}
+.lesson.active {
+  display: inherit;
+}
+.japan.collapse {
+  display: none;
+}
+.japan.hideruby ruby rt {
+  color: white;
+}
+.japan.hideruby ruby rt:hover {
+  color: inherit;
+}
+</style>
+<div class="tags">
+  {% for num in page.lessons %}
+    <a class="toggle-lesson" data-lesson="{{num}}" href="#">{{num}}</a>
+  {% endfor %}
+  <a class="toggle-ruby" href="#">Ruby</a>
+  <a class="toggle-japan" href="#">japan</a>
+</div>
+<script>
+$(document).ready(function() {
+  function openTab(tabName) {
+    $('.lesson').removeClass('active');
+    $('#'+tabName).addClass("active");
+  }
+  $('a.toggle-lesson').on('click', function(e) {
+    e.preventDefault();
+    openTab("l"+$(this).attr('data-lesson'));
+  });
+  $('a.toggle-japan').on('click', function(e) {
+    e.preventDefault();
+    $('.japan').toggleClass("collapse");
+  });
+  $('a.toggle-ruby').on('click', function(e) {
+    e.preventDefault();
+    $('.japan').toggleClass("hideruby");
+  });
+
+  openTab("");
+});
+</script>
+
+<script>
+$(document).ready(function() {
+  $('li').add('h1').add('h2').add('p').each(function() {
+    var content = $(this).html();
+    if (content.indexOf('!') >= 0) {
+      content = content.replace(/!(.*?)\((.*?)\)/g, '<rt></rt>$1<rt>$2</rt>');
+      $(this).html('<ruby>' + content + '</ruby>');
+    }
+  });
+});
+</script>
+
+{{ content }}
+
+<!--
+```
+'<,'>s/[　：，。 ]\zs\ze[^　：，。!]\{-}(/!/g
+%s/<基本课文译文>/基本课文译文/g
+%s/<应用课文译文>/应用课文译文/g
+'<,'>s/^* $/---/g
+```
+-->
