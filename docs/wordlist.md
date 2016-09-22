@@ -4,6 +4,27 @@ title: "Word List"
 permalink: /wordlist/index.html
 description: "Word List for your words"
 ---
+<style>
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loading {
+  display: none;
+}
+</style>
+
+<div class="loader"></div>
+<div class="loading" markdown="1">
 <div>
 模式:
 - <a class="toggle-mode" data-column="0|2|3|4|5">普通浏览</a>
@@ -18,6 +39,15 @@ description: "Word List for your words"
 | 假名          | 汉字           | 词性         | 解释          | 单词          | 课              | 记忆 | 序号         |
 {:.display width="100%"}
 
+<button class="toggle-start">start</button>
+<button class="toggle-previous">previous</button>
+<div class="card">
+<p id="content">
+</p>
+</div>
+<button class="toggle-next">next</button>
+
+</div>
 
 <!--
 ## 尚未录入的单词
@@ -77,6 +107,8 @@ $(document).ready(function() {
           search.appendTo($('<li>'+$(column.header()).html()+': </li>')).parent().appendTo( $("#filter") )
         }
     } );
+    $(".loader").hide();
+    $(".loading").removeClass('loading');
   }
   setTimeout(inittable, 300);
   $('table tbody tr td:nth-child(2)').each(function() {
@@ -153,14 +185,6 @@ button.toggle-next {
   width: 80%;
 }
 </style>
-
-<button class="toggle-start">start</button>
-<button class="toggle-previous">previous</button>
-<div class="card">
-<p id="content">
-</p>
-</div>
-<button class="toggle-next">next</button>
 
 <!--
 ```
