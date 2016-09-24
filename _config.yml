@@ -46,15 +46,15 @@ links:
   - title: Home
     url: /
   - title: Grammar
-    url: /grammar
+    url: /grammar/index.html
   - title: Word List
-    url: /wordlist
+    url: /wordlist/index.html
   # - title: Series
   #   url: /series
   # - title: Tags
   #   url: /tags
   - title: About Me
-    url: /about
+    url: /about/index.html
 
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules', 'site.vfs']
