@@ -15,6 +15,7 @@ function japanruby(content) {
   } else if (content.indexOf('@') >= 0) {
     var re = /(.*)@(\d)/g;
     var match = re.exec(content);
+    if (!match) return content;
     var sen = match[1];
     var num = match[2];
     if (num == 0) {
