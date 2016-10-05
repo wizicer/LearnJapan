@@ -159,6 +159,7 @@ description: "grammar"
 | 名词谓语形式的简体形                       |                                                                                | 22   | 141 |
 | ========================================   | ==========================                                                     | ==== | ==  |
 | 句型、表达                                 | 解释                                                                           | 课次 | 序  |
+{:.display width="100%"}
 
 <script>
 $(document).ready(function() {
@@ -172,6 +173,8 @@ $(document).ready(function() {
     table
       .order( [3, 'asc'] )
       .draw();
+
+    initFilters();
   }
   setTimeout(inittable, 300);
   $('table tbody tr td:nth-child(1)')

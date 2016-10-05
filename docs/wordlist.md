@@ -4,33 +4,11 @@ title: "Word List"
 permalink: /wordlist/index.html
 description: "Word List for your words"
 ---
-<style>
-.loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-.loading {
-  display: none;
-}
-</style>
-
-<div class="loader"></div>
-<div class="loading" markdown="1">
 <div>
 模式:
 - <a class="toggle-mode" data-column="0|2|3|4|5">普通浏览</a>
 - <a class="toggle-mode" data-column="2|3|5|6">看中文忆日文</a>
 </div>
-<ul id="filter"></ul>
 
 | 假名          | 汉字           | 词性         | 解释          | 单词          | 课              | 记忆 | 序号         |
 | ----          | ----           | ----         | ----          | ----          | --              | --   | --           | {% for word in site.data.words %}
@@ -46,8 +24,6 @@ description: "Word List for your words"
 </p>
 </div>
 <button class="toggle-next">next</button>
-
-</div>
 
 <!--
 ## 尚未录入的单词
@@ -85,30 +61,7 @@ $(document).ready(function() {
       .order( [5, 'asc'], [7, 'asc'] )
       .draw();
 
-    table.columns().every( function () {
-        var column = this;
-        if (column.data().unique().length * 5 < column.data().length) {
-          var select = $('<select><option value=""></option></select>')
-            .on( 'change', function () {
-              var val = $.fn.dataTable.util.escapeRegex($(this).val());
-              column.search( val ? '^'+val+'$' : '', true, false ).draw();
-            } );
-
-          column.data().unique().sort().each( function ( d, j ) { select.append( '<option value="'+d+'">'+d+'</option>' )});
-          select.appendTo($('<li>'+$(column.header()).html()+': </li>')).parent().appendTo( $("#filter") )
-        } else {
-          var search = $( '<input type="text" placeholder="Search" />' )
-            .on('keyup change', function () {
-              var val = $.fn.dataTable.util.escapeRegex($(this).val());
-              if ( column.search() !== val ) {
-                column.search( val ).draw();
-              }
-            } );
-          search.appendTo($('<li>'+$(column.header()).html()+': </li>')).parent().appendTo( $("#filter") )
-        }
-    } );
-    $(".loader").hide();
-    $(".loading").removeClass('loading');
+    initFilters();
   }
   setTimeout(inittable, 300);
   $('table tbody tr td:nth-child(2)').each(function() {
