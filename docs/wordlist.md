@@ -19,6 +19,7 @@ description: "Word List for your words"
 
 <button class="toggle-start">start</button>
 <button class="toggle-previous">previous</button>
+<div id="card-summary"></div>
 <div class="card">
 <p id="content">
 </p>
@@ -89,20 +90,27 @@ $(document).ready(function() {
   $('button.toggle-start').on('click', function(e) {
     e.preventDefault();
     quizdata = table.rows({filter: 'applied'}).data()
-      .map(function(p) { return [p[3], "<span class='japan'>" + (p[1] == "&nbsp;" ? p[0] : p[4] + "<br />" + p[0]) + "</span>"]})
+      .map(function(p) {
+        var desc = "<span class='japan'>" + (p[1] == "&nbsp;" ? p[0] : p[4] + "<br />" + p[0]) + "</span>";
+        desc += "<span class='card-pos'>[" + p[2] + "]</span>";
+        return [p[3], desc]})
       .reduce(function(a, b){ return a.concat(b); });
     quizid = 0;
-    $("#content").html(quizdata[quizid]);
+    displayquiz();
   });
+  function displayquiz() {
+    $("#content").html(quizdata[quizid]);
+    $("#card-summary").html((Math.floor(quizid / 2) + 1) + '/' + (quizdata.length / 2));
+  }
   $('button.toggle-next').on('click', function(e) {
     e.preventDefault();
     quizid++;
-    $("#content").html(quizdata[quizid]);
+    displayquiz();
   });
   $('button.toggle-previous').on('click', function(e) {
     e.preventDefault();
     quizid--;
-    $("#content").html(quizdata[quizid]);
+    displayquiz();
   });
 });
 </script>
