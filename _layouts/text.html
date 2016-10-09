@@ -10,6 +10,9 @@ layout: post
 .tags a {
   background: white;
 }
+.tags a.toggle-lesson.active {
+  background: wheat;
+}
 .lesson {
   display: none;
 }
@@ -28,16 +31,23 @@ layout: post
 </style>
 <div class="tags">
   {% for num in page.lessons %}
-    <a class="toggle-lesson" data-lesson="{{num}}" href="#">{{num}}</a>
+    <a class="toggle-lesson tl{{num}}" data-lesson="{{num}}" href="#">{{num}}</a>
   {% endfor %}
   <a class="toggle-ruby" href="#">注音</a>
   <a class="toggle-japan" href="#">原文</a>
+  <audio id="player" controls>
+  </audio>
 </div>
 <script>
 $(document).ready(function() {
   function openTab(tabName) {
     $('.lesson').removeClass('active');
+    $('.toggle-lesson').removeClass('active');
+    $('.t'+tabName).addClass("active");
     $('#'+tabName).addClass("active");
+    var player = $('#player').get(0);
+    player.src = "/assets/audio/lesson/" + tabName + ".mp3";
+    player.load();
   }
   $('a.toggle-lesson').on('click', function(e) {
     e.preventDefault();
