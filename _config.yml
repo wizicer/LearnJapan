@@ -57,7 +57,7 @@ links:
     url: /about/index.html
 
 # exclude my node related stuff
-exclude: ['package.json', 'src', 'node_modules', 'site.vfs']
+exclude: ['package.json', 'src', 'node_modules', 'site.vfs', 'Gemfile.lock', 'Gemfile', 'CNAME', 'LICENSE', '*.bat', 'gulpfile.js']
 
 la51_analytics: 17278963
 

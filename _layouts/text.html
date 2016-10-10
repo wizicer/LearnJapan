@@ -46,7 +46,7 @@ $(document).ready(function() {
     $('.t'+tabName).addClass("active");
     $('#'+tabName).addClass("active");
     var player = $('#player').get(0);
-    player.src = "/assets/audio/lesson/" + tabName + ".mp3";
+    player.src = "{{ site.baseurl }}/assets/audio/lesson/" + tabName + ".mp3";
     player.load();
   }
   $('a.toggle-lesson').on('click', function(e) {
