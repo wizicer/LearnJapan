@@ -143,30 +143,7 @@ button.translate {
 {% for lnum in page.lessons %}
 {% assign id = lnum | prepend: 'l' %}
 {% assign lesson = site.data.lessons[id] %}
-<div id="{{id}}" class="lesson" markdown="1">
-<div class="japan" markdown="1">
-# {{lesson.title}}
-## 基本課文
-{{lesson.basic4}}
-
-{{lesson.basicc}}
-
-## {{lesson.contitle}}
-
-{{lesson.context}}
- 
-</div>
-## 基本课文译文
-{{lesson.basic4t}}
-
-{{lesson.basicct}}
-
-
-## 应用课文译文 {{lesson.contitlet}}
-
-{{lesson.contextt}}
- 
-</div>
+{% include lesson.html id=id lesson=lesson %}
 {% endfor %}
 {% endcapture %}
 {{ allcontent | markdownify}}
