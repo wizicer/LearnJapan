@@ -1,0 +1,105 @@
+---
+layout: uwp
+---
+<style>
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loading {
+  display: none;
+}
+</style>
+
+<div class="loader"></div>
+<div class="loading" markdown="1">
+  <ul id="filter"></ul>
+  {{ content }}
+</div>
+
+<script>
+$(document).ready(function() {
+  table = $('table').DataTable({
+    initComplete: function () {
+      this.api().columns().every( function () {
+        var column = this;
+        if (column.data().unique().length * 5 < column.data().length) {
+          var select = $('<select><option value=""></option></select>')
+              .appendTo( $(column.footer()).empty() )
+              .on( 'change', function () {
+                  var val = $.fn.dataTable.util.escapeRegex(
+                      $(this).val()
+                  );
+
+                  column
+                      .search( val ? '^'+val+'$' : '', true, false )
+                      .draw();
+              } );
+
+          column.data().unique().sort().each( function ( d, j ) {
+              select.append( '<option value="'+d+'">'+d+'</option>' )
+          } );
+        } else {
+          var search = $( '<input type="text" placeholder="Search" />' )
+              .appendTo( $(column.footer()).empty() )
+              .on('keyup change', function () {
+                  var val = $.fn.dataTable.util.escapeRegex(
+                      $(this).val()
+                  );
+                  if ( column.search() !== val ) {
+                      column.search( val )
+                          .draw();
+                  }
+              } );
+        }
+      } );
+    },
+    responsive: {
+      details: true
+    },
+    dom: 'Bfrtip',
+    buttons: [
+      'pageLength', 'colvis'
+    ],
+    stateSave: true,
+    pageLength: 10,
+    lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "All"]]
+  });
+  initFilters = function() {
+    table.columns().every( function () {
+        var column = this;
+        var li = $('<li>'+$(column.header()).html()+': </li>').appendTo($("#filter"));
+        if (column.data().unique().length * 5 < column.data().length) {
+          var select = $('<select><option value=""></option></select>')
+            .on( 'change', function () {
+              var val = $.fn.dataTable.util.escapeRegex($(this).val());
+              column.search( val ? '^'+val+'$' : '', true, false ).draw();
+            } );
+
+          column.data().unique().sort().each( function ( d, j ) { select.append( '<option value="'+d+'">'+d+'</option>' )});
+          select.appendTo(li)
+        }
+
+        var search = $( '<input type="text" placeholder="Search" />' )
+          .on('keyup change', function () {
+            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+            if ( column.search() !== val ) {
+              column.search( val ).draw();
+            }
+          } );
+        search.appendTo(li)
+    });
+  };
+  $(".loader").hide();
+  $(".loading").removeClass('loading');
+});
+</script>
