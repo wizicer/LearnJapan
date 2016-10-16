@@ -1,5 +1,5 @@
 {% assign lesson = include.lesson %}
-<div id="{{include.id}}" class="lesson" markdown="1">
+<div id="l{{include.num}}" class="lesson" markdown="1">
 <div class="japan" markdown="1">
 # {{lesson.title}}
 ## 基本課文
@@ -22,4 +22,19 @@
 
 {{lesson.contextt}}
  
+## 语法点
+{% assign findingNum = include.num | prepend: " " | append: " " %}
+{% assign gs = site.data.grammar | where_exp: "item", "item.lesson contains findingNum" %}
+| 句型、表达             | 解释                    |
+| ----                   | ----                    | {% for grammar in gs %}
+| {{grammar.expression}} | {{grammar.explanation}} | {% endfor %}
+
+## 生词表
+
+
+{% assign ws = site.data.words | where_exp: "item", "item.lesson contains findingNum" %}
+| 假名          | 单词          | 词性         | 解释          |
+| ----          | ----          | ----         | ----          | {% for word in ws %}
+| {{word.kana}} | {{word.word}} | {{word.pos}} | {{word.desc}} | {% endfor %}
+
 </div>

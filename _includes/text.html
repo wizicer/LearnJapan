@@ -24,6 +24,14 @@
 .japan.hideruby ruby rt:hover {
   color: inherit;
 }
+.lesson table {
+  margin: 50px auto;
+}
+.lesson table th,
+.lesson table td {
+  border: 2px solid #ccc;
+  padding: 5px;
+}
 </style>
 <div class="tags">
   {% for num in page.lessons %}
@@ -60,7 +68,7 @@ $(document).ready(function() {
     $('.japan').toggleClass("hideruby");
   });
 
-  $('li').add('h1').add('h2').add('p').each(function() {
+  $('li').add('h1').add('h2').add('p').add('td').each(function() {
     $(this).html(japanruby($(this).html()));
   });
 
@@ -196,7 +204,7 @@ $(document).ready(function() {
 {% for lnum in lessons %}
 {% assign id = lnum | prepend: 'l' %}
 {% assign lesson = site.data.lessons[id] %}
-{% include lesson.html id=id lesson=lesson %}
+{% include lesson.html num=lnum lesson=lesson %}
 {% endfor %}
 {% endcapture %}
 {{ allcontent | markdownify}}
