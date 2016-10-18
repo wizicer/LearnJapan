@@ -34,6 +34,10 @@
 }
 </style>
 <div class="tags">
+  {% if page.lesson %}
+  <a class="link" href="lesson{{page.lesson | minus: 1}}.html">前</a>
+  <a class="link" href="lesson{{page.lesson | plus: 1}}.html">后</a>
+  {% endif %}
   {% for num in page.lessons %}
     <a class="toggle-lesson tl{{num}}" data-lesson="{{num}}" href="#">{{num}}</a>
   {% endfor %}
