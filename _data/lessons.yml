@@ -1913,14 +1913,14 @@ l25:
     > * !中国(ちゅうごく)で!買(か)ったＣＤを!友達(ともだち)に!貸(か)しました
     > * !操作(そうさ)が!簡単(かんたん)なパソコンが!欲(ほ)しいです
   basicc: |
-    * Ａ　!甲(かぶと)：!李(り)さん，この!人(ひと)はだれですか。
-    * 　　!乙(おつ)：その!人(ひと)は!中国(ちゅうごく)でとても!人気(にんき)がある!女優(じょゆう)です。
-    * Ｂ　!甲(かぶと)：あの!窓(まど)のところにいる!人(ひと)はだれですか。
-    * 　　!乙(おつ)：あれは!受付(うけつけ)の!戴(たい)さんですよ。
-    * Ｃ　!甲(かぶと)：!何(なに)をしているんですか。
-    * 　　!乙(おつ)：!昨日(きのう)!李(り)さんにもらった!本(ほん)を!読(よ)んでいます。
-    * Ｄ　!甲(かぶと)：この!会社(かいしゃ)で!歌(うた)がいちばん!上手(じょうず)な!人(ひと)は!誰(だれ)ですか。
-    * 　　!乙(おつ)：!森(もり)さんだと!思(おも)います。
+    * Ａ　甲：!李(り)さん，この!人(ひと)はだれですか。
+    * 　　乙：その!人(ひと)は!中国(ちゅうごく)でとても!人気(にんき)がある!女優(じょゆう)です。
+    * Ｂ　甲：あの!窓(まど)のところにいる!人(ひと)はだれですか。
+    * 　　乙：あれは!受付(うけつけ)の!戴(たい)さんですよ。
+    * Ｃ　甲：!何(なに)をしているんですか。
+    * 　　乙：!昨日(きのう)!李(り)さんにもらった!本(ほん)を!読(よ)んでいます。
+    * Ｄ　甲：この!会社(かいしゃ)で!歌(うた)がいちばん!上手(じょうず)な!人(ひと)は!誰(だれ)ですか。
+    * 　　乙：!森(もり)さんだと!思(おも)います。
   contitle: >
     !北京(ぺきん)!市街(しがい)ヘ
   context: |
@@ -1980,3 +1980,265 @@ l25:
     * 森：车多起来了啊。
     * 马：是啊。现在走的这条路〈是〉三环路，这一带经常堵车。
     * 李：〈因为〉三环路在北京是交通流量最大的公路。
+l26:
+  basic4: |
+    > * !自転車(じてんしゃ)に２!人(にん)で!乗(の)るのは!危(あぶ)ないです。
+    > * !手紙(てがみ)を!出(だ)すのを!忘(わす)れました。
+    > * !明日(あした)の!朝(あさ)は!大雨(おおあめ)になるでしょう。
+    > * !森(もり)さんは!今日(きょう)!会社(かいしゃ)を!休(やす)むかもしれません。
+  basicc: |
+    * Ａ　甲：!李(り)さんは!絵(え)をかくのガ!好(す)きですね。
+    * 　　乙：ええ，!大好(だいす)きです。でも，あまり!上手(じょうず)ではありませんよ。
+    * Ｂ　甲：!吉田(よしだ)さんが!転勤(てんきん)したのを!知(し)っていますか。
+    * 　　乙：えつ，!本当(ほんとう)ですか。!知(し)りませんでした。
+    * Ｃ　甲：!会議(かいぎ)は!何時(いつ)に!終(お)わりますか。
+    * 　　乙：２!時(じ)に!終(お)わるでしょう。
+    * Ｄ　甲：!馬(うま)さんはまだ!来(き)ませんね。
+    * 　　乙：もしかしたら，!今日(きょう)は!来(こ)ないかもしれませんよ。
+  contitle: >
+    !握手(あくしゅ)とお!辞儀(じぎ)　　
+  context: |
+    * -
+    * -
+    * !楊()：!初(はじ)めまして，!楊()です
+    * !森(もり)：!初(はじ)めまして，!森(もり)です，よろしくお!願(ねが)いします。
+    * -
+    * !陳(ちん)：!日本(にっぽん)には!握手(あくしゅ)の!習慣(しゅうかん)がないんですね
+    * !森(もり)：ええ，そうなんです，それで，つい!握手(あくしゅ)するのを!忘(わす)れます
+    * -
+    * !森(もり)：!中国(ちゅうごく)では!握手(あくしゅ)するのが!普通(ふつう)なんですか。
+    * !陳(ちん)：ええ，そうですよ。!日本(にっぽん)にはお!辞儀(じぎ)のほかの!挨拶(あいさつ)はないんですか。
+    * !森(もり)：そうですね…。!手(て)を!挙(あ)げたり，!握手(あくしゅ)したりする!人(ひと)もいますが，ほとんどお!辞儀(じぎ)ですね
+    * -
+    * !戴(たい)：!陳(ちん)さん，!森(もり)さんの!午後(ごご)の!予定(よてい)はあいさつ!回(まわ)りですね。
+    * !陳(ちん)：ええ，!今(いま)１!時半(じはん)ですから，これから４!社(しゃ)ぐらい!回(まわ)ることができるでしょう
+    * !戴(たい)：そうですね，５!社(しゃ)!行(い)くことができるかもしれませんよ。!森(もり)さん，!次(つぎ)は!握手(あくしゅ)するのを!忘(わす)れないでくださいね。
+  basic4t: |
+    > * 骑自行车带人很危险。
+    > * （我）忘了寄信了。
+    > * 明天早晨会下很大的雨吧。
+    > * 森先生今天也许不来〈公司〉上班。
+  basicct: |
+    * A 甲: 小李你喜欢画画啊！ 
+    * 　乙: 是的，非常喜欢，不过画的不太好。
+    * B 甲: 吉田先生调动工作了，你知道吗？
+    * 　乙: 哎，真的？我不知道啊。
+    * C 甲: 会议几点结束？
+    * 　乙: 两点结束吧。
+    * D 甲: 小马还没来啊？
+    * 　乙: 也许今天不来了。
+  contitlet: 握手和鞠躬　 
+  contextt: |
+    * 在北京分公司上班后，森有机会与主顾杨先生见面了。分公司经理陈梅芳向森介绍了前来拜访的杨先生。森象在日本时一样，向阳先生鞠躬、寒暄。
+    * (杨先生被介绍后，做自我介绍)
+    * 杨：初次见面，我姓杨。(说着，伸出了手)
+    * 森：初次见面。我姓森请多关照。（一边说，一边开始鞠躬，转而慌慌张张地伸出了手）
+    * （杨先生回去后）
+    * 陈：日本没有握手的习惯吧。
+    * 森：是的。因此，一不注意就忘记握手了。
+    * （说起中日两国的寒暄习惯）
+    * 森：在中国一般都握手吗？
+    * 陈：是的。在日本，除了鞠躬还有别的寒暄（方式）吗？
+    * 森：怎么说啦？……也有挥手啦，握手什么的，但大部分人还是鞠躬。
+    * （听到他们谈话的小戴插话了）
+    * 戴：老陈，森下午的安排是拜访（各有关部门），对吧？
+    * 陈：是的。现在是1点半，从现在起能转四家公司吧？
+    * 戴：是啊。也许能转五家公司呢。　(面向森) 森，这回可不要忘记握手哟。
+l27:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l28:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l29:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l30:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l31:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l32:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l33:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l34:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l35:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l36:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l37:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l38:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l39:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l40:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l41:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l42:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l43:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l44:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l45:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l46:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l47:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |
+l48:
+  basic4: |
+  basicc: |
+  contitle: >
+  context: |
+  basic4t: |
+  basicct: |
+  contitlet: 
+  contextt: |

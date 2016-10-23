@@ -4,7 +4,7 @@
 {% if lesson.title %}
 # {{lesson.title}}
 {% else %}
-{% assign title = lesson.basic4 | newline_to_br | strip_newlines | split: '<br />' | first | remove: "> * " | prepend: "課 " | prepend: include.num | prepend: "第" %}
+{% assign title = lesson.basic4 | newline_to_br | strip_newlines | split: '<br />' | first | remove: "。" | remove: "> * " | prepend: "課　" | prepend: include.num | prepend: "第" %}
 # {{title}}
 {% endif %}
 ## 基本課文
