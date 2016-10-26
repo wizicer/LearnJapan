@@ -4,3 +4,4 @@ _site
 .jekyll-metadata
 node_modules
 /site.vfs*
+/_site*.zip
