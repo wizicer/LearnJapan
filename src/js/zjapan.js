@@ -30,4 +30,5 @@ function japanruby(content) {
     }
     return content;
   }
+  return content;
 }
