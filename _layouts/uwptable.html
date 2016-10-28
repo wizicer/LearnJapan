@@ -91,9 +91,9 @@ $(document).ready(function() {
 
         var search = $( '<input type="text" placeholder="Search" />' )
           .on('keyup change', function () {
-            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+            var val = $(this).val();
             if ( column.search() !== val ) {
-              column.search( val ).draw();
+              column.search( val, true, false ).draw();
             }
           } );
         search.appendTo(li)
