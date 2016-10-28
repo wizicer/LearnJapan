@@ -4,11 +4,11 @@
 - <a class="toggle-mode" data-column="2|3|5|6">看中文忆日文</a>
 </div>
 
-| 假名          | 汉字           | 词性         | 解释          | 单词          | 课              | 记忆 | 序号         |
-| ----          | ----           | ----         | ----          | ----          | --              | --   | --           | {% for word in site.data.words %}
-| {{word.kana}} | {{word.kanji}} | {{word.pos}} | {{word.desc}} | {{word.word}} | {{word.lesson}} |      | {{word.idx}} | {% endfor %}
-| ====          | ====           | ====         | ====          | ====          | ==              | ==== | ==           |
-| 假名          | 汉字           | 词性         | 解释          | 单词          | 课              | 记忆 | 序号         |
+| 假名    | 汉字 | 词性 | 解释 | 单词 | 课 | 序号 |
+| ----    | ---- | ---- | ---- | ---- | -- | --   |
+| loading |      |      |      |      |    |      |
+| ====    | ==== | ==== | ==== | ==== | == | ==   |
+| 假名    | 汉字 | 词性 | 解释 | 单词 | 课 | 序号 |
 {:.display width="100%"}
 
 <button class="toggle-start">start</button>
@@ -49,32 +49,30 @@
 
 <script>
 $(document).ready(function() {
-  $('td').each(function() {
-    $(this).html(japanruby($(this).html()));
-  });
   function inittable() {
-    table.column(1).visible(false);
-    table.column(6).visible(false);
-    table.column(7).visible(false);
-    table
-      .order( [5, 'asc'], [7, 'asc'] )
-      .draw();
+    table.ajax.url('{{ site.baseurl }}/words.json' ).load(function (){
+      table.column(1).visible(false);
+      table.column(5).visible(false);
+      table.column(6).visible(false);
+      table.column(0).nodes().to$().addClass('japan');
+      table.column(1).nodes().to$().addClass('japan');
+      table.column(4).nodes().to$().addClass('japan');
+      table
+        .order( [5, 'asc'], [6, 'asc'] )
+        .draw();
 
-    initFilters();
+      initFilters();
+    }, false);
+    table.on('xhr.dt', function ( e, settings, json, xhr ) {
+      json.data.forEach(function(part, index, arr) {
+        arr[index][0]=japanruby(arr[index][0]);
+        arr[index][4]=japanruby(arr[index][4]);
+        var content = arr[index][1];
+        arr[index][1] = '<a href="http://kanji.jitenon.jp/cat/search.php?getdata=' + content + '" target="_blank">' + content + '</a>';
+      });
+    });
   }
   setTimeout(inittable, 300);
-  $('table tbody tr td:nth-child(2)').each(function() {
-    var content = $(this).html();
-    if (content.trim() !== '&nbsp;') {
-      $(this).html('<a href="http://kanji.jitenon.jp/cat/search.php?getdata=' + content + '" target="_blank">' + content + '</a>');
-    }
-  });
-  $('table tbody tr td:nth-child(5)')
-  .add('table tbody tr td:nth-child(1)')
-  .add('table tbody tr td:nth-child(2)')
-  .each(function() {
-    $(this).addClass('japan');
-  });
   $('a.toggle-mode').on('click', function(e) {
     e.preventDefault();
     table.columns().visible(false);

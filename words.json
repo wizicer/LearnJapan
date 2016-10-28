@@ -1,0 +1,7 @@
+---
+---
+{
+  "data": [
+  {% for word in site.data.words %}[ "{{word.kana | strip}}", "{{word.kanji | strip}}", "{{word.pos | strip}}", "{{word.desc | strip}}", "{{word.word | strip}}", "{{word.lesson | strip}}", "{{word.idx | strip}}"]{% unless forloop.last %},{% endunless %}{% endfor %}
+  ]
+}
