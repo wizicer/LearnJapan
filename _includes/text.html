@@ -45,26 +45,46 @@
   <a class="toggle-japan" href="#">原文</a>
   <br />
   <a class="player-shortback" href="#">短退</a>
+  <a class="player-play" href="#">播放</a>
+  <a class="player-slow" href="#">慢速</a>
+  <a class="player-normal" href="#">常速</a>
   <audio id="player" controls>
   </audio>
 </div>
 <script>
 $(document).ready(function() {
+  var player = $('#player').get(0);
   function openTab(tabName) {
     $('.lesson').removeClass('active');
     $('.toggle-lesson').removeClass('active');
     $('.t'+tabName).addClass("active");
     $('#'+tabName).addClass("active");
     if (tabName != 'l0') {
-      var player = $('#player').get(0);
       player.src = "{{ site.baseurl }}/assets/audio/lesson/" + tabName + ".mp3";
       player.load();
     }
   }
   $('a.player-shortback').on('click', function(e) {
-    var player = $('#player').get(0);
+    e.preventDefault();
     player.currentTime -= 2;
   });
+  $('a.player-slow').on('click', function(e) {
+    e.preventDefault();
+    player.playbackRate = 0.8;
+  });
+  $('a.player-normal').on('click', function(e) {
+    e.preventDefault();
+    player.playbackRate = 1;
+  });
+  $('a.player-play').on('click', function(e) {
+    e.preventDefault();
+    if (player.paused)
+      player.play();
+    else
+      player.pause();
+  });
+  let handler = () => $('a.player-play').text(player.paused ? '播放' : '暂停');
+  $(player).on('play pause', handler);
   $('a.toggle-lesson').on('click', function(e) {
     e.preventDefault();
     openTab("l"+$(this).attr('data-lesson'));
@@ -159,7 +179,7 @@ button.translate {
 <!--scroll hide tag, get from: http://jsfiddle.net/mariusc23/s6mLJ/31/-->
 <style>
 .nav-up {
-    top: -120px !important;
+    top: -180px !important;
 }
 </style>
 
