@@ -6,19 +6,25 @@ permalink: /verb/index.html
 
 ---
 
+<span class="verb1">動1</span>
+<span class="verb2">動2</span>
+<span class="verb3">動3</span>
+
+| 課 | 
+| -- | 
+|loading|
+{:.japan#kanjitable}
 
 | 課 | 類别 | ます形                   | 辞書形       | ない形       | て形         | た形         | 特殊 | 搭配                     |
 | -- | ---  | -----------------------  | ------------ | ------------ | ------------ | ------------ | ---- | ------------------------ |
-| 4  | 動1  | あります                 | ある         | ない         | あって       | あった       | ＊   |                          |
-| 5  | 動2  | !起(お)きます            | 起きる       | 起きない     | 起きて       |              | ＊   |                          |
-| 6  | 動1  | !行(い)きます            | 行く         | 行かない     | 行って       |              | ＊   |                          |
-| 6  | 動3  | !来(き)ます              | 来る         | 来ない       | 来て         |              | ＊   |                          |
-| 8  | 動2  | !借(か)ります            | 借りる       | 借りない     | 借りて       |              | ＊   |                          |
-| 14 | 動2  | !過(す)ぎます            | 過ぎる       | 過ぎない     | 過ぎて       |              | ＊   |                          |
-| 14 | 動2  | !降(お)ります            | 降りる       | 降りない     | 降りて       |              | ＊   |                          |
-| 20 | 動2  | !浴(あ)びます            | 浴びる       | 浴びない     |              |              | ＊   | シャワーを浴びる         |
+|loading|
 {:.japan#verbtable}
 
+<style>
+.verb1 { background-color: #BAA378; }
+.verb2 { background-color: #E6E6DC; }
+.verb3 { background-color: #81A594; }
+</style>
 
 <script>
 $(document).ready(function() {
@@ -97,6 +103,9 @@ $(document).ready(function() {
           obj.nai += "ない";
         }
 
+        // kanji
+        obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "")
+
         if (sp[obj.masu]) {
           for (p in sp[obj.masu]) {
             obj[p] = sp[obj.masu][p];
@@ -113,9 +122,17 @@ $(document).ready(function() {
           +item.jisyo+'</td><td>'
           +item.nai+'</td><td>'
           +item.te+'</td><td>'
-          +item.ta+'</td><td>'
+          +item.kanji+'</td><td>'
           +''+'</td><td>'
           +''+'</td></tr>');
+      });
+      var hist = {};
+      $.each(d, function (i, a) { if (a.kanji in hist) hist[a.kanji].push(a); else hist[a.kanji] = [a]; } );
+      $.each(hist, function(i, group) {
+        if (group.length == 1 || group.length > 20) return;
+        var all = '<tr>';
+        $.each(group, function(i, item) { all += '<td class="verb' + item.pos.slice(-1) + '">' + item.lesson + ': ' + item.jisyo + '</td>'; });
+        $('#kanjitable').append(all + '</tr>');
       });
       $('td').each(function() {
         $(this).html(japanruby($(this).html()));
