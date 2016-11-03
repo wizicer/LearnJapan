@@ -1,8 +1,8 @@
 ---
 layout: table
-title: "Word List"
+title: "单词表"
 permalink: /wordlist/index.html
-description: "Word List for your words"
+description: "标准日本语初级上下册单词表"
 ---
 
 {% include wordlist.md %}

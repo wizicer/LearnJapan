@@ -49,11 +49,11 @@ $(document).ready(function() {
 </script>
 
 
-<button class="toggle-start">start</button>
-<button class="toggle-previous">previous</button>
+<button class="toggle-start">开始记单词</button>
+<button class="toggle-previous">上一个</button>
 <p>
   <input id="onlyremember" type="checkbox" checked />
-  <label for="onlyremember">Skip remembered word</label>
+  <label for="onlyremember">自动跳过已经记住的单词</label>
 </p>
 <div id="card-summary"></div>
 <div class="card">
@@ -62,10 +62,10 @@ $(document).ready(function() {
 </div>
 <p>
   <input id="wordremember" type="checkbox" />
-  <label for="wordremember">word remembered</label>
+  <label for="wordremember">此单词已记住</label>
 </p>
 
-<button class="toggle-next">next</button>
+<button class="toggle-next">下一个</button>
 
 <script>
 $(document).ready(function() {

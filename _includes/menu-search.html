@@ -13,12 +13,12 @@
 </a>
 <aside id="sidebar">
 <nav id="navigation">
-  <h2>MENU</h2>
+  <h2>菜单</h2>
   <ul>
     {% for link in site.links %}
       <li><a href="{{site.baseurl}}{{ link.url }}">{{ link.title }}</a></li>
     {% endfor %}
-    <li><a class="feed" href="{{site.baseurl}}/feed.xml" title="Atom/RSS feed">Feed</a></li>
+    <li><a class="feed" href="{{site.baseurl}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
   </ul>
 </nav>
 </aside>
