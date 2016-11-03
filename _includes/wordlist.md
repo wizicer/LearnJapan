@@ -71,6 +71,8 @@ $(document).ready(function() {
 $(document).ready(function() {
   var quizdata;
   var quizid;
+  var quiznum;
+  var quiz;
   function isLocalstorageExist() {
     var mod = 'test';
     try {
@@ -95,19 +97,16 @@ $(document).ready(function() {
         desc += "<span class='card-pos'>[" + p[2] + "]</span>";
         var rid = p[5]+'|'+p[6];
         return { tip: p[3], desc: desc, rem: rwords[rid], rid: rid }});
-    quizid = 0;
+    quizid = -1;
+    rollquiz(1);
     displayquiz();
   });
   function displayquiz() {
-    var quiznum = Math.floor(quizid / 2) + 1;
-    var quiz = quizdata[quiznum];
     $("#content").html(quizid % 2 == 0 ? quiz.tip : quiz.desc);
-    $("#card-summary").html(quiznum + '/' + (quizdata.length / 2));
+    $("#card-summary").html((quiznum + 1) + '/' + (quizdata.length / 2));
     $("#wordremember").prop('checked', quiz.rem ? true : false);
   }
   $('#wordremember').change(function() {
-    var quiznum = Math.floor(quizid / 2) + 1;
-    var quiz = quizdata[quiznum];
     if (this.checked) {
       rwords[quiz.rid] = true;
       quiz.rem = true;
@@ -117,14 +116,23 @@ $(document).ready(function() {
     }
     localStorage.setItem("rwords", JSON.stringify(rwords));
   });
+  function rollquiz(offset) {
+    if (quizid + offset < 0 || quizid + offset >= quizdata.length) return;
+    var onlyremember = $('#onlyremember').prop('checked');
+    do {
+      quizid += offset;
+      quiznum = Math.floor(quizid / 2);
+      quiz = quizdata[quiznum];
+    } while (quizid > 0 && quizid < quizdata.length - 1 && onlyremember && quiz.rem)
+  }
   $('button.toggle-next').on('click', function(e) {
     e.preventDefault();
-    quizid++;
+    rollquiz(1);
     displayquiz();
   });
   $('button.toggle-previous').on('click', function(e) {
     e.preventDefault();
-    quizid--;
+    rollquiz(-1);
     displayquiz();
   });
 });
