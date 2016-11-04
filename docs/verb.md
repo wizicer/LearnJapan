@@ -10,9 +10,9 @@ permalink: /verb/index.html
 <span class="verb2">動2</span>
 <span class="verb3">動3</span>
 
-| 課 | 
-| -- | 
-|loading|
+| 漢字    | 課 | 類别 | 辞書形 |
+| ----    | -- | ---  | ------ |
+| loading |
 {:.japan#kanjitable}
 
 | 課 | 類别 | ます形                   | 辞書形       | ない形       | て形         | た形         | 特殊 | 搭配                     |
@@ -114,6 +114,7 @@ $(document).ready(function() {
 
         return obj;
       });
+      $('#verbtable tbody').remove();
       $.each(d, function(i, item) {
         $('#verbtable').append('<tr><td>'
           +item.lesson+'</td><td>'
@@ -122,16 +123,23 @@ $(document).ready(function() {
           +item.jisyo+'</td><td>'
           +item.nai+'</td><td>'
           +item.te+'</td><td>'
-          +item.kanji+'</td><td>'
+          +item.ta+'</td><td>'
           +''+'</td><td>'
           +''+'</td></tr>');
       });
       var hist = {};
       $.each(d, function (i, a) { if (a.kanji in hist) hist[a.kanji].push(a); else hist[a.kanji] = [a]; } );
+      $('#kanjitable tbody').remove();
       $.each(hist, function(i, group) {
+        console.log(hist[i]);
         if (group.length == 1 || group.length > 20) return;
         var all = '<tr>';
-        $.each(group, function(i, item) { all += '<td class="verb' + item.pos.slice(-1) + '">' + item.lesson + ': ' + item.jisyo + '</td>'; });
+        all += '<td rowspan="' + group.length + '">' + group[0].kanji + '</td>';
+        $.each(group, function(i, item) {
+          all += '<td>' + item.lesson + '</td><td>'
+            + item.pos + '</td><td>'
+            + item.jisyo + '</td></tr><tr>';
+        });
         $('#kanjitable').append(all + '</tr>');
       });
       $('td').each(function() {
