@@ -57,9 +57,9 @@ $(document).ready(function() {
 </p>
 <div id="card-summary"></div>
 <div class="card">
-<p id="content">
-</p>
+  <p id="content"></p>
 </div>
+<input id="trialtext" type="textbox" />
 <p>
   <input id="wordremember" type="checkbox" />
   <label for="wordremember">此单词已记住</label>
@@ -103,7 +103,7 @@ $(document).ready(function() {
   });
   function displayquiz() {
     $("#content").html(quizid % 2 == 0 ? quiz.tip : quiz.desc);
-    $("#card-summary").html((quiznum + 1) + '/' + (quizdata.length / 2));
+    $("#card-summary").html((quiznum + 1) + '/' + (quizdata.length));
     $("#wordremember").prop('checked', quiz.rem ? true : false);
   }
   $('#wordremember').change(function() {
@@ -117,13 +117,14 @@ $(document).ready(function() {
     localStorage.setItem("rwords", JSON.stringify(rwords));
   });
   function rollquiz(offset) {
-    if (quizid + offset < 0 || quizid + offset >= quizdata.length) return;
+    if (quizid + offset < 0 || quizid + offset >= quizdata.length * 2) return;
     var onlyremember = $('#onlyremember').prop('checked');
     do {
       quizid += offset;
       quiznum = Math.floor(quizid / 2);
       quiz = quizdata[quiznum];
-    } while (quizid > 0 && quizid < quizdata.length - 1 && onlyremember && quiz.rem)
+      if (quizid % 2 == 0) $('#trialtext').val('');
+    } while (quizid > 0 && quizid < quizdata.length * 2 - 1 && onlyremember && quiz.rem)
   }
   $('button.toggle-next').on('click', function(e) {
     e.preventDefault();
@@ -138,6 +139,9 @@ $(document).ready(function() {
 });
 </script>
 <style>
+#trialtext {
+  width: 100%;
+}
 .card {
   margin-right: 10px;
   width: 80%;
