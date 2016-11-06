@@ -2,11 +2,11 @@
 <div id="l{{include.num}}" class="lesson" markdown="1">
 <div class="japan" markdown="1">
 {% if lesson.title %}
-# {{lesson.title}}
+{% assign title = lesson.title | prepend: "課　" | prepend: include.num | prepend: "第" %}
 {% else %}
 {% assign title = lesson.basic4 | newline_to_br | strip_newlines | split: '<br />' | first | remove: "。" | remove: "> * " | prepend: "課　" | prepend: include.num | prepend: "第" %}
-# {{title}}
 {% endif %}
+# {{title}}
 ## 基本課文
 {{lesson.basic4}}
 
@@ -46,3 +46,20 @@
 | {{word.kana}} | {{word.word}} | {{word.pos}} | {{word.desc}} | {% endfor %}
 
 </div>
+<script>
+var lessonquizdata = [
+  {% for word in ws %}
+    [ "{{word.kana | strip}}", "{{word.kanji | strip}}", "{{word.pos | strip}}", "{{word.desc | strip}}", "{{word.word | strip}}", "{{word.lesson | strip}}", "{{word.idx | strip}}"]{% unless forloop.last %},{% endunless %}{% endfor %}
+  ]
+  .map(function(p) {
+    var rwords = JSON.parse(localStorage.getItem("rwords"));
+    rwords = rwords || {};
+    p[0]=japanruby(p[0]);
+    p[4]=japanruby(p[4]);
+    var desc = "<span class='japan'>" + (p[1] == "&nbsp;" ? p[0] : p[4] + "<br />" + p[0]) + "</span>";
+    desc += "<span class='card-pos'>[" + p[2] + "]</span>";
+    var rid = p[5]+'|'+p[6];
+    return { tip: p[3], desc: desc, rem: rwords[rid], rid: rid }});
+</script>
+
+{% include wordrecite.md %}
