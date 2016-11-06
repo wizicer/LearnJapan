@@ -1,3 +1,4 @@
+<div id="wordrecite">
 <button class="toggle-start">开始记单词</button>
 <button class="toggle-previous">上一个</button>
 <p>
@@ -15,8 +16,11 @@
 </p>
 
 <button class="toggle-next">下一个</button>
+</div>
 
 <script>
+var lessonquizdata = {};
+var curlessonquizdata;
 $(document).ready(function() {
   var quizdata;
   var quizid;
@@ -40,7 +44,9 @@ $(document).ready(function() {
   rwords = rwords || {};
   $('button.toggle-start').on('click', function(e) {
     e.preventDefault();
-    quizdata = lessonquizdata || table.rows({filter: 'applied'}).data()
+    quizdata = (lessonquizdata && lessonquizdata["l{{page.lesson}}"])
+      || (curlessonquizdata)
+      || table.rows({filter: 'applied'}).data()
       .map(function(p) {
         var desc = "<span class='japan'>" + (p[1] == "&nbsp;" ? p[0] : p[4] + "<br />" + p[0]) + "</span>";
         desc += "<span class='card-pos'>[" + p[2] + "]</span>";

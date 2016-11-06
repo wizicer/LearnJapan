@@ -63,6 +63,11 @@ $(document).ready(function() {
       player.src = "{{ site.baseurl }}/assets/audio/lesson/" + tabName + ".mp3";
       player.load();
     }
+    curlessonquizdata = lessonquizdata[tabName];
+    if (tabName == 'l0')
+      $('#wordrecite').hide();
+    else
+      $('#wordrecite').show();
   }
   $('a.player-shortback').on('click', function(e) {
     e.preventDefault();
@@ -238,3 +243,5 @@ $(document).ready(function() {
 {% endfor %}
 {% endcapture %}
 {{ allcontent | markdownify}}
+
+{% include wordrecite.md %}
