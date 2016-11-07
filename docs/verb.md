@@ -10,8 +10,8 @@ permalink: /verb/index.html
 <span class="verb2">動2</span>
 <span class="verb3">動3</span>
 
-| 漢字    | 課 | 類别 | 辞書形 |
-| ----    | -- | ---  | ------ |
+| 漢字    | 課 | 類别 | 辞書形 | 意味 |
+| ----    | -- | ---  | ------ | ---- |
 | loading |
 {:.japan#kanjitable}
 
@@ -68,7 +68,7 @@ $(document).ready(function() {
   $.ajax('/verb.json')
     .done(function (data) {
       var d = $.map(JSON.parse(data), function (od) {
-        var obj = { pos: od[2], lesson: od[5], masu: od[4]};
+        var obj = { pos: od[2], lesson: od[5], masu: od[4], desc: od[3]};
         obj.pos = obj.pos.replace("动", "動");
         obj.lian = obj.masu.replace(/ます$/g, "");
 
@@ -131,14 +131,15 @@ $(document).ready(function() {
       $.each(d, function (i, a) { if (a.kanji in hist) hist[a.kanji].push(a); else hist[a.kanji] = [a]; } );
       $('#kanjitable tbody').remove();
       $.each(hist, function(i, group) {
-        console.log(hist[i]);
         if (group.length == 1 || group.length > 20) return;
         var all = '<tr>';
         all += '<td rowspan="' + group.length + '">' + group[0].kanji + '</td>';
         $.each(group, function(i, item) {
-          all += '<td>' + item.lesson + '</td><td>'
-            + item.pos + '</td><td>'
-            + item.jisyo + '</td></tr><tr>';
+          all += '<td>' + item.lesson
+            + '</td><td>' + item.pos
+            + '</td><td>' + item.jisyo
+            + '</td><td>' + item.desc
+            + '</td></tr><tr>';
         });
         $('#kanjitable').append(all + '</tr>');
       });
