@@ -15,6 +15,11 @@ permalink: /verb/index.html
 | loading |
 {:.japan#kanjitable}
 
+| 音読み  | 課 | 類别 | 辞書形 | 意味 |
+| ------  | -- | ---  | ------ | ---- |
+| loading |
+{:.japan#prontable}
+
 | 課 | 類别 | ます形                   | 辞書形       | ない形       | て形         | た形         | 特殊 | 搭配                     |
 | -- | ---  | -----------------------  | ------------ | ------------ | ------------ | ------------ | ---- | ------------------------ |
 |loading|
@@ -104,13 +109,16 @@ $(document).ready(function() {
         }
 
         // kanji
-        obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "")
+        obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "");
 
         if (sp[obj.masu]) {
           for (p in sp[obj.masu]) {
             obj[p] = sp[obj.masu][p];
           }
         }
+
+        // pronounce
+        obj.pronounce = obj.jisyo.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
 
         return obj;
       });
@@ -127,6 +135,7 @@ $(document).ready(function() {
           +''+'</td><td>'
           +''+'</td></tr>');
       });
+
       var hist = {};
       $.each(d, function (i, a) { if (a.kanji in hist) hist[a.kanji].push(a); else hist[a.kanji] = [a]; } );
       $('#kanjitable tbody').remove();
@@ -143,6 +152,24 @@ $(document).ready(function() {
         });
         $('#kanjitable').append(all + '</tr>');
       });
+
+      var prons = {};
+      $.each(d, function (i, a) { if (a.pronounce in prons) prons[a.pronounce].push(a); else prons[a.pronounce] = [a]; } );
+      $('#prontable tbody').remove();
+      $.each(prons, function(i, group) {
+        if (group.length == 1 || group.length > 20) return;
+        var all = '<tr>';
+        all += '<td rowspan="' + group.length + '">' + group[0].pronounce + '</td>';
+        $.each(group, function(i, item) {
+          all += '<td>' + item.lesson
+            + '</td><td>' + item.pos
+            + '</td><td>' + item.jisyo
+            + '</td><td>' + item.desc
+            + '</td></tr><tr>';
+        });
+        $('#prontable').append(all + '</tr>');
+      });
+
       $('td').each(function() {
         $(this).html(japanruby($(this).html()));
       });
