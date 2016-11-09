@@ -6,8 +6,9 @@ permalink: /verb/index.html
 
 ---
 
-<span class="verb1">動1</span>
-<span class="verb2">動2</span>
+<span class="verb1">五段动词</span>
+<span class="verb2-1">上一段动词</span>
+<span class="verb2-2">下一段动词</span>
 <span class="verb3">動3</span>
 
 | 漢字    | 課 | 類别 | 辞書形 | 意味 |
@@ -26,9 +27,12 @@ permalink: /verb/index.html
 {:.japan#verbtable}
 
 <style>
-.verb1 { background-color: #BAA378; }
-.verb2 { background-color: #E6E6DC; }
-.verb3 { background-color: #81A594; }
+.verb1 { background-color: #B5F4FE; }
+.verb2 { background-color: #69D2E7; }
+.verb2-1 { background-color: #69D2E7; }
+.verb2-2 { background-color: #52B2E2; }
+.verb3 { background-color: #00BCD1; }
+.althead { background-color: #C0D8D7; }
 </style>
 
 <script>
@@ -40,6 +44,7 @@ $(document).ready(function() {
   var cte = {};
   var cnai = {};
   var cjisyo = {};
+  var verb21tail = "き ぎ び み に ち り い し";
   cte["き"] = "いて";
   cte["ぎ"] = "いで";
   cte["び"] = "んで";
@@ -120,11 +125,25 @@ $(document).ready(function() {
         // pronounce
         obj.pronounce = obj.jisyo.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
 
+        // posclass
+        if (obj.pos.endsWith('2')) {
+          if (verb21tail.indexOf(obj.pronounce.slice(-2, -1)) >= 0) {
+            obj.posclass = "verb2-1";
+          }
+          else {
+            obj.posclass = "verb2-2";
+          }
+        } else if (obj.pos.endsWith('3')) {
+          obj.posclass = "verb3";
+        } else {
+          obj.posclass = "verb1";
+        }
+
         return obj;
       });
       $('#verbtable tbody').remove();
       $.each(d, function(i, item) {
-        $('#verbtable').append('<tr><td>'
+        $('#verbtable').append('<tr class="' + item.posclass + '"><td>'
           +item.lesson+'</td><td>'
           +item.pos+'</td><td>'
           +item.masu+'</td><td>'
@@ -136,39 +155,33 @@ $(document).ready(function() {
           +''+'</td></tr>');
       });
 
-      var hist = {};
-      $.each(d, function (i, a) { if (a.kanji in hist) hist[a.kanji].push(a); else hist[a.kanji] = [a]; } );
-      $('#kanjitable tbody').remove();
-      $.each(hist, function(i, group) {
-        if (group.length == 1 || group.length > 20) return;
-        var all = '<tr>';
-        all += '<td rowspan="' + group.length + '">' + group[0].kanji + '</td>';
-        $.each(group, function(i, item) {
-          all += '<td>' + item.lesson
-            + '</td><td>' + item.pos
-            + '</td><td>' + item.jisyo
-            + '</td><td>' + item.desc
-            + '</td></tr><tr>';
+      function initgrouptable(table, propertySelector) {
+        function createcell(klass, content) {
+          return $('<td />', { class: klass }).html(content);
+        };
+        var groups = {};
+        $.each(d, function (i, a) { if (propertySelector(a) in groups) groups[propertySelector(a)].push(a); else groups[propertySelector(a)] = [a]; } );
+        table.children('tbody').remove();
+        var count = 0;
+        $.each(groups, function(i, group) {
+          if (group.length == 1 || group.length > 20) return;
+          var row = $('<tr />');
+          var headcell = $('<td rowspan="' + group.length + '">' + propertySelector(group[0]) + '</td>');
+          if (count++ % 2 == 0) headcell = headcell.addClass('althead');
+          row.append(headcell);
+          $.each(group, function(i, item) {
+            row.append(createcell(item.posclass, item.lesson));
+            row.append(createcell(item.posclass, item.pos));
+            row.append(createcell(item.posclass, item.jisyo));
+            row.append(createcell(item.posclass, item.desc));
+            table.append(row);
+            row = $('<tr />');
+          });
         });
-        $('#kanjitable').append(all + '</tr>');
-      });
+      };
 
-      var prons = {};
-      $.each(d, function (i, a) { if (a.pronounce in prons) prons[a.pronounce].push(a); else prons[a.pronounce] = [a]; } );
-      $('#prontable tbody').remove();
-      $.each(prons, function(i, group) {
-        if (group.length == 1 || group.length > 20) return;
-        var all = '<tr>';
-        all += '<td rowspan="' + group.length + '">' + group[0].pronounce + '</td>';
-        $.each(group, function(i, item) {
-          all += '<td>' + item.lesson
-            + '</td><td>' + item.pos
-            + '</td><td>' + item.jisyo
-            + '</td><td>' + item.desc
-            + '</td></tr><tr>';
-        });
-        $('#prontable').append(all + '</tr>');
-      });
+      initgrouptable($('#kanjitable'), function (item) { return item.kanji; });
+      initgrouptable($('#prontable'), function (item) { return item.pronounce; });
 
       $('td').each(function() {
         $(this).html(japanruby($(this).html()));
