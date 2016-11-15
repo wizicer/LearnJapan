@@ -40,7 +40,7 @@ $(document).ready(function() {
   var sp = {};
   sp["!来(き)ます"] = { jisyo: "!来(く)る", nai: "!来(こ)ない" }
   sp["あります"] = { nai: "ない" }
-  sp["!行(い)きます"] = { te: "!行(い)って" }
+  sp["!行(い)きます"] = { te: "!行(い)って", ta: "!行(い)った" }
   var cte = {};
   var cnai = {};
   var cjisyo = {};
