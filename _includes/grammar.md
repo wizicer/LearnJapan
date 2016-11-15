@@ -33,5 +33,9 @@ $(document).ready(function() {
   .each(function() {
     $(this).addClass('japan');
   });
+  $('table tbody tr td:nth-child(2)')
+  .each(function() {
+    $(this).html($(this).html().replace(/\\n/g, "<br />"));
+  });
 });
 </script>
