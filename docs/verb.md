@@ -141,48 +141,34 @@ $(document).ready(function() {
 
         return obj;
       });
-      $('#verbtable tbody').remove();
-      $.each(d, function(i, item) {
-        $('#verbtable').append('<tr class="' + item.posclass + '"><td>'
-          +item.lesson+'</td><td>'
-          +item.pos+'</td><td>'
-          +item.masu+'</td><td>'
-          +item.jisyo+'</td><td>'
-          +item.nai+'</td><td>'
-          +item.te+'</td><td>'
-          +item.ta+'</td><td>'
-          +item.desc+'</td><td>'
-          +''+'</td><td>'
-          +''+'</td></tr>');
-      });
 
-      function initgrouptable(table, propertySelector) {
+      function initgrouptable(table, groupby, tableRow, filter) {
         function createcell(klass, content) {
           return $('<td />', { class: klass }).html(content);
         };
         var groups = {};
-        $.each(d, function (i, a) { if (propertySelector(a) in groups) groups[propertySelector(a)].push(a); else groups[propertySelector(a)] = [a]; } );
+        $.each(d, function (i, a) { if (a[groupby] in groups) groups[a[groupby]].push(a); else groups[a[groupby]] = [a]; } );
         table.children('tbody').remove();
         var count = 0;
         $.each(groups, function(i, group) {
-          if (group.length == 1 || group.length > 20) return;
+          if (filter != undefined && !filter(group)) return;
           var row = $('<tr />');
-          var headcell = $('<td rowspan="' + group.length + '">' + propertySelector(group[0]) + '</td>');
+          var headcell = $('<td rowspan="' + group.length + '">' + group[0][groupby] + '</td>');
           if (count++ % 2 == 0) headcell = headcell.addClass('althead');
           row.append(headcell);
           $.each(group, function(i, item) {
-            row.append(createcell(item.posclass, item.lesson));
-            row.append(createcell(item.posclass, item.pos));
-            row.append(createcell(item.posclass, item.jisyo));
-            row.append(createcell(item.posclass, item.desc));
+            $.each(tableRow, function(j, name) {
+              row.append(createcell(item.posclass, item[name]));
+            });
             table.append(row);
             row = $('<tr />');
           });
         });
       };
 
-      initgrouptable($('#kanjitable'), function (item) { return item.kanji; });
-      initgrouptable($('#prontable'), function (item) { return item.pronounce; });
+      initgrouptable($('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
+      initgrouptable($('#prontable'), "pronounce", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
+      initgrouptable($('#verbtable'), "lesson", [ "pos", "masu", "jisyo", "nai", "te", "ta", "desc", "", ""]);
 
       $('td').each(function() {
         $(this).html(japanruby($(this).html()));
