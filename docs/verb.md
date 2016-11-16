@@ -32,6 +32,7 @@ permalink: /verb/index.html
 .verb2-1 { background-color: #69D2E7; }
 .verb2-2 { background-color: #52B2E2; }
 .verb3 { background-color: #00BCD1; }
+.spcell { font-weight: bold; }
 .althead { background-color: #C0D8D7; }
 </style>
 
@@ -116,9 +117,11 @@ $(document).ready(function() {
         // kanji
         obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "");
 
+        // special transformation
         if (sp[obj.masu]) {
           for (p in sp[obj.masu]) {
             obj[p] = sp[obj.masu][p];
+            obj["sp" + p] = true;
           }
         }
 
@@ -158,7 +161,7 @@ $(document).ready(function() {
           row.append(headcell);
           $.each(group, function(i, item) {
             $.each(tableRow, function(j, name) {
-              row.append(createcell(item.posclass, item[name]));
+              row.append(createcell(item.posclass + (item["sp" + name] ? " spcell" : ""), item[name]));
             });
             table.append(row);
             row = $('<tr />');
