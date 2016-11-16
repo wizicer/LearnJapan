@@ -50,6 +50,7 @@ $(document).ready(function() {
       .map(function(p) {
         var desc = "<span class='japan'>" + (p[1] == "&nbsp;" ? p[0] : p[4] + "<br />" + p[0]) + "</span>";
         desc += "<span class='card-pos'>[" + p[2] + "]</span>";
+        desc += "<a href='#' class='read' data-read='"+p[0]+"'>[读]</a>";
         var rid = p[5]+'|'+p[6];
         return { tip: p[3], desc: desc, rem: rwords[rid], rid: rid }});
     quizid = -1;
@@ -79,8 +80,16 @@ $(document).ready(function() {
       quiznum = Math.floor(quizid / 2);
       quiz = quizdata[quiznum];
       if (quizid % 2 == 0) $('#trialtext').val('');
-    } while (quizid > 0 && quizid < quizdata.length * 2 - 1 && onlyremember && quiz.rem)
+    } while (quizid > 0 && quizid < quizdata.length * 2 - 1 && onlyremember && quiz.rem);
   }
+  $('#content').on('click', "a.read", function(e) {
+    e.preventDefault();
+    if('speechSynthesis' in window){
+      var speech = new SpeechSynthesisUtterance($(this).data('read'));
+      speech.lang = 'ja-JP';
+      window.speechSynthesis.speak(speech);
+    }
+  });
   $('button.toggle-next').on('click', function(e) {
     e.preventDefault();
     rollquiz(1);
