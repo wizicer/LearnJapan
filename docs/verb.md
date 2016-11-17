@@ -81,6 +81,10 @@ $(document).ready(function() {
   cjisyo["い"] = "う";
   cjisyo["し"] = "す";
 
+  function purify(sen) {
+    return sen.replace(/!(.*)\(.*\)/g, '$1')
+  }
+
   $.ajax('/verb.json')
     .done(function (data) {
       var d = $.map(JSON.parse(data), function (od) {
@@ -110,6 +114,12 @@ $(document).ready(function() {
         } else {
           obj.jisyo = obj.jisyo.slice(0, -1) + cjisyo[obj.jisyo.slice(-1)];
         }
+
+        // jisyo link
+        obj.jisyolink = "<a target='_blank' href='http://dictionary.goo.ne.jp/freewordsearcher.html?MT=" + purify(obj.jisyo) + "&mode=0&x=0&y=0&kind=jn'>" + japanruby(obj.jisyo) + "</a>";
+
+        // masu link
+        obj.masulink = "<a target='_blank' href='http://www.gavo.t.u-tokyo.ac.jp/ojad/search/index/word:" + purify(obj.masu) + "'>" + japanruby(obj.masu) + "</a>";
 
         // nai
         obj.nai = obj.lian;
@@ -176,7 +186,7 @@ $(document).ready(function() {
 
       initgrouptable(d, $('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
       initgrouptable(d, $('#prontable'), "pronounce", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
-      initgrouptable(d, $('#verbtable'), "lesson", [ "pos", "masu", "jisyo", "nai", "te", "ta", "desc", "", ""]);
+      initgrouptable(d, $('#verbtable'), "lesson", [ "pos", "masulink", "jisyolink", "nai", "te", "ta", "desc", "", ""]);
       var dd = d.map(function(item) {
         var desc = item.desc.replace(/；/g, '，').replace(/（.*）/g, '');
         var ss = desc.split('，');
