@@ -11,6 +11,11 @@ permalink: /verb/index.html
 <span class="verb2-2">下一段动词</span>
 <span class="verb3">動3</span>
 
+| 意味    | 課 | 類别 | 辞書形 | 意味 |
+| ----    | -- | ---  | ------ | ---- |
+| loading |
+{:.japan#imitable}
+
 | 漢字    | 課 | 類别 | 辞書形 | 意味 |
 | ----    | -- | ---  | ------ | ---- |
 | loading |
@@ -145,12 +150,12 @@ $(document).ready(function() {
         return obj;
       });
 
-      function initgrouptable(table, groupby, tableRow, filter) {
+      function initgrouptable(data, table, groupby, tableRow, filter) {
         function createcell(klass, content) {
           return $('<td />', { class: klass }).html(content);
         };
         var groups = {};
-        $.each(d, function (i, a) { if (a[groupby] in groups) groups[a[groupby]].push(a); else groups[a[groupby]] = [a]; } );
+        $.each(data, function (i, a) { if (a[groupby] in groups) groups[a[groupby]].push(a); else groups[a[groupby]] = [a]; } );
         table.children('tbody').remove();
         var count = 0;
         $.each(groups, function(i, group) {
@@ -169,9 +174,15 @@ $(document).ready(function() {
         });
       };
 
-      initgrouptable($('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
-      initgrouptable($('#prontable'), "pronounce", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
-      initgrouptable($('#verbtable'), "lesson", [ "pos", "masu", "jisyo", "nai", "te", "ta", "desc", "", ""]);
+      initgrouptable(d, $('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
+      initgrouptable(d, $('#prontable'), "pronounce", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
+      initgrouptable(d, $('#verbtable'), "lesson", [ "pos", "masu", "jisyo", "nai", "te", "ta", "desc", "", ""]);
+      var dd = d.map(function(item) {
+        var desc = item.desc.replace(/；/g, '，').replace(/（.*）/g, '');
+        var ss = desc.split('，');
+        return ss.map(function(ssitem) { return $.extend({}, item, { imi: ssitem }); } );
+      }).reduce(function(a, b) { return a.concat(b);});
+      initgrouptable(dd, $('#imitable'), "imi", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
 
       $('td').each(function() {
         $(this).html(japanruby($(this).html()));
