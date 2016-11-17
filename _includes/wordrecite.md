@@ -1,21 +1,22 @@
 <div id="wordrecite">
-<button class="toggle-start">开始记单词</button>
-<button class="toggle-previous">上一个</button>
 <p>
+  <button class="toggle-start">开始记单词</button>
   <input id="onlyremember" type="checkbox" checked />
   <label for="onlyremember">自动跳过已经记住的单词</label>
+  <span id="card-summary"></span>
+  <div class="card">
+    <p id="content"></p>
+  </div>
 </p>
-<div id="card-summary"></div>
-<div class="card">
-  <p id="content"></p>
-</div>
-<input id="trialtext" type="textbox" />
 <p>
+  <input id="trialtext" type="textbox" />
   <input id="wordremember" type="checkbox" />
   <label for="wordremember">此单词已记住</label>
+  <button class="toggle-next">下一个</button>
+  <button class="toggle-previous">上一个</button>
+  <button class="toggle-next">下一个</button>
 </p>
 
-<button class="toggle-next">下一个</button>
 </div>
 
 <script>
@@ -104,7 +105,7 @@ $(document).ready(function() {
 </script>
 <style>
 #trialtext {
-  width: 100%;
+  width: 70%;
 }
 .card {
   margin-right: 10px;
@@ -133,8 +134,11 @@ button {
   display: inline-block;
   font-size: 24px;
 }
+button.toggle-previous {
+  width: 25%;
+}
 button.toggle-next {
-  width: 80%;
+  width: 35%;
 }
 
 /* Base for label styling */
