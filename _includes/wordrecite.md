@@ -45,15 +45,17 @@ $(document).ready(function() {
   rwords = rwords || {};
   $('button.toggle-start').on('click', function(e) {
     e.preventDefault();
-    quizdata = (lessonquizdata && lessonquizdata["l{{page.lesson}}"])
+    quizdata = ((lessonquizdata && lessonquizdata["l{{page.lesson}}"])
       || (curlessonquizdata)
-      || table.rows({filter: 'applied'}).data()
+      || table.rows({filter: 'applied'}).data().map(function(p) { return { kana: p[0], kanji: p[1], explain: p[3], display: p[4], pos: p[2], rid: p[5] + '|' + p[6]}}))
       .map(function(p) {
-        var desc = "<span class='japan'>" + (p[1] == "&nbsp;" ? p[0] : p[4] + "<br />" + p[0]) + "</span>";
-        desc += "<span class='card-pos'>[" + p[2] + "]</span>";
-        desc += "<a href='#' class='read' data-read='"+p[0]+"'>[读]</a>";
-        var rid = p[5]+'|'+p[6];
-        return { tip: p[3], desc: desc, rem: rwords[rid], rid: rid }});
+        p.kana = japanruby(p.kana);
+        p.purekana = p.kana.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
+        p.display = japanruby(p.display);
+        var desc = "<span class='japan'>" + (p.kanji == "&nbsp;" ? p.kana : p.display + "<br />" + p.kana) + "</span>";
+        desc += "<span class='card-pos'>[" + p.pos + "]</span>";
+        desc += "<a href='#' class='read' data-read='"+p.purekana+"'>[读]</a>";
+        return { tip: p.explain, desc: desc, rem: rwords[p.rid], rid: p.rid }});
     quizid = -1;
     rollquiz(1);
     displayquiz();
