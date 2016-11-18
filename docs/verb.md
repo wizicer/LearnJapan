@@ -26,8 +26,8 @@ permalink: /verb/index.html
 | loading |
 {:.japan#prontable}
 
-| 課      | 類别 | ます形 | 辞書形 | ない形 | て形 | た形 | 意味 | 特殊 | 搭配 |
-| --      | ---  | ------ | ------ | ------ | ---- | ---- | ---- | ---- | ---- |
+| 課      | 類别 | 敬体形 | 简体形 | 其他形 | ます形 | 辞書形 | ない形 | て形 | た形 | 意味 | 搭配 |
+| --      | ---  | ------ | ------ | ------ | ------ | ------ | ------ | ---- | ---- | ---- | ---- |
 | loading |
 {:.japan#verbtable}
 
@@ -39,6 +39,24 @@ permalink: /verb/index.html
 .verb3 { background-color: #00BCD1; }
 .spcell { font-weight: bold; }
 .althead { background-color: #C0D8D7; }
+
+@media only screen and (min-width: 768px) {
+  #verbtable th:nth-child(3),#verbtable th:nth-child(4) {
+    display: none;
+  }
+  #verbtable td:nth-child(3),#verbtable td:nth-child(4) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #verbtable th:nth-child(2),#verbtable th:nth-child(5),#verbtable th:nth-child(6),#verbtable th:nth-child(7),#verbtable th:nth-child(8),#verbtable th:nth-child(9) {
+    display: none;
+  }
+  #verbtable td:nth-child(2),#verbtable td:nth-child(5),#verbtable td:nth-child(6),#verbtable td:nth-child(7),#verbtable td:nth-child(8),#verbtable td:nth-child(9) {
+    display: none;
+  }
+}
 </style>
 
 <script>
@@ -92,6 +110,15 @@ $(document).ready(function() {
         obj.pos = obj.pos.replace("动", "動");
         obj.lian = obj.masu.replace(/ます$/g, "");
 
+        // masen
+        obj.masen = obj.lian + "ません";
+
+        // masita
+        obj.masita = obj.lian + "ました";
+
+        // masendesita
+        obj.masendesita = obj.lian + "ませんでした";
+
         // te
         obj.te = obj.lian;
         if (obj.pos.endsWith('1')) {
@@ -129,6 +156,9 @@ $(document).ready(function() {
           obj.nai += "ない";
         }
 
+        // nakatta
+        obj.nakatta = obj.nai.slice(0, -1) + "かった";
+
         // kanji
         obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "");
 
@@ -139,6 +169,14 @@ $(document).ready(function() {
             obj["sp" + p] = true;
           }
         }
+
+        function joincell(arr) {
+          return arr.map(function(p) {return p && japanruby(p);}).join("<br />");
+        }
+        // compact cells
+        obj.respect = joincell( [ obj.masu, obj.masen, obj.masita, obj.masendesita ] );
+        obj.simple = joincell( [ obj.jisyo, obj.nai, obj.ta, obj.nakatta ] );
+        obj.other = joincell( [ obj.te ] );
 
         // pronounce
         obj.pronounce = obj.jisyo.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
@@ -180,13 +218,15 @@ $(document).ready(function() {
             });
             table.append(row);
             row = $('<tr />');
+            var emptycell = $('<td style="display: none" />');
+            row.append(emptycell);
           });
         });
       };
 
       initgrouptable(d, $('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
       initgrouptable(d, $('#prontable'), "pronounce", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
-      initgrouptable(d, $('#verbtable'), "lesson", [ "pos", "masulink", "jisyolink", "nai", "te", "ta", "desc", "", ""]);
+      initgrouptable(d, $('#verbtable'), "lesson", [ "pos", "respect", "simple", "other", "masulink", "jisyolink", "nai", "te", "ta", "desc", ""]);
       var dd = d.map(function(item) {
         var desc = item.desc.replace(/；/g, '，').replace(/（.*）/g, '');
         var ss = desc.split('，');
