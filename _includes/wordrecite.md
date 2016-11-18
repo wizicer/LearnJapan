@@ -2,7 +2,7 @@
 <p>
   <button class="toggle-start">开始记单词</button>
   <input id="onlyremember" type="checkbox" checked />
-  <label for="onlyremember">自动跳过已经记住的单词</label>
+  <label for="onlyremember">自动跳过已记住单词</label>
   <span id="card-summary"></span>
   <div class="card">
     <p id="content"></p>
@@ -11,10 +11,10 @@
 <p>
   <input id="trialtext" type="textbox" />
   <input id="wordremember" type="checkbox" />
-  <label for="wordremember">此单词已记住</label>
-  <button class="toggle-next">下一个</button>
-  <button class="toggle-previous">上一个</button>
-  <button class="toggle-next">下一个</button>
+  <label for="wordremember">已记住</label>
+  <button class="toggle-next">下</button>
+  <button class="toggle-previous">上</button>
+  <button class="toggle-next">下</button>
 </p>
 
 </div>
