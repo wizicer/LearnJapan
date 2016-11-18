@@ -1,5 +1,5 @@
 ---
 ---
 [ {% assign words = site.data.words | where_exp: "word", "word.pos contains '动'" %} {% for word in words %}
-  [ "{{word.kana | strip}}", "{{word.kanji | strip}}", "{{word.pos | strip}}", "{{word.desc | strip}}", "{{word.word | strip}}", "{{word.lesson | strip}}", "{{word.idx | strip}}"]{% unless forloop.last %},{% endunless %} {% endfor %}
+  { "pos": "{{word.pos | strip}}", "desc": "{{word.desc | strip}}", "masu": "{{word.word | strip}}", "lesson": "{{word.lesson | strip}}" }{% unless forloop.last %},{% endunless %} {% endfor %}
 ]
