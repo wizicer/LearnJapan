@@ -52,7 +52,7 @@ var verbhelper = new function() {
     return sen.replace(/!(.*)\(.*\)/g, '$1')
   }
 
-  this.parseajaxdata = function (od) {
+  function parseajaxdataline(od, idioms) {
     var obj = od;
     obj.pos = obj.pos.replace("动", "動");
     obj.lian = obj.masu.replace(/ます$/g, "");
@@ -128,6 +128,18 @@ var verbhelper = new function() {
     // pronounce
     obj.pronounce = obj.jisyo.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
 
+    // idioms
+    var possiblelist = [ obj.masu, obj.masen, obj.masita, obj.masendesita, obj.jisyo, obj.nai, obj.ta, obj.nakatta, obj.te ]
+      .map(function (p) { return purify(p); });
+    obj.idiomlist = $.extend([], idioms);
+    obj.idiomlist = obj.idiomlist
+      .filter(function (idiom) {
+        return possiblelist.some(function (p) { return idiom.indexOf(p) >= 0; });
+      });
+    obj.idioms = joincell(obj.idiomlist);
+    // ignore special words to avoid confusion
+    if (obj.masu == "あります" || obj.masu == "します") obj.idioms = "";
+
     // posclass
     if (obj.pos.endsWith('2')) {
       if (verb21tail.indexOf(obj.pronounce.slice(-2, -1)) >= 0) {
@@ -143,6 +155,10 @@ var verbhelper = new function() {
     }
 
     return obj;
+  };
+  this.parseajaxdata = function (data) {
+    var d = $.map(data.data, function (p) { return parseajaxdataline(p, data.idiom); } );
+    return d;
   };
 
   this.initgrouptable = function (data, table, groupby, tableRow, filter) {

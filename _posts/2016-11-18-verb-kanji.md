@@ -24,7 +24,7 @@ category: grammar
 $(document).ready(function() {
   $.ajax('/verb.json')
     .done(function (data) {
-      var d = $.map(JSON.parse(data), verbhelper.parseajaxdata);
+      var d = verbhelper.parseajaxdata(JSON.parse(data));
       verbhelper.initgrouptable(d, $('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
 
       $('td').each(function() {
