@@ -22,9 +22,9 @@ category: grammar
 
 <script>
 $(document).ready(function() {
-  $.ajax('/verb.json')
+  $.ajax('/verb.json', { dataType: "json" })
     .done(function (data) {
-      var d = verbhelper.parseajaxdata(JSON.parse(data));
+      var d = verbhelper.parseajaxdata(data);
       verbhelper.initgrouptable(d, $('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
 
       $('td').each(function() {
