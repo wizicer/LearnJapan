@@ -11,12 +11,14 @@
 <script>
 var verbhelper = new function() {
   var sp = {};
-  sp["!来(き)ます"] = { jisyo: "!来(く)る", nai: "!来(こ)ない" }
+  sp["!来(き)ます"] = { jisyo: "!来(く)る", nai: "!来(こ)ない", isi: "!来(こ)よう", meirei: "!来(こ)い" }
   sp["あります"] = { nai: "ない" }
   sp["!行(い)きます"] = { te: "!行(い)って", ta: "!行(い)った" }
   var cte = {};
   var cnai = {};
   var cjisyo = {};
+  var cmeirei = {};
+  var cisi = {};
   var verb21tail = "き ぎ び み に ち り い し";
   cte["き"] = "いて";
   cte["ぎ"] = "いで";
@@ -47,6 +49,26 @@ var verbhelper = new function() {
   cjisyo["り"] = "る";
   cjisyo["い"] = "う";
   cjisyo["し"] = "す";
+
+  cmeirei["く"] = "け";
+  cmeirei["ぐ"] = "げ";
+  cmeirei["ぶ"] = "べ";
+  cmeirei["む"] = "め";
+  cmeirei["ぬ"] = "ね";
+  cmeirei["つ"] = "て";
+  cmeirei["る"] = "れ";
+  cmeirei["う"] = "え";
+  cmeirei["す"] = "せ";
+
+  cisi["く"] = "こう";
+  cisi["ぐ"] = "ごう";
+  cisi["ぶ"] = "ぼう";
+  cisi["む"] = "もう";
+  cisi["ぬ"] = "のう";
+  cisi["つ"] = "とう";
+  cisi["る"] = "ろう";
+  cisi["う"] = "おう";
+  cisi["す"] = "そう";
 
   function purify(sen) {
     return sen.replace(/!(.*)\(.*\)/g, '$1')
@@ -100,6 +122,27 @@ var verbhelper = new function() {
     // nakatta
     obj.nakatta = obj.nai.slice(0, -1) + "かった";
 
+    // meirei
+    obj.meirei = obj.jisyo;
+    if (obj.pos.endsWith('2')) {
+      obj.meirei = obj.meirei.replace(/る$/g, 'ろ');
+    } else if (obj.pos.endsWith('3')) {
+      obj.meirei = obj.meirei.replace(/する$/g, 'しろ');
+    } else {
+      obj.meirei = obj.meirei.slice(0, -1) + cmeirei[obj.meirei.slice(-1)];
+    }
+    console.log(obj.jisyo, obj.meirei);
+
+    // isi
+    obj.isi = obj.jisyo;
+    if (obj.pos.endsWith('2')) {
+      obj.isi = obj.isi.replace(/る$/g, 'よう');
+    } else if (obj.pos.endsWith('3')) {
+      obj.isi = obj.isi.replace(/する$/g, 'しよう');
+    } else {
+      obj.isi = obj.isi.slice(0, -1) + cisi[obj.isi.slice(-1)];
+    }
+
     // kanji
     obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "");
 
@@ -121,9 +164,9 @@ var verbhelper = new function() {
       return arr.map(function(p) {return p && japanruby(p);}).join("<br />");
     }
     // compact cells
-    obj.respect = joincell( [ obj.masu, obj.masen, obj.masita, obj.masendesita ] );
-    obj.simple = joincell( [ obj.jisyo, obj.nai, obj.ta, obj.nakatta ] );
-    obj.other = joincell( [ obj.te ] );
+    obj.respect = joincell( [ obj.masulink, obj.masen, obj.masita, obj.masendesita ] );
+    obj.simple = joincell( [ obj.jisyolink, obj.nai, obj.ta, obj.nakatta ] );
+    obj.other = joincell( [ obj.te, obj.meirei, obj.isi ] );
 
     // pronounce
     obj.pronounce = obj.jisyo.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
@@ -138,7 +181,7 @@ var verbhelper = new function() {
       });
     obj.idioms = joincell(obj.idiomlist);
     // ignore special words to avoid confusion
-    if (obj.masu == "あります" || obj.masu == "します") obj.idioms = "";
+    if (obj.masu == "あります" || obj.masu == "います" || obj.masu == "します") obj.idioms = "";
 
     // posclass
     if (obj.pos.endsWith('2')) {
