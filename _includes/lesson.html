@@ -33,6 +33,7 @@
 | 句型、表达             | 解释                    |
 | ----                   | ----                    | {% for grammar in gs %}
 | {{grammar.expression}} | {{grammar.explanation}} | {% endfor %}
+{:#grammartable}
 
 ## 生词表
 
@@ -51,6 +52,10 @@ $(document).ready(function() {
     {% for word in ws %}
       { kana: "{{word.kana | strip}}", kanji: "{{word.kanji | strip}}", pos: "{{word.pos | strip}}", explain: "{{word.desc | strip}}", display: "{{word.word | strip}}", rid: "{{word.lesson | strip}}|{{word.idx | strip}}"}{% unless forloop.last %},{% endunless %}{% endfor %}
     ];
+  $('#grammartable tbody tr td:nth-child(2)')
+  .each(function() {
+    $(this).html($(this).html().replace(/\\n/g, "<br />"));
+  });
 });
 </script>
 
