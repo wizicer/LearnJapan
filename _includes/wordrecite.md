@@ -1,8 +1,6 @@
 <div id="wordrecite">
 <p>
   <button class="toggle-start">开始记单词</button>
-  <input id="onlyremember" type="checkbox" checked />
-  <label for="onlyremember">自动跳过已记住单词</label>
   <span id="card-summary"></span>
   <div class="card">
     <p id="content"></p>
@@ -16,6 +14,24 @@
   <button class="toggle-previous">上</button>
   <button class="toggle-next">下</button>
 </p>
+
+<div class="compact">
+  <p>
+  记单词选项：
+  </p>
+  <p>
+    <input id="onlyremember" type="checkbox" checked />
+    <label for="onlyremember">自动跳过已记住单词</label>
+  </p>
+  <p>
+    <input id="autoreadword" type="checkbox" checked />
+    <label for="autoreadword">自动读单词</label>
+  </p>
+  <p>
+    <input id="autoremember" type="checkbox" checked />
+    <label for="autoremember">拼写正确则标记记住</label>
+  </p>
+</div>
 
 </div>
 
@@ -55,7 +71,7 @@ $(document).ready(function() {
         var desc = "<span class='japan'>" + (p.kanji == "&nbsp;" ? p.kana : p.display + "<br />" + p.kana) + "</span>";
         desc += "<span class='card-pos'>[" + p.pos + "]</span>";
         desc += "<a href='#' class='read' data-read='"+p.purekana+"'>[读]</a>";
-        return { tip: p.explain, desc: desc, rem: rwords[p.rid], rid: p.rid }});
+        return { tip: p.explain, desc: desc, read: p.purekana, rem: rwords[p.rid], rid: p.rid }});
     quizid = -1;
     rollquiz(1);
     displayquiz();
@@ -78,20 +94,36 @@ $(document).ready(function() {
   function rollquiz(offset) {
     if (quizid + offset < 0 || quizid + offset >= quizdata.length * 2) return;
     var onlyremember = $('#onlyremember').prop('checked');
+    var autoreadword = $('#autoreadword').prop('checked');
     do {
       quizid += offset;
       quiznum = Math.floor(quizid / 2);
       quiz = quizdata[quiznum];
       if (quizid % 2 == 0) $('#trialtext').val('');
+      if (autoreadword && quizid % 2 != 0) speak(quiz.read);
     } while (quizid > 0 && quizid < quizdata.length * 2 - 1 && onlyremember && quiz.rem);
   }
-  $('#content').on('click', "a.read", function(e) {
-    e.preventDefault();
+  function speak(word) {
     if('speechSynthesis' in window){
-      var speech = new SpeechSynthesisUtterance($(this).data('read'));
+      var speech = new SpeechSynthesisUtterance(word);
       speech.lang = 'ja-JP';
       window.speechSynthesis.speak(speech);
     }
+  }
+  $('#trialtext').keypress(function (e) {
+    if (e.which == 13) {
+      var autoremember = $('#autoremember').prop('checked');
+      rollquiz(1);
+      displayquiz();
+      if (autoremember && $(this).val() == quiz.read) {
+        $("#wordremember").prop('checked', true).change();
+      }
+      return false;
+    }
+  });
+  $('#content').on('click', "a.read", function(e) {
+    e.preventDefault();
+    speak($(this).data('read'));
   });
   $('button.toggle-next').on('click', function(e) {
     e.preventDefault();
@@ -108,6 +140,9 @@ $(document).ready(function() {
 <style>
 #trialtext {
   width: 70%;
+}
+.compact p {
+  margin-bottom: 0px;
 }
 .card {
   margin-right: 10px;
