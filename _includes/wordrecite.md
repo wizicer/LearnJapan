@@ -31,6 +31,10 @@
     <input id="autoremember" type="checkbox" checked />
     <label for="autoremember">拼写正确则标记记住</label>
   </p>
+  <p>
+    <input id="shufflewords" type="checkbox" />
+    <label for="shufflewords">随机顺序记忆</label>
+  </p>
 </div>
 
 </div>
@@ -72,6 +76,8 @@ $(document).ready(function() {
         desc += "<span class='card-pos'>[" + p.pos + "]</span>";
         desc += "<a href='#' class='read' data-read='"+p.purekana+"'>[读]</a>";
         return { tip: p.explain, desc: desc, read: p.purekana, rem: rwords[p.rid], rid: p.rid }});
+    var shufflewords = $('#shufflewords').prop('checked');
+    if (shufflewords) quizdata = quizdata.sort(function() { return 0.5 - Math.random() });;
     quizid = -1;
     rollquiz(1);
     displayquiz();

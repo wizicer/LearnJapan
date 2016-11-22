@@ -153,19 +153,24 @@ var verbhelper = new function() {
       }
     }
 
-    // jisyo link
-    obj.jisyolink = "<a target='_blank' href='http://dictionary.goo.ne.jp/freewordsearcher.html?MT=" + purify(obj.jisyo) + "&mode=0&x=0&y=0&kind=jn'>" + japanruby(obj.jisyo) + "</a>";
+    // goo link
+    obj.goolink = "<a target='_blank' href='http://dictionary.goo.ne.jp/freewordsearcher.html?MT=" + purify(obj.jisyo) + "&mode=0&x=0&y=0&kind=jn'>goo</a>";
 
-    // masu link
-    obj.masulink = "<a target='_blank' href='http://www.gavo.t.u-tokyo.ac.jp/ojad/search/index/word:" + purify(obj.masu) + "'>" + japanruby(obj.masu) + "</a>";
+    // ojad link
+    obj.ojadlink = "<a target='_blank' href='http://www.gavo.t.u-tokyo.ac.jp/ojad/search/index/word:" + purify(obj.jisyo) + "'>OJAD</a>";
+
+    // xd link
+    obj.xdlink = "<a target='_blank' href='http://dict.hjenglish.com/jp/jc/" + purify(obj.jisyo) + "'>小D</a>";
 
     function joincell(arr) {
       return arr.map(function(p) {return p && japanruby(p);}).join("<br />");
     }
     // compact cells
-    obj.respect = joincell( [ obj.masulink, obj.masen, obj.masita, obj.masendesita ] );
-    obj.simple = joincell( [ obj.jisyolink, obj.nai, obj.ta, obj.nakatta ] );
+    obj.respect = joincell( [ obj.masu, obj.masen, obj.masita, obj.masendesita ] );
+    obj.simple = joincell( [ obj.jisyo, obj.nai, obj.ta, obj.nakatta ] );
     obj.other = joincell( [ obj.te, obj.meirei, obj.isi ] );
+    var links = obj.goolink + "|" + obj.ojadlink + "|" + obj.xdlink;
+    obj.desclinks = joincell( [ obj.desc, links ] );
 
     // pronounce
     obj.pronounce = obj.jisyo.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
