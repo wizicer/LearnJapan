@@ -8,14 +8,14 @@ category: word
 
 ---
 
-{% include verb.html %}
+{% include wordhelper.html %}
 {% include wordrecite.md %}
 
 <script>
 $(document).ready(function() {
   $.ajax('/verb.json', { dataType: "json" })
     .done(function (data) {
-      var d = verbhelper.parseajaxdata(data);
+      var d = wordhelper.parseverbdata(data);
       curlessonquizdata = d.map(function (p) {
         return { kana: p.kana, kanji: p.kanji, pos: p.pos, explain: p.desc, display: p.masu, rid: p.lesson + "|" + p.idx };
       });

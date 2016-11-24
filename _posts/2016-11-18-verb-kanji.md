@@ -18,14 +18,14 @@ category: grammar
 | loading |
 {:.japan#kanjitable}
 
-{% include verb.html %}
+{% include wordhelper.html %}
 
 <script>
 $(document).ready(function() {
   $.ajax('/verb.json', { dataType: "json" })
     .done(function (data) {
-      var d = verbhelper.parseajaxdata(data);
-      verbhelper.initgrouptable(d, $('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
+      var d = wordhelper.parseverbdata(data);
+      wordhelper.initgrouptable(d, $('#kanjitable'), "kanji", [ "lesson", "pos", "jisyo", "desc"], function (group) { return group.length > 1 && group.length < 20; });
 
       $('td').each(function() {
         $(this).html(japanruby($(this).html()));

@@ -9,7 +9,7 @@
 </style>
 
 <script>
-var verbhelper = new function() {
+var wordhelper = new function() {
   var sp = {};
   sp["!来(き)ます"] = { jisyo: "!来(く)る", nai: "!来(こ)ない", isi: "!来(こ)よう", meirei: "!来(こ)い" }
   sp["あります"] = { nai: "ない" }
@@ -74,7 +74,7 @@ var verbhelper = new function() {
     return sen.replace(/!(.*)\(.*\)/g, '$1')
   }
 
-  function parseajaxdataline(od, idioms) {
+  function parseverbdataline(od, idioms) {
     var obj = od;
     obj.pos = obj.pos.replace("动", "動");
     obj.lian = obj.masu.replace(/ます$/g, "");
@@ -203,8 +203,8 @@ var verbhelper = new function() {
 
     return obj;
   };
-  this.parseajaxdata = function (data) {
-    var d = $.map(data.data, function (p) { return parseajaxdataline(p, data.idiom); } );
+  this.parseverbdata = function (data) {
+    var d = $.map(data.data, function (p) { return parseverbdataline(p, data.idiom); } );
     return d;
   };
 
