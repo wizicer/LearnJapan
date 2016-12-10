@@ -11,7 +11,7 @@
 | {{grammar.expression}} | {{grammar.explanation}} | {{grammar.lesson}} | {{grammar.idx}} | {% endfor %}
 | ====                   | ====                    | ====               | ==              |
 | 句型、表达             | 解释                    | 课次               | 序              |
-{:.display width="100%"}
+{:.display.table.table-striped.table-bordered width="100%"}
 
 <script>
 $(document).ready(function() {

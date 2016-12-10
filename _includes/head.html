@@ -58,9 +58,24 @@
     <!-- Android Lolipop Theme Color -->
     <meta name="theme-color" content="{{ page.color }}">
 
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | prepend: site.baseurl }}">
+    <!-- <link rel="stylesheet" href="{{ "/assets/css/main.css" | prepend: site.baseurl }}"> -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/bootstrap/css/slate.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/buttons.bootstrap.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/responsive.bootstrap.min.css">
+
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
     <script>var searchJsonFile='{{ site.baseurl }}/search.json';</script>
+    <script src="{{ site.baseurl }}/assets/3rd/jquery/jquery-1.12.4.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/dataTables/jquery.dataTables.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/dataTables/dataTables.bootstrap.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/dataTables/dataTables.buttons.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/dataTables/buttons.bootstrap.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/dataTables/buttons.colVis.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/dataTables/dataTables.responsive.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/3rd/dataTables/responsive.bootstrap.min.js"></script>
     <script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
 </head>
