@@ -9,20 +9,20 @@
 <p>
   <div class="form-horizontal">
     <div class="form-group row">
-    <div class="col-xs-10">
-  <input class="form-control" id="trialtext" type="textbox" />
-  </div>
-    <div class="checkbox col-xs-2">
-    <label>
-      <input type="checkbox" id="wordremember">已记住
-    </label>
-  </div>
-  </div>
+      <div class="col-xs-10">
+        <input class="form-control" id="trialtext" type="textbox" />
+      </div>
+      <div class="checkbox col-xs-2">
+        <label>
+          <input type="checkbox" id="wordremember">已记住
+        </label>
+      </div>
+    </div>
   </div>
   <div class="row">
-  <button class="col-xs-5 toggle-next btn btn-success">下</button>
-  <button class="col-xs-2 toggle-previous btn btn-info">上</button>
-  <button class="col-xs-5 toggle-next btn btn-success">下</button>
+    <button class="col-xs-5 toggle-next btn btn-success">下</button>
+    <button class="col-xs-2 toggle-previous btn btn-info">上</button>
+    <button class="col-xs-5 toggle-next btn btn-success">下</button>
   </div>
 </p>
 
