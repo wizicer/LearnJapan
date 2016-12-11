@@ -9,7 +9,7 @@
 | loading |      |      |      |      |    |      |
 | ====    | ==== | ==== | ==== | ==== | == | ==   |
 | 假名    | 汉字 | 词性 | 解释 | 单词 | 课 | 序号 |
-{:.display width="100%"}
+{:.display.table.table-striped.table-bordered width="100%"}
 
 <script>
 $(document).ready(function() {

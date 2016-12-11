@@ -64,6 +64,7 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/buttons.bootstrap.min.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/font-awesome/css/font-awesome.min.css">
 
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
@@ -106,6 +107,8 @@ $(document).ready(function () {
   $('[data-toggle="offcanvas"]').click(function () {
         $('#wrapper').toggleClass('toggled');
   });  
+
+  $("table").addClass("table");
 });
     </script>
     <style>

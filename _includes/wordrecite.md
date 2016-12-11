@@ -167,7 +167,7 @@ $(document).ready(function() {
   display: table-cell;
   font-size: 22px;
 }
-button {
+#wordrecite button {
   background-color: #4CAF50;
   border: none;
   color: white;
@@ -177,10 +177,10 @@ button {
   display: inline-block;
   font-size: 24px;
 }
-button.toggle-previous {
+#wordrecite button.toggle-previous {
   width: 25%;
 }
-button.toggle-next {
+#wordrecite button.toggle-next {
   width: 35%;
 }
 

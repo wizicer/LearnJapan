@@ -1,32 +1,33 @@
 ---
-layout: default
+layout: page
 ---
 
-<main class="home" id="post" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
-    <div id="grid" class="row flex-grid">
-    {% for post in site.posts %}
-        <article class="box-item post-{{site.categorythemes[post.category].theme}}" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-                <span class="ribbon">
-                    <a href="{{site.baseurl}}/category/#{{site.categorythemes[post.category].tag}}"><span>{{site.categorythemes[post.category].name}}</span></a>
-                </span>
-                <div class="box-body">
-                    <meta itemprop="datePublished" content="{{post.date | date_to_xmlschema }}">
-                    <time itemprop="datePublished" datetime="{{ post.date }}" class="date">{{ post.date | date_to_string }}</time>
-                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-                        <h2 class="post-title" itemprop="name">
-                            {{ post.title }}
-                        </h2>
-                    </a>
-                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-                        <p class="description">{{ post.introduction }}</p>
-                    </a>
-                    <div class="tags">
-                        {% for tag in post.tags %}
-                            <a href="{{site.baseurl}}/tags/#{{tag | slugify }}">{{ tag }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-        </article>
-    {% endfor %}
+<div class="row">
+{% for tag in site.categories %}
+  {% assign cate = tag[0] %}
+  <div class="col-sm-4 col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <a href="#tag[0]"></a>
+        {% if site.categorythemes[cate].name != null %}
+        <span class="tag-title" id="{{ tag[0] | slugify }}">{{site.categorythemes[cate].name}}</span>
+        {% else %}
+        <span class="tag-title" id="{{ tag[0] | slugify }}">{{ tag[0] | capitalize }}</span>
+        {% endif %}
+      </div>
+      <ul class="list-group">
+        {% assign pages_list = tag[1] %}
+        {% for post in pages_list reversed %}
+          {% if post.title != null %}
+          {% if group == null or group == post.group %}
+          <a class="list-group-item" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+          {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% assign pages_list = nil %}
+        {% assign group = nil %}
+      </ul>
     </div>
-</main>
+  </div>
+{% endfor %}
+</div>
