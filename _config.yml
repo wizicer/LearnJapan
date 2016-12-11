@@ -12,7 +12,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: 冰河魔法师的标准日本语学习日志
+title: 冰河标日学习日志
 sidebartitle: 冰河标日
 email: icer@icerdesign.com
 description: > # this means to ignore newlines until "baseurl:"

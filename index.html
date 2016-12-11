@@ -2,6 +2,11 @@
 layout: page
 ---
 
+<div class="jumbotron">
+  <h1>{{ site.title }}</h1>
+  <p>{{ site.description }}</p>
+</div>
+
 <div class="row">
 {% for tag in site.categories %}
   {% assign cate = tag[0] %}
