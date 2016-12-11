@@ -59,8 +59,8 @@
     <meta name="theme-color" content="{{ page.color }}">
 
     <!-- <link rel="stylesheet" href="{{ "/assets/css/main.css" | prepend: site.baseurl }}"> -->
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/bootstrap/css/slate.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/bootstrap/css/bootstrap.min.css" title="theme">
+    <!-- <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/bootstrap/css/slate.min.css"> -->
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/buttons.bootstrap.min.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/3rd/dataTables/responsive.bootstrap.min.css">
@@ -109,6 +109,32 @@ $(document).ready(function () {
   });  
 
   $("table").addClass("table");
+
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+var supports_storage = supports_html5_storage();
+$('.theme-link').click(function(e){
+  e.preventDefault();
+  settheme($(this).attr('data-theme'));
+});
+function settheme(theme) {
+  var themeurl = "{{ site.baseurl }}/assets/3rd/bootstrap/css/" + theme + ".min.css"; 
+  $('link[title="theme"]').attr('href', themeurl);
+  if (supports_storage) localStorage.theme = theme;
+}
+if (supports_storage) {
+  var theme = localStorage.theme;
+  if (theme) settheme(theme);
+} else {
+  /* Don't annoy user with options that don't persist */
+  $('#theme-dropdown').hide();
+}
 });
     </script>
     <style>
