@@ -25,8 +25,6 @@ $(document).ready(function() {
     table
       .order( [3, 'asc'] )
       .draw();
-
-    initFilters();
   }
   setTimeout(inittable, 300);
   $('table tbody tr td:nth-child(1)')

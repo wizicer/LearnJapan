@@ -24,8 +24,6 @@ $(document).ready(function() {
       table
         .order( [5, 'asc'], [6, 'asc'] )
         .draw();
-
-      initFilters();
     }, false);
     table.on('xhr.dt', function ( e, settings, json, xhr ) {
       json.data.forEach(function(part, index, arr) {
