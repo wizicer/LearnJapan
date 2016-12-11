@@ -67,7 +67,6 @@
 
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
-    <script>var searchJsonFile='{{ site.baseurl }}/search.json';</script>
     <script src="{{ site.baseurl }}/assets/3rd/jquery/jquery-1.12.4.min.js"></script>
     <script src="{{ site.baseurl }}/assets/3rd/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ site.baseurl }}/assets/3rd/dataTables/jquery.dataTables.min.js"></script>
@@ -79,61 +78,6 @@
     <script src="{{ site.baseurl }}/assets/3rd/dataTables/responsive.bootstrap.min.js"></script>
     <script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
     <script>
-$(document).ready(function () {
-  var trigger = $('.hamburger'),
-      overlay = $('.overlay'),
-     isClosed = false;
-
-    trigger.click(function () {
-      hamburger_cross();      
-    });
-
-    function hamburger_cross() {
-
-      if (isClosed == true) {          
-        overlay.hide();
-        trigger.removeClass('is-open');
-        trigger.addClass('is-closed');
-        isClosed = false;
-      } else {   
-        overlay.show();
-        trigger.removeClass('is-closed');
-        trigger.addClass('is-open');
-        isClosed = true;
-      }
-  }
-  
-  $('[data-toggle="offcanvas"]').click(function () {
-        $('#wrapper').toggleClass('toggled');
-  });  
-
-  $("table").addClass("table");
-
-function supports_html5_storage() {
-  try {
-    return 'localStorage' in window && window['localStorage'] !== null;
-  } catch (e) {
-    return false;
-  }
-}
-
-var supports_storage = supports_html5_storage();
-$('.theme-link').click(function(e){
-  e.preventDefault();
-  settheme($(this).attr('data-theme'));
-});
-function settheme(theme) {
-  var themeurl = "{{ site.baseurl }}/assets/3rd/bootstrap/css/" + theme + ".min.css"; 
-  $('link[title="theme"]').attr('href', themeurl);
-  if (supports_storage) localStorage.theme = theme;
-}
-if (supports_storage) {
-  var theme = localStorage.theme;
-  if (theme) settheme(theme);
-} else {
-  /* Don't annoy user with options that don't persist */
-  $('#theme-dropdown').hide();
-}
-});
+      var basethemeurl = "{{ site.baseurl }}/assets/3rd/bootstrap/css/";
     </script>
 </head>
