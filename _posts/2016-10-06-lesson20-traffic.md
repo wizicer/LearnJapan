@@ -25,5 +25,5 @@ category: word
 | !船(ふね)                       |      |
 | !()フェリー                     |      |
 | !夜行列車(やこうれっしゃ)       |      |
-{:.japan.hidden}
+{:.japan.hidekanji}
 
