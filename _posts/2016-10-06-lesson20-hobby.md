@@ -42,6 +42,6 @@ category: word
 | !()ビリヤード                          |      |
 | !()サーフィン                          |      |
 | !()ダイビング                          |      |
-{:.japan.hidden}
+{:.japan.hidekanji}
 
 

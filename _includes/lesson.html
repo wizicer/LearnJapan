@@ -28,7 +28,7 @@
 {{lesson.contextt}}
  
 ## 语法点
-{% assign findingNum = include.num | prepend: " " | append: " " %}
+{% assign findingNum = include.num | prepend: '00' | slice: -3, 3 | prepend: " " | append: " " %}
 {% assign gs = site.data.grammar | where_exp: "item", "item.lesson contains findingNum" %}
 | 句型、表达             | 解释                    |
 | ----                   | ----                    | {% for grammar in gs %}

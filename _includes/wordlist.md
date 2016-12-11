@@ -9,7 +9,7 @@
 | loading |      |      |      |      |    |      |
 | ====    | ==== | ==== | ==== | ==== | == | ==   |
 | 假名    | 汉字 | 词性 | 解释 | 单词 | 课 | 序号 |
-{:.display width="100%"}
+{:.display.table.table-striped.table-bordered width="100%"}
 
 <script>
 $(document).ready(function() {
@@ -24,8 +24,6 @@ $(document).ready(function() {
       table
         .order( [5, 'asc'], [6, 'asc'] )
         .draw();
-
-      initFilters();
     }, false);
     table.on('xhr.dt', function ( e, settings, json, xhr ) {
       json.data.forEach(function(part, index, arr) {

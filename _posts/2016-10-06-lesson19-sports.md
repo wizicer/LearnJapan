@@ -33,4 +33,4 @@ category: word
 | !()ヨット                 | yacht             |
 | !()マラソン               | marathon          |
 | !()スカイダイビング       | sky diving        |
-{:.japan.hidden}
+{:.japan.hidekanji}

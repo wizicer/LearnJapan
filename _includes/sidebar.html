@@ -1,0 +1,20 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+    <ul class="nav sidebar-nav">
+        <li class="sidebar-brand"><a href="/">{{ site.sidebartitle }}</a></li>
+        {% for link in site.links %}
+            <li><a href="{{site.baseurl}}{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+        <li><a class="feed" href="{{site.baseurl}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Theme <span class="caret"></span></a>
+            <ul class="dropdown-menu" id="theme-dropdown" role="menu">
+                <li class="dropdown-header">Choose one theme</li>
+                <li><a href="#" data-theme="bootstrap" class="theme-link">Default</a></li>
+                <li><a href="#" data-theme="slate" class="theme-link">slate</a></li>
+                <li><a href="#" data-theme="superhero" class="theme-link">superhero</a></li>
+                <li><a href="#" data-theme="darkly" class="theme-link">darkly</a></li>
+                <li><a href="#" data-theme="paper" class="theme-link">paper</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>

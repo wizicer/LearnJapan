@@ -3,12 +3,6 @@
   position: fixed;
   top: 0px;
 }
-.tags a {
-  background: white;
-}
-.tags a.toggle-lesson.active {
-  background: wheat;
-}
 .lesson {
   display: none;
 }
@@ -24,30 +18,22 @@
 .japan.hideruby ruby rt:hover {
   color: inherit;
 }
-.lesson table {
-  margin: 50px auto;
-}
-.lesson table th,
-.lesson table td {
-  border: 2px solid #ccc;
-  padding: 5px;
-}
 </style>
 <div class="tags">
   {% if page.lesson %}
-  <a class="link" href="lesson{{page.lesson | minus: 1}}.html">前</a>
-  <a class="link" href="lesson{{page.lesson | plus: 1}}.html">后</a>
+  <a class="link btn btn-success" href="lesson{{page.lesson | minus: 1}}.html">前</a>
+  <a class="link btn btn-success" href="lesson{{page.lesson | plus: 1}}.html">后</a>
   {% endif %}
   {% for num in page.lessons %}
-    <a class="toggle-lesson tl{{num}}" data-lesson="{{num}}" href="#">{{num}}</a>
+    <a class="toggle-lesson tl{{num}} btn btn-info" data-lesson="{{num}}" href="#">{{num}}</a>
   {% endfor %}
-  <a class="toggle-ruby" href="#">注音</a>
-  <a class="toggle-japan" href="#">原文</a>
+  <a class="toggle-ruby btn btn-warning" href="#">注音</a>
+  <a class="toggle-japan btn btn-warning" href="#">原文</a>
   <br />
-  <a class="player-shortback" href="#">短退</a>
-  <a class="player-play" href="#">播放</a>
-  <a class="player-slow" href="#">慢速</a>
-  <a class="player-normal" href="#">常速</a>
+  <a class="player-shortback btn btn-primary" href="#">短退</a>
+  <a class="player-play btn btn-success" href="#">播放</a>
+  <a class="player-slow btn btn-primary" href="#">慢速</a>
+  <a class="player-normal btn btn-primary" href="#">常速</a>
   <audio id="player" controls>
   </audio>
 </div>
@@ -128,24 +114,26 @@ $(document).ready(function() {
     if (citem.length == 0) console.log($(this).text() + " not found.");
 
     var t = citem.contents().clone();
-    t = t.unwrap().wrap('<div class="japan translation"/>').parent();
+    t = t.unwrap().wrap('<div class="japan translation well"/>').parent();
     t.find('rt').remove();
 
-    var button = $('<button class="translate" />')
+    var button = $('<button class="btn btn-xs"><i class="fa fa-pencil-square-o"></i>翻译</button>')
     button.on('click', function () {
       $(this).parent().find('div.input').toggleClass('active');
     });
-    var inputdiv = $('<div class="input" />')
-    var input = $('<input type="textbox" class="translate" />')
-    var inputbutton = $('<button class="translate" />')
+    var formdiv = $('<div class="form-horizontal input"></div>')
+    var inputdiv = $('<div class="form-group"></div>')
+    formdiv.append(inputdiv);
+    var input = $('<input type="textbox" class="col-xs-10 col-md-11 input-sm" />')
+    var inputbutton = $('<button class="btn btn-sm col-xs-2 col-md-1"><i class="fa fa-exchange"></i>对照</button>')
     inputbutton.on('click', function () {
-      $(this).parent().parent().find('.japan.translation').toggleClass('active');
+      $(this).parent().parent().parent().find('.japan.translation').toggleClass('active');
     });
     inputdiv.append(input);
     inputdiv.append(inputbutton);
 
     $(this).append(button);
-    $(this).append(inputdiv);
+    $(this).append(formdiv);
     $(this).append(t);
   });
   $('li:contains("-")').hide();
@@ -159,25 +147,11 @@ div.input.active {
 div.input {
   display: none;
 }
-div.input input {
-  width: 95%;
-}
 div.translation.active {
   display: inherit;
 }
 div.translation {
   display: none;
-}
-button.translate {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 1px 2px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  height: 20px;
-  width: 20px;
 }
 </style>
 
