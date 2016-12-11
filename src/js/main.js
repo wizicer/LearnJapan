@@ -58,8 +58,9 @@ function supports_html5_storage() {
 
 var supports_storage = supports_html5_storage();
 
-function settheme(theme) {
+function settheme(theme, persist) {
+  if (typeof persist === 'undefined') { persist = true; }
   var themeurl = basethemeurl + theme + ".min.css"; 
   $('link[title="theme"]').attr('href', themeurl);
-  if (supports_storage) localStorage.theme = theme;
+  if (supports_storage && persist) localStorage.theme = theme;
 }

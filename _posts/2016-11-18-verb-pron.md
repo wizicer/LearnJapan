@@ -31,6 +31,7 @@ $(document).ready(function() {
         $(this).html(japanruby($(this).html()));
       });
     });
+  settheme("bootstrap", false);
 });
 </script>
 
