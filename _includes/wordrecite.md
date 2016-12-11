@@ -9,10 +9,10 @@
 <p>
   <div class="form-horizontal">
     <div class="form-group row">
-      <div class="col-xs-10">
+      <div class="col-xs-9 col-md-10">
         <input class="form-control" id="trialtext" type="textbox" />
       </div>
-      <div class="checkbox col-xs-2">
+      <div class="checkbox col-xs-3 col-md-2">
         <label>
           <input type="checkbox" id="wordremember">已记住
         </label>
