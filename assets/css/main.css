@@ -292,3 +292,9 @@ html {
   border-top: #f63 1px solid;
   padding: 1px 0px 0px 0px;
 }
+.japan.hideruby ruby rt {
+  color: #fff;
+}
+.japan.hideruby ruby rt:hover {
+  color: inherit;
+}
