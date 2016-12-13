@@ -298,3 +298,6 @@ html {
 .japan.hideruby ruby rt:hover {
   color: inherit;
 }
+.lesson {
+  font-size: 17px;
+}
