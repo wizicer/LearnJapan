@@ -137,6 +137,11 @@ $(document).ready(function() {
     $(this).append(t);
   });
   $('li:contains("-")').hide();
+  $('.lesson>:not(.japan) li button').hide();
+  $('#starttranslate').on('click', function(){
+    $(this).hide();
+    $('.lesson>:not(.japan) li button').show();
+  });
 });
 
 </script>
