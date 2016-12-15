@@ -6,7 +6,7 @@ $(document).ready(function() {
       }
   });
 
-  var trigger = $('.hamburger'),
+  var trigger = $('.hamburger').add('.overlay'),
       overlay = $('.overlay'),
      isClosed = false;
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
       }
   }
   
-  $('[data-toggle="offcanvas"]').click(function () {
+  trigger.click(function () {
         $('#wrapper').toggleClass('toggled');
   });  
 
