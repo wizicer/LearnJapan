@@ -106,7 +106,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('.lesson>:not(.japan) li').each(function() {
     var jp = $(this).closest('.lesson').find('.japan');
-    var listno = $(this).parentsUntil('.lesson').last().index();
+    var listno = $(this).parentsUntil('.lesson').last().index() - 1;
     var itemno = $(this).index();
     var citem = jp.children().eq(listno);
     if (citem.prop('tagName').toLowerCase() != 'ul') citem = citem.find('ul');
@@ -138,9 +138,9 @@ $(document).ready(function() {
   });
   $('li:contains("-")').hide();
   $('.lesson>:not(.japan) li button').hide();
-  $('#starttranslate').on('click', function(){
+  $('.starttranslate').on('click', function(){
     $(this).hide();
-    $('.lesson>:not(.japan) li button').show();
+    $(this).closest('.lesson').find('>:not(.japan) li button').show();
   });
 });
 
