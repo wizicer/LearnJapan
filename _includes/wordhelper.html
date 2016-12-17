@@ -11,9 +11,16 @@
 <script>
 var wordhelper = new function() {
   var sp = {};
-  sp["!来(き)ます"] = { jisyo: "!来(く)る", nai: "!来(こ)ない", isi: "!来(こ)よう", meirei: "!来(こ)い" }
-  sp["あります"] = { nai: "ない" }
-  sp["!行(い)きます"] = { te: "!行(い)って", ta: "!行(い)った" }
+  sp["!来(き)ます"] = {
+    jisyo: "!来(く)る",
+    nai: "!来(こ)ない",
+    isi: "!来(こ)よう",
+    meirei: "!来(こ)い",
+    ba: "!来(く)れば",
+    kanou: "!来(こ)られる"
+  };
+  sp["あります"] = { nai: "ない" };
+  sp["!行(い)きます"] = { te: "!行(い)って", ta: "!行(い)った" };
   var cte = {};
   var cnai = {};
   var cjisyo = {};
@@ -142,6 +149,35 @@ var wordhelper = new function() {
       obj.isi = obj.isi.slice(0, -1) + cisi[obj.isi.slice(-1)];
     }
 
+    // ba
+    obj.ba = obj.jisyo;
+    if (obj.pos.endsWith('2')) {
+      obj.ba = obj.ba.replace(/る$/g, 'れば');
+    } else if (obj.pos.endsWith('3')) {
+      obj.ba = obj.ba.replace(/する$/g, 'すれば');
+    } else {
+      obj.ba = obj.ba.slice(0, -1) + cmeirei[obj.ba.slice(-1)] + 'ば';
+    }
+
+    // kanou
+    obj.kanou = obj.jisyo;
+    if (obj.pos.endsWith('2')) {
+      obj.kanou = obj.kanou.replace(/る$/g, 'られる');
+    } else if (obj.pos.endsWith('3')) {
+      obj.kanou = obj.kanou.replace(/する$/g, 'できる');
+    } else {
+      obj.kanou = obj.kanou.slice(0, -1) + cmeirei[obj.kanou.slice(-1)] + 'る';
+    }
+
+    obj.kanoulian = obj.kanou.slice(0, -1);
+    obj.kanoumasu = obj.kanoulian + "ます";
+    obj.kanoumasen = obj.kanoulian + "ません";
+    obj.kanoumasita = obj.kanoulian + "ました";
+    obj.kanoumasendesita = obj.kanoulian + "ませんでした";
+    obj.kanouta = obj.kanoulian + "た";
+    obj.kanounai = obj.kanoulian + "ない";
+    obj.kanounakatta = obj.kanoulian + "なかった";
+
     // kanji
     obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "");
 
@@ -168,7 +204,9 @@ var wordhelper = new function() {
     // compact cells
     obj.respect = joincell( [ obj.masu, obj.masen, obj.masita, obj.masendesita ] );
     obj.simple = joincell( [ obj.jisyo, obj.nai, obj.ta, obj.nakatta ] );
-    obj.other = joincell( [ obj.te, obj.meirei, obj.isi ] );
+    obj.kanourespect = joincell( [ obj.kanoumasu, obj.kanoumasen, obj.kanoumasita, obj.kanoumasendesita ] );
+    obj.kanousimple = joincell( [ obj.kanou, obj.kanounai, obj.kanouta, obj.kanounakatta ] );
+    obj.other = joincell( [ obj.te, obj.meirei, obj.isi, obj.ba ] );
     var links = obj.goolink + "|" + obj.ojadlink + "|" + obj.xdlink;
     obj.desclinks = joincell( [ obj.desc, links ] );
 
@@ -185,7 +223,17 @@ var wordhelper = new function() {
         obj.nai,
         obj.ta,
         obj.nakatta,
-        obj.te ]
+        obj.te,
+        obj.ba,
+        obj.kanou,
+        obj.kanounai,
+        obj.kanouta,
+        obj.kanounakatta,
+        obj.kanoumasu,
+        obj.kanoumasen,
+        obj.kanoumasita,
+        obj.kanoumasendesita,
+      ]
       .map(function (p) { return purify(p); });
     obj.idiomlist = $.extend([], idioms);
     obj.idiomlist = obj.idiomlist
