@@ -10,8 +10,8 @@
 
 <script>
 var wordhelper = new function() {
-  var sp = {};
-  sp["!来(き)ます"] = {
+  var spverb = {};
+  spverb["!来(き)ます"] = {
     jisyo: "!来(く)る",
     nai: "!来(こ)ない",
     isi: "!来(こ)よう",
@@ -19,8 +19,8 @@ var wordhelper = new function() {
     ba: "!来(く)れば",
     kanou: "!来(こ)られる"
   };
-  sp["あります"] = { nai: "ない" };
-  sp["!行(い)きます"] = { te: "!行(い)って", ta: "!行(い)った" };
+  spverb["あります"] = { nai: "ない" };
+  spverb["!行(い)きます"] = { te: "!行(い)って", ta: "!行(い)った" };
   var cte = {};
   var cnai = {};
   var cjisyo = {};
@@ -77,8 +77,28 @@ var wordhelper = new function() {
   cisi["う"] = "おう";
   cisi["す"] = "そう";
 
+  function makeLink(url, title) {
+    return "<a target='_blank' href='" + url + "'>" + title + "</a>";
+  }
+
+  function makeGooLink(query, title) {
+    return makeLink("http://dictionary.goo.ne.jp/freewordsearcher.html?MT=" + query + "&mode=0&x=0&y=0&kind=jn", title);
+  }
+
+  function makeOjadLink(query, title) {
+    return makeLink("http://www.gavo.t.u-tokyo.ac.jp/ojad/search/index/word:" + query, title);
+  }
+
+  function makeXdLink(query, title) {
+    return makeLink("http://dict.hjenglish.com/jp/jc/" + query, title);
+  }
+
   function purify(sen) {
     return sen.replace(/!(.*)\(.*\)/g, '$1')
+  }
+
+  function joincell(arr) {
+    return arr.map(function(p) {return p && japanruby(p);}).join("<br />");
   }
 
   function parseverbdataline(od, idioms) {
@@ -86,13 +106,9 @@ var wordhelper = new function() {
     obj.pos = obj.pos.replace("动", "動");
     obj.lian = obj.masu.replace(/ます$/g, "");
 
-    // masen
+    // masen // masita // masendesita
     obj.masen = obj.lian + "ません";
-
-    // masita
     obj.masita = obj.lian + "ました";
-
-    // masendesita
     obj.masendesita = obj.lian + "ませんでした";
 
     // te
@@ -182,25 +198,20 @@ var wordhelper = new function() {
     obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "");
 
     // special transformation
-    if (sp[obj.masu]) {
-      for (p in sp[obj.masu]) {
-        obj[p] = sp[obj.masu][p];
+    if (spverb[obj.masu]) {
+      for (p in spverb[obj.masu]) {
+        obj[p] = spverb[obj.masu][p];
         obj["sp" + p] = true;
       }
     }
 
     // goo link
-    obj.goolink = "<a target='_blank' href='http://dictionary.goo.ne.jp/freewordsearcher.html?MT=" + purify(obj.jisyo) + "&mode=0&x=0&y=0&kind=jn'>goo</a>";
-
+    obj.goolink = makeGooLink(purify(obj.jisyo), "goo");
     // ojad link
-    obj.ojadlink = "<a target='_blank' href='http://www.gavo.t.u-tokyo.ac.jp/ojad/search/index/word:" + purify(obj.jisyo) + "'>OJAD</a>";
-
+    obj.ojadlink = makeOjadLink(purify(obj.jisyo), "OJAD");
     // xd link
-    obj.xdlink = "<a target='_blank' href='http://dict.hjenglish.com/jp/jc/" + purify(obj.jisyo) + "'>小D</a>";
+    obj.xdlink = makeXdLink(purify(obj.jisyo), "小D");
 
-    function joincell(arr) {
-      return arr.map(function(p) {return p && japanruby(p);}).join("<br />");
-    }
     // compact cells
     obj.respect = joincell( [ obj.masu, obj.masen, obj.masita, obj.masendesita ] );
     obj.simple = joincell( [ obj.jisyo, obj.nai, obj.ta, obj.nakatta ] );
@@ -215,24 +226,12 @@ var wordhelper = new function() {
 
     // idioms
     var possiblelist =
-      [ obj.masu,
-        obj.masen,
-        obj.masita,
-        obj.masendesita,
-        obj.jisyo,
-        obj.nai,
-        obj.ta,
-        obj.nakatta,
+      [ obj.masu, obj.masen, obj.masita, obj.masendesita,
+        obj.jisyo, obj.nai, obj.ta, obj.nakatta,
         obj.te,
         obj.ba,
-        obj.kanou,
-        obj.kanounai,
-        obj.kanouta,
-        obj.kanounakatta,
-        obj.kanoumasu,
-        obj.kanoumasen,
-        obj.kanoumasita,
-        obj.kanoumasendesita,
+        obj.kanou, obj.kanounai, obj.kanouta, obj.kanounakatta,
+        obj.kanoumasu, obj.kanoumasen, obj.kanoumasita, obj.kanoumasendesita,
       ]
       .map(function (p) { return purify(p); });
     obj.idiomlist = $.extend([], idioms);
@@ -262,6 +261,60 @@ var wordhelper = new function() {
   };
   this.parseverbdata = function (data) {
     var d = $.map(data.data, function (p) { return parseverbdataline(p, data.idiom); } );
+    return d;
+  };
+
+  function parseAdjCommonDataLine(od, idioms) {
+    var obj = od;
+
+    // posclass
+    if (obj.pos.endsWith('2')) {
+      obj.posclass = "adj2";
+    } else {
+      obj.posclass = "adj1";
+    }
+
+    return obj;
+  };
+
+  function parseAdj1DataLine(od, idioms) {
+    var obj = parseAdjCommonDataLine(od, idioms);
+
+    obj.base = obj.word.slice(0, -1);
+    obj.te = "";
+    obj.ku = obj.base + "く";
+    obj.katta = obj.base + "かった";
+    obj.nai = obj.ku + "ない";
+    obj.nakatta = obj.ku + "なかった";
+    obj.kereba = obj.base + "ければ";
+
+    return obj;
+  };
+
+  this.parseAdj1Data = function (data) {
+    var d = $.map(data.data, function (p) { return parseAdj1DataLine(p, null); } );
+    return d;
+  };
+
+  function parseAdj2DataLine(od, idioms) {
+    var obj = parseAdjCommonDataLine(od, idioms);
+
+    obj.na = obj.word + "な";
+    obj.te = "";
+    obj.ni = "";
+    obj.datta = obj.word + "だった";
+    obj.nai = obj.word + "ではない";
+    obj.nakatta = obj.word + "ではなかった";
+    obj.naraba = obj.word + "ならば";
+    obj.deareba = obj.word + "であれば";
+    obj.denakereba = obj.word + "でなければ";
+    obj.da = obj.word + "だ";
+
+    return obj;
+  };
+
+  this.parseAdj2Data = function (data) {
+    var d = $.map(data.data, function (p) { return parseAdj2DataLine(p, null); } );
     return d;
   };
 

@@ -1,0 +1,8 @@
+---
+---
+{
+  "data":
+  [ {% assign words = site.data.words | where_exp: "word", "word.pos contains '形'" %} {% for word in words %}
+  { "kana": "{{word.kana | strip}}", "pos": "{{word.pos | strip}}", "desc": "{{word.desc | strip}}", "word": "{{word.word | strip}}", "lesson": "{{word.lesson | strip}}", "idx": "{{word.idx | strip}}" }{% unless forloop.last %},{% endunless %} {% endfor %}
+  ]
+}
