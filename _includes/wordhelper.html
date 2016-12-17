@@ -176,7 +176,16 @@ var wordhelper = new function() {
     obj.pronounce = obj.jisyo.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
 
     // idioms
-    var possiblelist = [ obj.masu, obj.masen, obj.masita, obj.masendesita, obj.jisyo, obj.nai, obj.ta, obj.nakatta, obj.te ]
+    var possiblelist =
+      [ obj.masu,
+        obj.masen,
+        obj.masita,
+        obj.masendesita,
+        obj.jisyo,
+        obj.nai,
+        obj.ta,
+        obj.nakatta,
+        obj.te ]
       .map(function (p) { return purify(p); });
     obj.idiomlist = $.extend([], idioms);
     obj.idiomlist = obj.idiomlist
@@ -208,10 +217,17 @@ var wordhelper = new function() {
     return d;
   };
 
+  function createCell(klass, content) {
+    return $('<td />', { class: klass }).html(content);
+  };
+
+  function addCellsToRow(columns, row, data) {
+    $.each(columns, function(j, name) {
+      row.append(createCell(data.posclass + (data["sp" + name] ? " spcell" : ""), data[name]));
+    });
+  };
+
   this.initgrouptable = function (data, table, groupby, tableRow, filter) {
-    function createcell(klass, content) {
-      return $('<td />', { class: klass }).html(content);
-    };
     var groups = {};
     $.each(data, function (i, a) { if (a[groupby] in groups) groups[a[groupby]].push(a); else groups[a[groupby]] = [a]; } );
     table.children('tbody').remove();
@@ -223,14 +239,21 @@ var wordhelper = new function() {
       if (count++ % 2 == 0) headcell = headcell.addClass('althead');
       row.append(headcell);
       $.each(group, function(i, item) {
-        $.each(tableRow, function(j, name) {
-          row.append(createcell(item.posclass + (item["sp" + name] ? " spcell" : ""), item[name]));
-        });
+        addCellsToRow(tableRow, row, item);
         table.append(row);
         row = $('<tr />');
         var emptycell = $('<td style="display: none" />');
         row.append(emptycell);
       });
+    });
+  };
+
+  this.initTable = function (data, table, tableRow, filter) {
+    table.children('tbody').remove();
+    $.each(data, function(i, item) {
+      var row = $('<tr />');
+      addCellsToRow(tableRow, row, item);
+      table.append(row);
     });
   };
 };
