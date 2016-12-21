@@ -86,7 +86,9 @@ $(document).ready(function() {
         var desc = "<span class='japan'>" + (p.kanji == "&nbsp;" ? p.kana : p.display + "<br />" + p.kana) + "</span>";
         desc += "<span class='card-pos'>[" + p.pos + "]</span>";
         desc += "<a href='#' class='read' data-read='"+p.purekana+"'>[读]</a>";
-        return { tip: p.explain, desc: desc, read: p.purekana, rem: rwords[p.rid], rid: p.rid }});
+        var tip = "<span class='card-explain'>" + p.explain + "</span>";
+        tip += "<span class='card-pos'>[" + p.pos.slice(0,1) + "]</span>";
+        return { tip: tip, desc: desc, read: p.purekana, rem: rwords[p.rid], rid: p.rid }});
     var shufflewords = $('#shufflewords').prop('checked');
     if (shufflewords) quizdata = quizdata.sort(function() { return 0.5 - Math.random() });;
     quizid = -1;
