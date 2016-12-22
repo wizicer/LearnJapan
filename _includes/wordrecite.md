@@ -1,6 +1,5 @@
 <div id="wordrecite">
 <p>
-  <button class="toggle-start btn btn-primary">开始记单词</button>
   <span id="card-summary"></span>
   <div class="card well">
     <p class="text-center" id="content"></p>
@@ -51,9 +50,7 @@
 </div>
 
 <script>
-var lessonquizdata = {};
-var curlessonquizdata;
-$(document).ready(function() {
+var easyquiz = new function () {
   var quizdata;
   var quizid;
   var quiznum;
@@ -74,27 +71,17 @@ $(document).ready(function() {
   }
   var rwords = JSON.parse(localStorage.getItem("rwords"));
   rwords = rwords || {};
-  $('button.toggle-start').on('click', function(e) {
-    e.preventDefault();
-    quizdata = ((lessonquizdata && lessonquizdata["l{{page.lesson}}"])
-      || (curlessonquizdata)
-      || table.rows({filter: 'applied'}).data().map(function(p) { return { kana: p[0], kanji: p[1], explain: p[3], display: p[4], pos: p[2], rid: p[5] + '|' + p[6]}}))
-      .map(function(p) {
-        p.kana = japanruby(p.kana);
-        p.purekana = p.kana.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
-        p.display = japanruby(p.display);
-        var desc = "<span class='japan'>" + (p.kanji == "&nbsp;" ? p.kana : p.display + "<br />" + p.kana) + "</span>";
-        desc += "<span class='card-pos'>[" + p.pos + "]</span>";
-        desc += "<a href='#' class='read' data-read='"+p.purekana+"'>[读]</a>";
-        var tip = "<span class='card-explain'>" + p.explain + "</span>";
-        tip += "<span class='card-pos'>[" + p.pos.slice(0,1) + "]</span>";
-        return { tip: tip, desc: desc, read: p.purekana, rem: rwords[p.rid], rid: p.rid }});
+  this.start = function(data){
+    quizdata = data;
+    for (var i = 0; i < quizdata.length; i++) {
+      quizdata[i].rem = rwords[quizdata[i].rid];
+    }
     var shufflewords = $('#shufflewords').prop('checked');
     if (shufflewords) quizdata = quizdata.sort(function() { return 0.5 - Math.random() });;
     quizid = -1;
     rollquiz(1);
     displayquiz();
-  });
+  };
   function displayquiz() {
     $("#content").html(quizid % 2 == 0 ? quiz.tip : quiz.desc);
     $("#card-summary").html((quiznum + 1) + '/' + (quizdata.length));
@@ -154,7 +141,7 @@ $(document).ready(function() {
     rollquiz(-1);
     displayquiz();
   });
-});
+};
 </script>
 <style>
 .card {
