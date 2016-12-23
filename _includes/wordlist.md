@@ -15,9 +15,6 @@
 $(document).ready(function() {
   function inittable() {
     table.ajax.url('{{ site.baseurl }}/words.json' ).load(function (){
-      table.column(1).visible(false);
-      table.column(5).visible(false);
-      table.column(6).visible(false);
       table.column(0).nodes().to$().addClass('japan');
       table.column(1).nodes().to$().addClass('japan');
       table.column(4).nodes().to$().addClass('japan');
@@ -43,7 +40,24 @@ $(document).ready(function() {
         column.visible(true);
     })
   });
+  $('button.toggle-start').on('click', function(e) {
+    e.preventDefault();
+    var quizdata = table.rows({filter: 'applied'}).data()
+      .map(function(p) { return { kana: p[0], kanji: p[1], explain: p[3], display: p[4], pos: p[2], rid: p[5] + '|' + p[6]}})
+      .map(function(p) {
+        p.kana = japanruby(p.kana);
+        p.purekana = p.kana.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
+        p.display = japanruby(p.display);
+        var desc = "<span class='japan'>" + (p.kanji == "&nbsp;" ? p.kana : p.display + "<br />" + p.kana) + "</span>";
+        desc += "<span class='card-pos'>[" + p.pos + "]</span>";
+        desc += "<a href='#' class='read' data-read='"+p.purekana+"'>[读]</a>";
+        var tip = "<span class='card-explain'>" + p.explain + "</span>";
+        tip += "<span class='card-pos'>[" + p.pos.slice(0,1) + "]</span>";
+        return { tip: tip, desc: desc, read: p.purekana, rid: p.rid }});
+    easyquiz.start(quizdata);
+  });
 });
 </script>
 
+<button class="toggle-start btn btn-primary">开始记单词</button>
 {% include wordrecite.md %}
