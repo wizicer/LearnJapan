@@ -32,38 +32,7 @@ layout: page
 $(document).ready(function() {
   table = $('table').DataTable({
     initComplete: function () {
-      this.api().columns().every( function () {
-        var column = this;
-        if (column.data().unique().length * 5 < column.data().length) {
-          var select = $('<select><option value=""></option></select>')
-              .appendTo( $(column.footer()).empty() )
-              .on( 'change', function () {
-                  var val = $.fn.dataTable.util.escapeRegex(
-                      $(this).val()
-                  );
-
-                  column
-                      .search( val ? '^'+val+'$' : '', true, false )
-                      .draw();
-              } );
-
-          column.data().unique().sort().each( function ( d, j ) {
-              select.append( '<option value="'+d+'">'+d+'</option>' )
-          } );
-        } else {
-          var search = $( '<input type="text" placeholder="Search" />' )
-              .appendTo( $(column.footer()).empty() )
-              .on('keyup change', function () {
-                  var val = $.fn.dataTable.util.escapeRegex(
-                      $(this).val()
-                  );
-                  if ( column.search() !== val ) {
-                      column.search( val )
-                          .draw();
-                  }
-              } );
-        }
-      } );
+      //initBottomSearch(this);
     },
     responsive: {
       details: true
@@ -77,6 +46,30 @@ $(document).ready(function() {
     pageLength: 10,
     lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "All"]]
   });
+  function initBottomSearch(table) {
+    table.api().columns().every(function () {
+      var column = this;
+      if (column.data().unique().length * 5 < column.data().length) {
+        var select = $('<select><option value=""></option></select>')
+          .appendTo( $(column.footer()).empty() )
+          .on('change', function () {
+            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+            column.search( val ? '^'+val+'$' : '', true, false ).draw();
+          });
+
+        column.data().unique().sort().each(function (d, j) {
+          select.append('<option value="'+d+'">'+d+'</option>')
+        });
+      } else {
+        var search = $('<input type="text" placeholder="Search" />')
+          .appendTo($(column.footer()).empty())
+          .on('keyup change', function () {
+            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+            if (column.search() !== val) { column.search( val ).draw(); }
+          });
+      }
+    });
+  };
   initFilters = function() {
     table.columns().every( function () {
         var column = this;
