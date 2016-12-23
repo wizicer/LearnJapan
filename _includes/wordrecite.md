@@ -84,8 +84,15 @@ var easyquiz = new function () {
   };
   function displayquiz() {
     $("#content").html(quizid % 2 == 0 ? quiz.tip : quiz.desc);
-    $("#card-summary").html((quiznum + 1) + '/' + (quizdata.length));
+    $("#card-summary").html((quiznum + 1) + '/' + (quizdata.length) + '(' + countRememberedWords() + ')');
     $("#wordremember").prop('checked', quiz.rem ? true : false);
+  }
+  function countRememberedWords() {
+    var tt = 0;
+    for (var i = 0; i < quizdata.length; i++) {
+      if (rwords[quizdata[i].rid]) tt++;
+    }
+    return tt;
   }
   $('#wordremember').change(function() {
     if (this.checked) {
