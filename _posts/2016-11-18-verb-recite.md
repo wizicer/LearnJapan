@@ -9,17 +9,42 @@ category: word
 ---
 
 {% include wordhelper.html %}
+<button class="toggle-start btn btn-primary">开始记单词</button>
 {% include wordrecite.md %}
 
 <script>
 $(document).ready(function() {
+  $('button.toggle-start').prop('disabled', true);
   $.ajax('/verb.json', { dataType: "json" })
     .done(function (data) {
       var d = wordhelper.parseverbdata(data);
-      curlessonquizdata = d.map(function (p) {
-        return { kana: p.kana, kanji: p.kanji, pos: p.pos, explain: p.desc, display: p.masu, rid: p.lesson + "|" + p.idx };
+      var quizdata = d
+        .filter(function(p) { return !p.pos.endsWith('3'); })
+        .map(function(p) {
+          var word = p.masu;
+          word = word.replace(/ます$/g, "")
+                    .replace(/!(.*?)\(.*?\)/g, '$1')
+                    .replace(/[\u3040-\u309f\u30a0-\u30ff]/g, "__")
+                    .replace(/$/g, 'ます');
+          var desc = "<span lang='jp'>" + japanruby(p.masu) + "</span>";
+          desc += "<span class='card-pos'>[" + p.pos + "]</span>";
+          desc += "<a href='#' class='read' data-read='"+ p.pronounce +"'>[读]</a>";
+          var tip = "<span lang='jp'>" + word + "</span>";
+          tip += "<br/><span class='card-explain'>" + p.desc + "</span>";
+          var rid = "v" + p.lesson + "|" + p.idx;
+          return { tip: tip, desc: desc, read: p.pronounce, rid: rid }});
+      $('button.toggle-start').prop('disabled', false);
+      $('button.toggle-start').on('click', function(e) {
+        e.preventDefault();
+        easyquiz.start(quizdata);
       });
     });
 });
 </script>
+
+<style>
+.card-explain {
+  font-size: 9pt;
+}
+</style>
 
