@@ -17,7 +17,16 @@ var wordhelper = new function() {
     isi: "!来(こ)よう",
     meirei: "!来(こ)い",
     ba: "!来(く)れば",
-    kanou: "!来(こ)られる"
+    kanou: "!来(こ)られる",
+    kanoulian        : "!来(こ)られ",
+    kanoumasu        : "!来(こ)られます",
+    kanoumasen       : "!来(こ)られません",
+    kanoumasita      : "!来(こ)られました",
+    kanoumasendesita : "!来(こ)られませんでした",
+    kanouta          : "!来(こ)られた",
+    kanounai         : "!来(こ)られない",
+    kanounakatta     : "!来(こ)られなかった",
+    ukemi: "!来(こ)られる",
   };
   spverb["あります"] = { nai: "ない" };
   spverb["!行(い)きます"] = { te: "!行(い)って", ta: "!行(い)った" };
@@ -194,6 +203,25 @@ var wordhelper = new function() {
     obj.kanounai = obj.kanoulian + "ない";
     obj.kanounakatta = obj.kanoulian + "なかった";
 
+    // ukemi
+    obj.ukemi = obj.nai;
+    if (obj.pos.endsWith('2')) {
+      obj.ukemi = obj.ukemi.replace(/ない$/g, 'られる');
+    } else if (obj.pos.endsWith('3')) {
+      obj.ukemi = obj.ukemi.replace(/する$/g, 'される');
+    } else {
+      obj.ukemi = obj.ukemi.replace(/ない$/g, 'れる');
+    }
+
+    obj.ukemilian = obj.ukemi.slice(0, -1);
+    obj.ukemimasu = obj.ukemilian + "ます";
+    obj.ukemimasen = obj.ukemilian + "ません";
+    obj.ukemimasita = obj.ukemilian + "ました";
+    obj.ukemimasendesita = obj.ukemilian + "ませんでした";
+    //obj.ukemita = obj.ukemilian + "た";
+    //obj.ukeminai = obj.ukemilian + "ない";
+    //obj.ukeminakatta = obj.ukemilian + "なかった";
+
     // kanji
     obj.kanji = obj.jisyo.replace(/[!()\u3040-\u309f\u30a0-\u30ff]/g, "");
 
@@ -232,6 +260,7 @@ var wordhelper = new function() {
         obj.ba,
         obj.kanou, obj.kanounai, obj.kanouta, obj.kanounakatta,
         obj.kanoumasu, obj.kanoumasen, obj.kanoumasita, obj.kanoumasendesita,
+        obj.ukemi, obj.ukemimasu, obj.ukemimasen, obj.ukemimasita, obj.ukemimasendesita,
       ]
       .map(function (p) { return purify(p); });
     obj.idiomlist = $.extend([], idioms);
