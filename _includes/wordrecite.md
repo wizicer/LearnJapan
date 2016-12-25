@@ -112,9 +112,9 @@ var easyquiz = new function () {
       quizid += offset;
       quiznum = Math.floor(quizid / 2);
       quiz = quizdata[quiznum];
-      if (quizid % 2 == 0) $('#trialtext').val('');
-      if (autoreadword && quizid % 2 != 0) speak(quiz.read);
     } while (quizid > 0 && quizid < quizdata.length * 2 - 1 && onlyremember && quiz.rem);
+    if (quizid % 2 == 0) $('#trialtext').val('');
+    if (autoreadword && quizid % 2 != 0) speak(quiz.read);
   }
   function speak(word) {
     if('speechSynthesis' in window){
