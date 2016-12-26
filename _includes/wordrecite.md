@@ -8,10 +8,10 @@
 <p>
   <div class="form-horizontal">
     <div class="form-group row">
-      <div class="col-xs-9 col-md-10">
+      <div id="trialdiv" class="col-xs-9 col-md-10">
         <input class="form-control" id="trialtext" type="textbox" />
       </div>
-      <div class="checkbox col-xs-3 col-md-2">
+      <div id="remembereddiv" class="checkbox col-xs-3 col-md-2">
         <label>
           <input type="checkbox" id="wordremember">已记住
         </label>
@@ -19,9 +19,9 @@
     </div>
   </div>
   <div class="row">
-    <button class="col-xs-5 toggle-next btn btn-success">下</button>
+    <button class="col-xs-5 toggle-next-left toggle-next btn btn-success">下</button>
     <button class="col-xs-2 toggle-previous btn btn-info">上</button>
-    <button class="col-xs-5 toggle-next btn btn-success">下</button>
+    <button class="col-xs-5 toggle-next-right toggle-next btn btn-success">下</button>
   </div>
 </p>
 
@@ -142,6 +142,16 @@ var easyquiz = new function () {
     e.preventDefault();
     rollquiz(1);
     displayquiz();
+  });
+  $('button.toggle-next-left').on('click', function(e) {
+    e.preventDefault();
+    var remembereddiv = ($('#remembereddiv')).detach();
+    ($('#trialdiv')).before(remembereddiv);
+  });
+  $('button.toggle-next-right').on('click', function(e) {
+    e.preventDefault();
+    var trialdiv = ($('#trialdiv')).detach();
+    ($('#remembereddiv')).before(trialdiv);
   });
   $('button.toggle-previous').on('click', function(e) {
     e.preventDefault();
