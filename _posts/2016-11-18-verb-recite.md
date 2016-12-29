@@ -27,7 +27,8 @@ $(document).ready(function() {
                     .replace(/[\u3040-\u309f\u30a0-\u30ff]/g, "__")
                     .replace(/$/g, 'ます');
           var read = p.masu.replace(/[^\u3040-\u309f\u30a0-\u30ff]/g, "");
-          var desc = "<span lang='jp'>" + japanruby(p.masu) + "</span>";
+          var desc = "<span lang='jp'>" + japanruby(p.masu) + "</span><br />";
+          desc += "<span lang='jp'>" + japanruby(p.kana) + "</span>";
           desc += "<span class='card-pos'>[" + p.pos + "]</span>";
           desc += "<a href='#' class='read' data-read='"+ read +"'>[读]</a>";
           var tip = "<span lang='jp'>" + word + "</span>";
