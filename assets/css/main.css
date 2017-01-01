@@ -289,9 +289,24 @@ html {
 .hidekanji ruby:hover {
   background-color: inherit;
 }
-.accent {
+.accent,
+.accent0 {
   border-top: #f63 1px solid;
   padding: 1px 0px 0px 0px;
+}
+.accent {
+  position: relative;
+}
+.accent:after {
+  content: "";
+  height: 20%;
+  width: 1px;
+  padding: 0;
+  margin: 0;
+  background-color: #f63;
+  position: absolute;
+  top: -0.5px;
+  right: -0.5px;
 }
 .japan.hideruby ruby rt {
   color: #fff;

@@ -7,9 +7,23 @@
     &:hover
       background-color inherit
 
-.accent
+.accent, .accent0
   border-top #FF6633 1px solid
   padding 1px 0px 0px 0px
+
+.accent
+  position relative
+
+  &:after
+    content ""
+    height 20%
+    width 1px
+    padding 0
+    margin 0
+    background-color #FF6633
+    position absolute
+    top -0.5px
+    right -0.5px
 
 .japan.hideruby ruby rt
   color white
