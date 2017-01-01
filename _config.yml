@@ -73,3 +73,6 @@ categorythemes:
     name: 课文
     tag: class
     theme: orange
+  notebook:
+    name: 笔记
+    tag: notebook
