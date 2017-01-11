@@ -70,9 +70,12 @@ categorythemes:
     tag: word
     theme: purple
   class:
-    name: 课文
+    name: 初级课文
     tag: class
     theme: orange
   notebook:
     name: 笔记
     tag: notebook
+  middleclass:
+    name: 中级课文
+    tag: middleclass
