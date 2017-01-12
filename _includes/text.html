@@ -224,11 +224,13 @@ $(document).ready(function() {
 {% if page.category == 'middleclass' %}
 {% assign id = lnum | prepend: 'm' %}
 {% assign lesson = site.data.mlessons[id] %}
-{% include mlesson.html num=lnum lesson=lesson %}
+{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/l{{include.num}}.mp3{% endcapture %}
+{% include mlesson.html num=lnum lesson=lesson wordaudio=wordaudio %}
 {% else %}
 {% assign id = lnum | prepend: 'l' %}
 {% assign lesson = site.data.lessons[id] %}
-{% include lesson.html num=lnum lesson=lesson %}
+{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/l{{include.num}}.mp3{% endcapture %}
+{% include lesson.html num=lnum lesson=lesson wordaudio=wordaudio %}
 {% endif %}
 {% endfor %}
 {% endcapture %}
