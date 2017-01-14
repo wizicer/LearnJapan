@@ -17,7 +17,7 @@
  
 ## 语法点
 {% assign findingNum = include.num | prepend: '0' | slice: -2, 2 | prepend: "m" %}
-{% assign gs = site.data.mgrammar | where_exp: "item", "item.lesson contains findingNum" %}
+{% assign gs = site.data.grammar | where_exp: "item", "item.lesson contains findingNum" %}
 | 句型、表达             | 解释                    |
 | ----                   | ----                    | {% for grammar in gs %}
 | {{grammar.expression}} | {{grammar.explanation}} | {% endfor %}
