@@ -18,9 +18,9 @@
 ## 语法点
 {% assign findingNum = include.num | prepend: '0' | slice: -2, 2 | prepend: "m" %}
 {% assign gs = site.data.grammar | where_exp: "item", "item.lesson contains findingNum" %}
-| 句型、表达             | 解释                    |
-| ----                   | ----                    | {% for grammar in gs %}
-| {{grammar.expression}} | {{grammar.explanation}} | {% endfor %}
+| 句型、表达             | 简释                     | 解释                    |
+| ----                   | ----                     | ----                    | {% for grammar in gs %}
+| {{grammar.expression}} | {{grammar.shortexplain}} | {{grammar.explanation}} | {% endfor %}
 {:#grammartable}
 
 ## 生词表
@@ -29,24 +29,20 @@
   <source src="{{include.wordaudio}}" type="audio/mpeg"/>
 </audio>
 
-{% assign findingNum1 = findingNum | append: "1 " %}
-{% assign findingNum2 = findingNum | append: "2 " %}
-{% assign ws1 = site.data.words | where_exp: "item", "item.lesson contains findingNum1" %}
+{% for idx in (1..4) %}
+### 生词表 {{idx}}
+{% assign wordTableNum = findingNum | append: idx %}
+{% assign ws = site.data.words | where_exp: "item", "item.lesson contains wordTableNum" %}
 | 假名          | 单词          | 词性         | 解释          |
-| ----          | ----          | ----         | ----          | {% for word in ws1 %}
+| ----          | ----          | ----         | ----          | {% for word in ws %}
 | {{word.kana}} | {{word.word}} | {{word.pos}} | {{word.desc}} | {% endfor %}
-
-{% assign ws2 = site.data.words | where_exp: "item", "item.lesson contains findingNum2" %}
-| 假名          | 单词          | 词性         | 解释          |
-| ----          | ----          | ----         | ----          | {% for word in ws2 %}
-| {{word.kana}} | {{word.word}} | {{word.pos}} | {{word.desc}} | {% endfor %}
+{% endfor %}
 
 <script>
+{% assign ws = site.data.words | where_exp: "item", "item.lesson contains findingNum" %}
 $(document).ready(function() {
   lessonquizdata["l{{include.num}}"] = [
-    {% for word in ws1 %}
-      { kana: "{{word.kana | strip}}", kanji: "{{word.kanji | strip}}", pos: "{{word.pos | strip}}", explain: "{{word.desc | strip}}", display: "{{word.word | strip}}", rid: "{{word.lesson | strip}}|{{word.idx | strip}}"},{% endfor %}
-    {% for word in ws2 %}
+    {% for word in ws %}
       { kana: "{{word.kana | strip}}", kanji: "{{word.kanji | strip}}", pos: "{{word.pos | strip}}", explain: "{{word.desc | strip}}", display: "{{word.word | strip}}", rid: "{{word.lesson | strip}}|{{word.idx | strip}}"}{% unless forloop.last %},{% endunless %}{% endfor %}
     ];
   $('#grammartable tbody tr td:nth-child(2)')
