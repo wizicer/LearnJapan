@@ -18,6 +18,16 @@
 .japan.hideruby ruby rt:hover {
   color: inherit;
 }
+.lesson.middle-lesson ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.lesson.middle-lesson ul li {
+  text-indent: 2em;
+}
+.lesson.middle-lesson .conversation ul li {
+  text-indent: 0;
+}
 </style>
 <div class="tags">
   {% if page.lesson %}
@@ -46,9 +56,10 @@ $(document).ready(function() {
     $('.t'+tabName).addClass("active");
     $('#'+tabName).addClass("active");
     var level = "{{page.category}}";
-    level = level == "middleclass" ? "mlesson" : "lesson";
+    level = level == "middleclass" ? "m" : "l";
     if (tabName != 'l0') {
-      player.src = "{{ site.baseurl }}/assets/audio/" + level + "/" + tabName + ".mp3";
+      var lnum = tabName.slice(1);
+      player.src = "{{ site.baseurl }}/assets/audio/lesson/" + level + lnum + ".mp3";
       player.load();
     }
     curlessonquizdata = lessonquizdata[tabName];
@@ -224,12 +235,12 @@ $(document).ready(function() {
 {% if page.category == 'middleclass' %}
 {% assign id = lnum | prepend: 'm' %}
 {% assign lesson = site.data.mlessons[id] %}
-{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/l{{include.num}}.mp3{% endcapture %}
+{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/{{id}}.mp3{% endcapture %}
 {% include mlesson.html num=lnum lesson=lesson wordaudio=wordaudio %}
 {% else %}
 {% assign id = lnum | prepend: 'l' %}
 {% assign lesson = site.data.lessons[id] %}
-{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/l{{include.num}}.mp3{% endcapture %}
+{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/{{id}}.mp3{% endcapture %}
 {% include lesson.html num=lnum lesson=lesson wordaudio=wordaudio %}
 {% endif %}
 {% endfor %}

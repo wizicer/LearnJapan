@@ -1,11 +1,13 @@
 {% assign lesson = include.lesson %}
-<div id="l{{include.num}}" class="lesson" markdown="1">
+<div id="l{{include.num}}" class="lesson middle-lesson" markdown="1">
 <div class="japan" markdown="1">
 {% assign title = "課" | prepend: include.num | prepend: "第" %}
 # {{title}}
 ## 会話 {{lesson.contitle}}
 
+<div class="conversation" markdown="1">
 {{lesson.conversation}}
+</div>
 
 ## 課文 {{lesson.texttitle}}
 
@@ -14,8 +16,8 @@
 </div>
  
 ## 语法点
-{% assign findingNum = include.num | prepend: 'm' | prepend: " " | append: " " %}
-{% assign gs = site.data.grammar | where_exp: "item", "item.lesson contains findingNum" %}
+{% assign findingNum = include.num | prepend: '0' | slice: -2, 2 | prepend: "m" %}
+{% assign gs = site.data.mgrammar | where_exp: "item", "item.lesson contains findingNum" %}
 | 句型、表达             | 解释                    |
 | ----                   | ----                    | {% for grammar in gs %}
 | {{grammar.expression}} | {{grammar.explanation}} | {% endfor %}
@@ -27,8 +29,8 @@
   <source src="{{include.wordaudio}}" type="audio/mpeg"/>
 </audio>
 
-{% assign findingNum1 = include.num | prepend: 'm' | prepend: " " | append: "1 " %}
-{% assign findingNum2 = include.num | prepend: 'm' | prepend: " " | append: "2 " %}
+{% assign findingNum1 = findingNum | append: "1 " %}
+{% assign findingNum2 = findingNum | append: "2 " %}
 {% assign ws1 = site.data.words | where_exp: "item", "item.lesson contains findingNum1" %}
 | 假名          | 单词          | 词性         | 解释          |
 | ----          | ----          | ----         | ----          | {% for word in ws1 %}
