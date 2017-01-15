@@ -37,19 +37,13 @@ convert from result of <http://www.mori7.net/musi/ruby.php>
 ```
 
 ```
-^,,s,agea@0€kD€kDj
+^,,s,agea@0j
 ```
 
 ```
-^,,s,agea@1€kD€kDj
-^,,s,agea@2€kD€kDj
-^,,s,agea@3€kD€kDj
-^,,s,agea@4€kD€kDj
-^,,s,agea@5€kD€kDj
-^,,s,agea@6€kD€kDj
-^,,s,agea@7€kD€kDj
-^,,s,agea@8€kD€kDj
-^,,s,agea@9€kD€kDj
+^,,s,hlwiã€è‡ªã€‘,,s,agel6xj
+^,,s,hwiã€ä»–ã€‘,,s,agel6xj
+^,,s,hwiã€è‡ªä»–ã€‘,,s,agel8xj
 ```
 
 use following regex to find line of word without pronunciation
