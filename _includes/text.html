@@ -30,6 +30,53 @@
   padding-left: 3em;
 }
 </style>
+<style>
+{% capture scss %}
+@media only screen and (max-width: 800px) {
+  .wordtable { 
+    table, thead, tbody, th, tr { 
+      display: block;
+    }
+ 
+    thead tr { 
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr {
+      border: 1px solid #eee; 
+    }
+  
+    td { 
+      border: none !important;
+      white-space: normal;
+      text-align: left;
+      display: inline-block;
+
+      &:nth-child(2) {
+        &:before { content: "("; }
+        &:after { content: ")"; }
+      }
+
+      &:nth-child(3):not(:blank) {
+        &:before { content: "["; }
+        &:after { content: "]"; }
+      }
+
+      &:nth-child(3):blank {
+        display: none;
+      }
+
+      &:nth-child(4) {
+        font-weight: bold;
+      }
+    }
+  }
+}
+{% endcapture %}
+{{scss | scssify }}
+</style>
 <div class="tags">
   {% if page.lesson %}
   <a class="link btn btn-success" href="lesson{{page.lesson | minus: 1}}.html">前</a>
