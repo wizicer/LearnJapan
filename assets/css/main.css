@@ -296,6 +296,8 @@ html {
 }
 .accent {
   position: relative;
+  white-space: nowrap;
+  z-index: -1;
 }
 .accent:after {
   content: "";
