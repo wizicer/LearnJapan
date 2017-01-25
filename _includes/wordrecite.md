@@ -6,6 +6,11 @@
   </div>
 </p>
 <p>
+  <div class="row">
+    <button class="col-xs-5 toggle-next-left toggle-next btn btn-success">下</button>
+    <button class="col-xs-2 toggle-previous btn btn-info">上</button>
+    <button class="col-xs-5 toggle-next-right toggle-next btn btn-success">下</button>
+  </div>
   <div class="form-horizontal">
     <div class="form-group row">
       <div id="trialdiv" class="col-xs-9 col-md-10">
@@ -17,11 +22,6 @@
         </label>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <button class="col-xs-5 toggle-next-left toggle-next btn btn-success">下</button>
-    <button class="col-xs-2 toggle-previous btn btn-info">上</button>
-    <button class="col-xs-5 toggle-next-right toggle-next btn btn-success">下</button>
   </div>
 </p>
 
