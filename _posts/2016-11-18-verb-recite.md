@@ -20,6 +20,7 @@ $(document).ready(function() {
       var d = wordhelper.parseverbdata(data);
       var quizdata = d
         .filter(function(p) { return !p.pos.endsWith('3'); })
+        .filter(function(p) { return !p.lesson.startsWith('0'); })
         .map(function(p) {
           var word = p.masu;
           word = word.replace(/ます$/g, "")
