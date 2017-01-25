@@ -1,5 +1,10 @@
+{%capture body%}在页面<{{site.url}}{{page.url}}>发现错误。
+错误是：{%endcapture%}
 <footer>
-    <p>Made with <span class="love">❤</span> by <a href="http://icerdesign.com">冰河魔法师</a>, powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a>, <span class="love">themed</span> by <a href="http://icerdesign.com">冰河魔法师</a></p>
+    <p>
+        本站由<a href="http://icerdesign.com">冰河魔法师</a>开发制作，站点生成由<a href="http://jekyllrb.com/" target="_blank">Jekyll</a>提供。
+        <a href="https://github.com/wizicer/LearnJapan/issues/new?title={{page.title}}页面发现错误&body={{body | uri_escape}}&assignee={{site.github_username}}&labels[]=content" target="_blank">发现错误？</a>
+    </p>
 </footer>
 {% if site.la51_analytics %}
 <div style="display:none;">
