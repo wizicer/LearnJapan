@@ -25,7 +25,7 @@ layout: page
         {% for post in pages_list reversed %}
           {% if post.title != null %}
           {% if group == null or group == post.group %}
-          <a class="list-group-item" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+          <a class="list-group-item" href="{{ basepath }}{{ post.url }}">{{ post.title }}</a>
           {% endif %}
           {% endif %}
         {% endfor %}

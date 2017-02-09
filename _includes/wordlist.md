@@ -14,7 +14,7 @@
 <script>
 $(document).ready(function() {
   function inittable() {
-    table.ajax.url('{{ site.baseurl }}/words.json' ).load(function (){
+    table.ajax.url('{{ basepath }}/words.json' ).load(function (){
       table.column(0).nodes().to$().addClass('japan');
       table.column(1).nodes().to$().addClass('japan');
       table.column(4).nodes().to$().addClass('japan');

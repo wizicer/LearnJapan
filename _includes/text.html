@@ -110,7 +110,7 @@ $(document).ready(function() {
     level = level == "middleclass" ? "m" : "l";
     if (tabName != 'l0') {
       var lnum = tabName.slice(1);
-      player.src = "{{ site.baseurl }}/assets/audio/lesson/" + level + lnum + ".mp3";
+      player.src = "{{ basepath }}/assets/audio/lesson/" + level + lnum + ".mp3";
       player.load();
     }
     curlessonquizdata = lessonquizdata[tabName];
@@ -286,12 +286,12 @@ $(document).ready(function() {
 {% if page.category == 'middleclass' %}
 {% assign id = lnum | prepend: 'm' %}
 {% assign lesson = site.data.mlessons[id] %}
-{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/{{id}}.mp3{% endcapture %}
+{% capture wordaudio %}{{ basepath }}/assets/audio/word/{{id}}.mp3{% endcapture %}
 {% include mlesson.html num=lnum lesson=lesson wordaudio=wordaudio %}
 {% else %}
 {% assign id = lnum | prepend: 'l' %}
 {% assign lesson = site.data.lessons[id] %}
-{% capture wordaudio %}{{ site.baseurl }}/assets/audio/word/{{id}}.mp3{% endcapture %}
+{% capture wordaudio %}{{ basepath }}/assets/audio/word/{{id}}.mp3{% endcapture %}
 {% include lesson.html num=lnum lesson=lesson wordaudio=wordaudio %}
 {% endif %}
 {% endfor %}

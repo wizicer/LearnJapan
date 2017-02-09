@@ -2,19 +2,19 @@
     <div class="navbar-header"><h4 class="navbar-text">分享到</h4></div>
     <ul class="nav navbar-nav">
         <li>
-            <a aria-label="Share on Twitter" href="https://twitter.com/intent/tweet?text=&quot;{{ page.twitter_text }}&quot;%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20via%20&#64;{{ site.twitter_username }}&hashtags={% for tag in page.tags %}{{tag}},{% endfor %}"
+            <a aria-label="Share on Twitter" href="https://twitter.com/intent/tweet?text=&quot;{{ page.twitter_text }}&quot;%20{{ site.url }}{{ basepath }}{{ page.url }}%20via%20&#64;{{ site.twitter_username }}&hashtags={% for tag in page.tags %}{{tag}},{% endfor %}"
             onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
         <li>
-            <a aria-label="Share on Facebook"href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}"
+            <a aria-label="Share on Facebook"href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ basepath }}{{ page.url }}"
             onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li>
-            <a aria-label="Share on Google Plus" href="https://plus.google.com/share?url={{ site.url }}{{ site.baseurl }}{{ page.url }}"
+            <a aria-label="Share on Google Plus" href="https://plus.google.com/share?url={{ site.url }}{{ basepath }}{{ page.url }}"
             onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title="Share on Google+">
                 <i class="fa fa-google-plus"></i>
             </a>

@@ -2,9 +2,9 @@
     <ul class="nav sidebar-nav">
         <li class="sidebar-brand"><a href="/">{{ site.sidebartitle }}</a></li>
         {% for link in site.links %}
-            <li><a href="{{site.baseurl}}{{ link.url }}">{{ link.title }}</a></li>
+            <li><a href="{{basepath}}{{ link.url }}">{{ link.title }}</a></li>
         {% endfor %}
-        <li><a class="feed" href="{{site.baseurl}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
+        <li><a class="feed" href="{{basepath}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">主题风格<span class="caret"></span></a>
             <ul class="dropdown-menu" id="theme-dropdown" role="menu">

@@ -1,0 +1,8 @@
+{% assign basepath = '' %}
+{% assign depth = page.url | split: '/' | size | minus: 1 %}
+{% if    depth <= 1 %}{% assign basepath = '' %}
+{% elsif depth == 2 %}{% assign basepath = '..' %}
+{% elsif depth == 3 %}{% assign basepath = '../..' %}
+{% elsif depth == 4 %}{% assign basepath = '../../..' %}
+{% elsif depth == 5 %}{% assign basepath = '../../../..' %}
+{% endif %}

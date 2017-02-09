@@ -39,7 +39,7 @@
 ## 生词表
 
 <audio id="wordplayer" controls style="margin-left: auto; margin-right: auto; display: block;">
-  <source src="{{ site.baseurl }}/assets/audio/word/l{{include.num}}.mp3" type="audio/mpeg"/>
+  <source src="{{ basepath }}/assets/audio/word/l{{include.num}}.mp3" type="audio/mpeg"/>
 </audio>
 
 {% assign ws = site.data.words | where_exp: "item", "item.lesson contains findingNum" %}

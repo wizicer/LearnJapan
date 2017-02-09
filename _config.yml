@@ -15,8 +15,7 @@
 title: 冰河标日学习日志
 sidebartitle: 冰河标日
 email: icer@icerdesign.com
-description: > # this means to ignore newlines until "baseurl:"
-  冰河魔法师的标准日本语学习日志
+description: 冰河魔法师的标准日本语学习日志
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://japan.icerdesign.com" # the base hostname & protocol for your site
 
