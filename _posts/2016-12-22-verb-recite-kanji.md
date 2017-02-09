@@ -8,6 +8,7 @@ category: word
 
 ---
 
+{% include base.html %}
 {% include wordhelper.html %}
 <div class="container-fluid">
 <div id="word-container" class="row">
@@ -28,7 +29,7 @@ category: word
 
 <script>
 $(document).ready(function() {
-  $.ajax('/verb.json', { dataType: "json" })
+  $.ajax('{{basepath}}/verb.json', { dataType: "json" })
     .done(function (data) {
       var d = wordhelper.parseverbdata(data);
       var tp = $('#cell-template').detach();

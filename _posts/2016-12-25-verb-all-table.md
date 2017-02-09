@@ -8,6 +8,7 @@ category: grammar
 
 ---
 
+{% include base.html %}
 <table id="verbtable" class="display nowrap japan">
   <thead>
     <tr>

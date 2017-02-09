@@ -8,6 +8,7 @@ category: word
 
 ---
 
+{% include base.html %}
 {% include wordhelper.html %}
 <button class="toggle-start btn btn-primary">开始记单词</button>
 {% include wordrecite.md %}
@@ -15,7 +16,7 @@ category: word
 <script>
 $(document).ready(function() {
   $('button.toggle-start').prop('disabled', true);
-  $.ajax('/verb.json', { dataType: "json" })
+  $.ajax('{{basepath}}/verb.json', { dataType: "json" })
     .done(function (data) {
       var d = wordhelper.parseverbdata(data);
       var quizdata = d

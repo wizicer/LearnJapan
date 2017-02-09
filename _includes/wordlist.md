@@ -1,3 +1,4 @@
+{% include base.html %}
 <div>
 模式:
 - <a class="toggle-mode" data-column="0|2|3|4|5">普通浏览</a>
