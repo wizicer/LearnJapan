@@ -4,7 +4,7 @@
   "description": "A simple template for Jekyll site of Icer Japan Memo.",
   "main": "gulpfile.js",
   "scripts": {
-    "buildsubsite": "jekyll b --config _config.yml,_config.subsite.yml"
+    "test": "test"
   },
   "keywords": [
     "frontend",
