@@ -142,8 +142,7 @@ $(document).ready(function() {
     else
       player.pause();
   });
-  let handler = () => $('a.player-play').text(player.paused ? '播放' : '暂停');
-  $(player).on('play pause', handler);
+  $(player).on('play pause', function() { $('a.player-play').text(player.paused ? '播放' : '暂停'); });
   $('a.toggle-lesson').on('click', function(e) {
     e.preventDefault();
     openTab("l"+$(this).attr('data-lesson'));
