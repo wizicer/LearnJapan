@@ -12,7 +12,7 @@
             "taskName": "js",
             "args": [],
             "isBuildCommand": true,
-            "isWatching": false,
+            "isBackground": true,
             "problemMatcher": [
                 "$lessCompile",
                 "$tsc",

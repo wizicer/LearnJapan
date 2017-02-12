@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/cd4debea25a280da0808d4ff2ca5a4bdb34bd28b/webspeechapi/index.d.ts",
+    "raw": "registry:dt/webspeechapi#0.0.0+20161128184045",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/cd4debea25a280da0808d4ff2ca5a4bdb34bd28b/webspeechapi/index.d.ts"
+  }
+}

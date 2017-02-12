@@ -63,10 +63,12 @@ gulp.task('stylus', function(){
  */
 gulp.task('js', function(){
 	var jssrc = gulp.src((env.p) ? 'src/js/**/*.js' : ['src/js/**/*.js', '!src/js/analytics.js']);
-	var tssrc = gulp.src('src/js/**/*.ts')
+	var tssrc = gulp.src(['src/js/**/*.ts'])
 		.pipe(ts({
 			noImplicitAny: true,
-			out: 'output.js'
+			out: 'output.js',
+			target: 'es5',
+			module: 'system'
 		}));
 	return merge(jssrc, tssrc)
 		.pipe(plumber())

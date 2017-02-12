@@ -1,3 +1,4 @@
 {
+    "typescript.referencesCodeLens.enabled": true,
     "vsicons.presets.angular": false
 }

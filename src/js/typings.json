@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20170123093700",
+    "webspeechapi": "registry:dt/webspeechapi#0.0.0+20161128184045"
+  }
+}
