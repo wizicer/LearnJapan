@@ -1,7 +1,7 @@
-function japanruby(content) {
-  function getChar(sentence, start, len) {
-    len = len == undefined ? "*" : ("{" + len + "}");
-    var re = new RegExp("(.[ゅょゃュョャ]?){" + start + "}((.[ゅょゃュョャ]?)" + len + ")");
+function japanruby(content: string) {
+  function getChar(sentence: string, start: number, len?: number) {
+    var lenstr = len == undefined ? "*" : ("{" + len + "}");
+    var re = new RegExp("(.[ゅょゃュョャ]?){" + start + "}((.[ゅょゃュョャ]?)" + lenstr + ")");
     var result = re.exec(sentence)[2];
     return result;
   }

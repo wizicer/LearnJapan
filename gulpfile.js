@@ -5,6 +5,8 @@ var env         = require('minimist')(process.argv.slice(2)),
 	stylus      = require('gulp-stylus'),
 	uglify      = require('gulp-uglify'),
 	concat      = require('gulp-concat'),
+	ts          = require('gulp-typescript'),
+	merge       = require('event-stream').merge,
 	jeet        = require('jeet'),
 	rupture     = require('rupture'),
 	koutoSwiss  = require('kouto-swiss'),
@@ -60,7 +62,13 @@ gulp.task('stylus', function(){
  * Javascript Task
  */
 gulp.task('js', function(){
-	return gulp.src((env.p) ? 'src/js/**/*.js' : ['src/js/**/*.js', '!src/js/analytics.js'])
+	var jssrc = gulp.src((env.p) ? 'src/js/**/*.js' : ['src/js/**/*.js', '!src/js/analytics.js']);
+	var tssrc = gulp.src('src/js/**/*.ts')
+		.pipe(ts({
+			noImplicitAny: true,
+			out: 'output.js'
+		}));
+	return merge(jssrc, tssrc)
 		.pipe(plumber())
 		.pipe(concat('main.js'))
 		.pipe(uglify())
