@@ -319,7 +319,7 @@ $(document).ready(function() {
         var tip = "<span class='card-explain'>" + p.explain + "</span>";
         tip += "<span class='card-pos'>[" + p.pos.slice(0,1) + "]</span>";
         return { tip: tip, desc: desc, read: p.purekana, rid: p.rid }});
-    easyquiz.start(quizdata);
+    (new easyquiz()).start(quizdata);
   });
 });
 </script>

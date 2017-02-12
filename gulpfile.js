@@ -66,9 +66,8 @@ gulp.task('js', function(){
 	var tssrc = gulp.src(['src/js/**/*.ts'])
 		.pipe(ts({
 			noImplicitAny: true,
-			out: 'output.js',
 			target: 'es5',
-			module: 'system'
+			module: 'commonjs'
 		}));
 	return merge(jssrc, tssrc)
 		.pipe(plumber())

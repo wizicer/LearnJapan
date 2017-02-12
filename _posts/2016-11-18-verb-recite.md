@@ -40,7 +40,7 @@ $(document).ready(function() {
       $('button.toggle-start').prop('disabled', false);
       $('button.toggle-start').on('click', function(e) {
         e.preventDefault();
-        easyquiz.start(quizdata);
+        (new easyquiz()).start(quizdata);
       });
     });
 });

@@ -1,83 +1,35 @@
-import * as $ from "jquery";
-var easyquiz = new function () {
-  var quizdata : any;
-  var quizid : number;
-  var quiznum : number;
-  var quiz : any;
-  function isLocalstorageExist() {
-    var mod = 'test';
-    try {
-        localStorage.setItem(mod, mod);
-        localStorage.removeItem(mod);
-        return true;
-    } catch(e) {
-        return false;
-    }
-  }
-  if (!isLocalstorageExist()) {
+/// <reference path="./typings/index.d.ts" />
+//import * as $ from "jquery";
+class easyquiz {
+  quizdata : any;
+  quizid : number;
+  quiznum : number;
+  quiz: any;
+  rwords: any;
+  constructor() {
+    var _self = this;
+  if (!this.isLocalstorageExist()) {
     $('#onlyremember').prop('disabled', true);
     $('#wordremember').prop('disabled', true);
   }
   var rwords = JSON.parse(localStorage.getItem("rwords"));
-  rwords = rwords || {};
-  this.start = function(data){
-    quizdata = data;
-    for (var i = 0; i < quizdata.length; i++) {
-      quizdata[i].rem = rwords[quizdata[i].rid];
-    }
-    var shufflewords = $('#shufflewords').prop('checked');
-    if (shufflewords) quizdata = quizdata.sort(function() { return 0.5 - Math.random() });;
-    quizid = -1;
-    rollquiz(1);
-    displayquiz();
-  };
-  function displayquiz() {
-    $("#content").html(quizid % 2 == 0 ? quiz.tip : quiz.desc);
-    $("#card-summary").html((quiznum + 1) + '/' + (quizdata.length) + '(' + countRememberedWords() + ')');
-    $("#wordremember").prop('checked', quiz.rem ? true : false);
-  }
-  function countRememberedWords() {
-    var tt = 0;
-    for (var i = 0; i < quizdata.length; i++) {
-      if (rwords[quizdata[i].rid]) tt++;
-    }
-    return tt;
-  }
+  this.rwords = rwords || {};
   $('#wordremember').change(function() {
     if (this.checked) {
-      rwords[quiz.rid] = true;
-      quiz.rem = true;
+      rwords[_self.quiz.rid] = true;
+      _self.quiz.rem = true;
     } else {
-      delete rwords[quiz.rid];
-      quiz.rem = false;
+      delete rwords[_self.quiz.rid];
+      _self.quiz.rem = false;
     }
     localStorage.setItem("rwords", JSON.stringify(rwords));
   });
-  function rollquiz(offset) {
-    if (quizid + offset < 0 || quizid + offset >= quizdata.length * 2) return;
-    var onlyremember = $('#onlyremember').prop('checked');
-    var autoreadword = $('#autoreadword').prop('checked');
-    do {
-      quizid += offset;
-      quiznum = Math.floor(quizid / 2);
-      quiz = quizdata[quiznum];
-    } while (quizid > 0 && quizid < quizdata.length * 2 - 1 && onlyremember && quiz.rem);
-    if (quizid % 2 == 0) $('#trialtext').val('');
-    if (autoreadword && quizid % 2 != 0) speak(quiz.read);
-  }
-  function speak(word) {
-    if('speechSynthesis' in window){
-      var speech = new SpeechSynthesisUtterance(word);
-      speech.lang = 'ja-JP';
-      window.speechSynthesis.speak(speech);
-    }
-  }
   $('#trialtext').keypress(function (e) {
     if (e.which == 13) {
       var autoremember = $('#autoremember').prop('checked');
-      rollquiz(1);
-      displayquiz();
-      if (autoremember && $(this).val() == quiz.read) {
+      _self.rollquiz(1);
+      _self.displayquiz();
+      if (autoremember && $(this).val() == _self.quiz.read) {
         $("#wordremember").prop('checked', true).change();
       }
       return false;
@@ -85,12 +37,12 @@ var easyquiz = new function () {
   });
   $('#content').on('click', "a.read", function(e) {
     e.preventDefault();
-    speak($(this).data('read'));
+    _self.speak($(this).data('read'));
   });
   $('button.toggle-next').on('click', function(e) {
     e.preventDefault();
-    rollquiz(1);
-    displayquiz();
+    _self.rollquiz(1);
+    _self.displayquiz();
   });
   $('button.toggle-next-left').on('click', function(e) {
     e.preventDefault();
@@ -104,7 +56,60 @@ var easyquiz = new function () {
   });
   $('button.toggle-previous').on('click', function(e) {
     e.preventDefault();
-    rollquiz(-1);
-    displayquiz();
+    _self.rollquiz(-1);
+    _self.displayquiz();
   });
+  }
+  isLocalstorageExist() {
+    var mod = 'test';
+    try {
+      localStorage.setItem(mod, mod);
+      localStorage.removeItem(mod);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+  start(data:any){
+    this.quizdata = data;
+    for (var i = 0; i < this.quizdata.length; i++) {
+      this.quizdata[i].rem = this.rwords[this.quizdata[i].rid];
+    }
+    var shufflewords = $('#shufflewords').prop('checked');
+    if (shufflewords) this.quizdata = this.quizdata.sort(function() { return 0.5 - Math.random() });;
+    this.quizid = -1;
+    this.rollquiz(1);
+    this.displayquiz();
+  };
+  displayquiz() {
+    $("#content").html(this.quizid % 2 == 0 ? this.quiz.tip : this.quiz.desc);
+    $("#card-summary").html((this.quiznum + 1) + '/' + (this.quizdata.length) + '(' + this.countRememberedWords() + ')');
+    $("#wordremember").prop('checked', this.quiz.rem ? true : false);
+  }
+  countRememberedWords() {
+    var tt = 0;
+    for (var i = 0; i < this.quizdata.length; i++) {
+      if (this.rwords[this.quizdata[i].rid]) tt++;
+    }
+    return tt;
+  }
+  rollquiz(offset:number) {
+    if (this.quizid + offset < 0 || this.quizid + offset >= this.quizdata.length * 2) return;
+    var onlyremember = $('#onlyremember').prop('checked');
+    var autoreadword = $('#autoreadword').prop('checked');
+    do {
+      this.quizid += offset;
+      this.quiznum = Math.floor(this.quizid / 2);
+      this.quiz = this.quizdata[this.quiznum];
+    } while (this.quizid > 0 && this.quizid < this.quizdata.length * 2 - 1 && onlyremember && this.quiz.rem);
+    if (this.quizid % 2 == 0) $('#trialtext').val('');
+    if (autoreadword && this.quizid % 2 != 0) this.speak(this.quiz.read);
+  }
+  speak(word: string) {
+    if('speechSynthesis' in window){
+      var speech = new SpeechSynthesisUtterance(word);
+      speech.lang = 'ja-JP';
+      window.speechSynthesis.speak(speech);
+    }
+  }
 };
