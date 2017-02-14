@@ -1,5 +1,84 @@
+/// <reference path="./typings/index.d.ts" />
+/// <reference path="./japan.ts" />
+
+interface IOriginWordData {
+  kana?: string,
+  pos?: string,
+  desc?: string,
+  masu?: string,
+  lesson?: string,
+  idx?: number,
+  [key: string]: string|number|string[]|boolean,
+}
+
+interface IWordSheetData{
+    data: IOriginWordData,
+    idiom: string[],
+}
+
+interface IVerbWordData extends IOriginWordData {
+    jisyo?: string,
+    nai?: string,
+    isi?: string,
+    meirei?: string,
+    ba?: string,
+    kanou?: string,
+    kanoulian        ?: string,
+    kanoumasu        ?: string,
+    kanoumasen       ?: string,
+    kanoumasita      ?: string,
+    kanoumasendesita ?: string,
+    kanouta          ?: string,
+    kanounai         ?: string,
+    kanounakatta     ?: string,
+    ukemi?: string,
+    te?: string,
+    ta?: string,
+    lian?: string,
+    masen?: string,
+    masita?: string,
+    masendesita?: string,
+    ukemilian?: string,
+    ukemimasu?: string,
+    ukemimasen?: string,
+    ukemimasita?: string,
+    ukemimasendesita?: string,
+    nakatta?: string,
+    idiomlist?: string[],
+    idioms?: string,
+    posclass?: string,
+    pronounce?: string,
+    goolink?: string,
+    ojadlink?: string,
+    xdlink?: string,
+    respect?: string,
+    simple?: string,
+    kanourespect?: string,
+    kanousimple?: string,
+    other?: string,
+    desclinks?: string,
+    kanji?: string,
+}
+interface IAdjWordData extends IOriginWordData {
+    na?: string,
+    word?: string,
+    ni?: string,
+    datta?: string,
+    naraba?: string,
+    nai?: string,
+    nakatta?: string,
+    deareba?: string,
+    denakereba?: string,
+    da?: string,
+    base?: string,
+    ku?: string,
+    katta?: string,
+    kereba?: string,
+    te?: string,
+    posclass?: string,
+}
 class WordHelper {
-  spverb: { [id:string] : any} = {};
+  spverb: { [id:string] : IVerbWordData} = {};
   cte: { [id:string] : string} = {};
   cnai: { [id:string] : string} = {};
   cjisyo: { [id:string] : string} = {};
@@ -82,32 +161,32 @@ class WordHelper {
   this.cisi["う"] = "おう";
   this.cisi["す"] = "そう";
   }
-  makeLink(url: string, title: string) {
+  private makeLink(url: string, title: string) {
     return "<a target='_blank' href='" + url + "'>" + title + "</a>";
   }
 
-  makeGooLink(query: string, title: string) {
+  private makeGooLink(query: string, title: string) {
     return this.makeLink("http://dictionary.goo.ne.jp/freewordsearcher.html?MT=" + query + "&mode=0&x=0&y=0&kind=jn", title);
   }
 
-  makeOjadLink(query: string, title: string) {
+  private makeOjadLink(query: string, title: string) {
     return this.makeLink("http://www.gavo.t.u-tokyo.ac.jp/ojad/search/index/word:" + query, title);
   }
 
-  makeXdLink(query: string, title: string) {
+  private makeXdLink(query: string, title: string) {
     return this.makeLink("http://dict.hjenglish.com/jp/jc/" + query, title);
   }
 
-  purify(sen: string) {
+  private purify(sen: string) {
     return sen.replace(/!(.*)\(.*\)/g, '$1')
   }
 
-  joincell(arr: Array<string>) {
+  private joincell(arr: Array<string>) {
     return arr.map(function(p) {return p && japanruby(p);}).join("<br />");
   }
 
-  parseverbdataline(od: any, idioms: any) {
-    var obj = od;
+  private parseverbdataline(od: IOriginWordData, idioms: string[]) {
+    let obj: IVerbWordData = od;
     obj.pos = obj.pos.replace("动", "動");
     obj.lian = obj.masu.replace(/ます$/g, "");
 
@@ -284,13 +363,13 @@ class WordHelper {
 
     return obj;
   };
-  parseverbdata(data: any) {
+  parseverbdata(data: IWordSheetData) {
     var d = $.map(data.data, (p) => this.parseverbdataline(p, data.idiom));
     return d;
   };
 
-  parseAdjCommonDataLine(od: any, idioms: any) {
-    var obj = od;
+  parseAdjCommonDataLine(od: IOriginWordData, idioms: string[]) {
+    let obj: IAdjWordData = od;
 
     // posclass
     if (obj.pos.endsWith('2')) {
@@ -302,8 +381,8 @@ class WordHelper {
     return obj;
   };
 
-  parseAdj1DataLine(od: any, idioms: any) {
-    var obj = this.parseAdjCommonDataLine(od, idioms);
+  parseAdj1DataLine(od: IOriginWordData, idioms: string[]) {
+    let obj = this.parseAdjCommonDataLine(od, idioms);
 
     obj.base = obj.word.slice(0, -1);
     obj.te = "";
@@ -316,13 +395,13 @@ class WordHelper {
     return obj;
   };
 
-  parseAdj1Data(data: any) {
+  parseAdj1Data(data: IWordSheetData) {
     var d = $.map(data.data, (p) => this.parseAdj1DataLine(p, null));
     return d;
   };
 
-  parseAdj2DataLine(od: any, idioms: any) {
-    var obj = this.parseAdjCommonDataLine(od, idioms);
+  parseAdj2DataLine(od: IOriginWordData, idioms: string[]) {
+    let obj: IAdjWordData = this.parseAdjCommonDataLine(od, idioms);
 
     obj.na = obj.word + "な";
     obj.te = "";
@@ -338,25 +417,26 @@ class WordHelper {
     return obj;
   };
 
-  parseAdj2Data(data: any) {
+  parseAdj2Data(data: IWordSheetData) {
     var d = $.map(data.data, (p) => this.parseAdj2DataLine(p, null));
     return d;
   };
 
-  createCell(klass: string, content: string) {
+  private createCell(klass: string, content: string) {
     return $('<td />', { class: klass }).html(content);
   };
 
-  addCellsToRow(columns: any, row: any, data: any) {
-    $.each(columns, (j, name) => row.append(this.createCell(data.posclass + (data["sp" + name] ? " spcell" : ""), data[name])));
+  private addCellsToRow(columns: string[], row: JQuery, data: IVerbWordData) {
+    $.each(columns, (j, name) => row.append(this.createCell(data.posclass + (data["sp" + name] ? " spcell" : ""), data[name] as string)));
   };
 
-  initgrouptable(data: any, table: any, groupby: string, tableRow: any, filter?: any) {
-    var groups: { [id:string] : any} = {};
-    $.each(data, function (i, a) { if (a[groupby] in groups) groups[a[groupby]].push(a); else groups[a[groupby]] = [a]; } );
+  initgrouptable(data: IVerbWordData[], table: JQuery, groupby: string, tableRow: string[], filter?: (group: IVerbWordData[]) => boolean) {
+    var groups: { [id:string] : IVerbWordData[]} = {};
+    $.each(data, function (i, a) { if (a[groupby] in groups) groups[a[groupby] as string].push(a); else groups[a[groupby] as string] = [a]; } );
     table.children('tbody').remove();
     var count = 0;
-    $.each(groups, (i, group) => {
+    Object.keys(groups).forEach(key => {
+      let group = groups[key];
       if (filter != undefined && !filter(group)) return;
       var row = $('<tr />');
       var headcell = $('<td rowspan="' + group.length + '">' + group[0][groupby] + '</td>');
@@ -372,7 +452,7 @@ class WordHelper {
     });
   };
 
-  initTable(data: any, table: any, tableRow: any, filter: any) {
+  initTable(data: IVerbWordData[], table: JQuery, tableRow: string[]) {
     table.children('tbody').remove();
     $.each(data, (i, item) => {
       var row = $('<tr />');

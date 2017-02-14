@@ -67,6 +67,7 @@ gulp.task('js', function(){
 		.pipe(ts({
 			noImplicitAny: true,
 			target: 'es5',
+			lib: ['dom', 'scripthost', 'es5', 'es2015.core'],
 			module: 'commonjs'
 		}));
 	return merge(jssrc, tssrc)
