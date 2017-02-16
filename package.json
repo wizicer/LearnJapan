@@ -1,10 +1,11 @@
 {
   "name": "icerjekylljapansite",
   "version": "1.0.0",
-  "description": "A simple template for Jekyll site of Icer Japan Memo.",
+  "description": "A simple Jekyll site full of Japanese Learning Memo from Icer.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "test"
+    "dev": "jekyll s --config _config.yml,_config.dev.yml",
+    "devi": "jekyll s -i --config _config.yml,_config.dev.yml"
   },
   "keywords": [
     "frontend",
