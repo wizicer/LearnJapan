@@ -1,1 +1,1 @@
-exclude: ['package.json', 'src', 'node_modules', 'site.vfs', 'Gemfile.lock', 'Gemfile', 'CNAME', 'LICENSE', '*.bat', 'gulpfile.js', 'uwp', '_posts/text']
+exclude: ['package.json', 'src', 'node_modules', 'site.vfs', 'Gemfile.lock', 'Gemfile', 'CNAME', 'LICENSE', '*.bat', 'gulpfile.js', 'ionic', 'uwp', '_posts/text']
