@@ -4,6 +4,7 @@
   "description": "A simple Jekyll site full of Japanese Learning Memo from Icer.",
   "main": "gulpfile.js",
   "scripts": {
+    "ionic": "jekyll b --config _config.yml --destination ionic/src/assets/site/",
     "dev": "jekyll s --config _config.yml,_config.dev.yml",
     "devi": "jekyll s -i --config _config.yml,_config.dev.yml"
   },
