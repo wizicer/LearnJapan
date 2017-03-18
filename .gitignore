@@ -5,3 +5,4 @@ _site
 node_modules
 /site.vfs*
 /_site*.zip
+.vs/
