@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+﻿import { NgModule, ErrorHandler } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -23,7 +23,8 @@ import { SearchPage } from '../pages/search/search';
 import { User } from '../providers/user';
 import { Api } from '../providers/api';
 import { Settings } from '../providers/settings';
-import { Items } from '../mocks/providers/items';
+import { Items } from '../providers/items';
+//import { Items } from '../mocks/providers/items';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 

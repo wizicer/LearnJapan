@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { ItemDetailPage } from '../item-detail/item-detail';
-import { Items } from '../../providers/providers';
+import { Api, Items } from '../../providers/providers';
 import { Item } from '../../models/item';
 
 @Component({
