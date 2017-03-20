@@ -25,6 +25,7 @@ import { Api } from '../providers/api';
 import { Settings } from '../providers/settings';
 import { Items } from '../providers/items';
 //import { Items } from '../mocks/providers/items';
+import { JapanRubyPipe } from '../providers/japan-ruby.pipe';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
@@ -55,7 +56,7 @@ export function provideSettings(storage: Storage) {
  * We then take these pages and inject them into our NgModule so Angular
  * can find them. As you add and remove pages, make sure to keep this list up to date.
  */
-let pages = [
+let pages : any[] = [
   MyApp,
   CardsPage,
   ContentPage,
@@ -70,11 +71,14 @@ let pages = [
   ItemCreatePage,
   MenuPage,
   SettingsPage,
-  SearchPage
+  SearchPage,
+];
+let modules = [
+  JapanRubyPipe,
 ];
 
 export function declarations() {
-  return pages;
+  return pages.concat(modules);
 }
 
 export function entryComponents() {

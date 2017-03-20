@@ -13,6 +13,7 @@ import { Item } from '../../models/item';
 })
 export class ListMasterPage {
   currentItems: Item[];
+  groups: any;
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
     //this.currentItems = this.items.query();
@@ -20,8 +21,13 @@ export class ListMasterPage {
   getHeroes() {
     this.items.query()
       .subscribe(
-      data => this.currentItems = data.data,
+      data => this.setData(data.data),
       error => console.log(error));
+  }
+
+  setData(data) {
+    this.currentItems = data;
+    this.groups = this.groupBy(data, "lesson");
   }
 
   /**
@@ -29,6 +35,19 @@ export class ListMasterPage {
    */
   ionViewDidLoad() {
     this.getHeroes();
+  }
+
+  groupBy(xs, key) {
+    let its = xs.reduce(function (rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, []);
+    let retits = [];
+    for (let it in its) {
+      let obj = its[it];
+      retits.push({ lesson: it, data: obj });
+    }
+    return retits;
   }
 
   /**
