@@ -1,4 +1,4 @@
-<!--
+﻿<!--
   Generated template for the Settings page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
@@ -37,6 +37,10 @@
 
       <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
         {{ 'SETTINGS_PROFILE_BUTTON' | translate }}
+      </button>
+
+      <button ion-item (click)="gotoLegacySite()">
+        Goto Legacy Site
       </button>
     </ion-list>
 

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
@@ -33,10 +33,11 @@ export class SettingsPage {
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
-              public settings: Settings,
-              public formBuilder: FormBuilder,
-              public navParams: NavParams,
-              public translate: TranslateService) {
+    public settings: Settings,
+    public formBuilder: FormBuilder,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    public translate: TranslateService) {
   }
 
   _buildForm() {
@@ -46,7 +47,7 @@ export class SettingsPage {
       option3: [this.options.option3]
     };
 
-    switch(this.page) {
+    switch (this.page) {
       case 'main':
         break;
       case 'profile':
@@ -61,6 +62,26 @@ export class SettingsPage {
     this.form.valueChanges.subscribe((v) => {
       this.settings.merge(this.form.value);
     });
+  }
+
+  gotoLegacySite() {
+    let confirm = this.alertCtrl.create({
+      title: 'Confirm?',
+      message: 'Are you sure to go to the legacy site?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => { }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            window.location.href = "assets/site/index.html";
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   ionViewDidLoad() {
