@@ -16,38 +16,15 @@ export class ListMasterPage {
   groups: any;
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    //this.currentItems = this.items.query();
-  }
-  getHeroes() {
-    this.items.query()
-      .subscribe(
-      data => this.setData(data.data),
+    this.items.query().subscribe(
+      data => this.groups = data,
       error => console.log(error));
-  }
-
-  setData(data) {
-    this.currentItems = data;
-    this.groups = this.groupBy(data, "lesson");
   }
 
   /**
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
-    this.getHeroes();
-  }
-
-  groupBy(xs, key) {
-    let its = xs.reduce(function (rv, x) {
-      (rv[x[key]] = rv[x[key]] || []).push(x);
-      return rv;
-    }, []);
-    let retits = [];
-    for (let it in its) {
-      let obj = its[it];
-      retits.push({ lesson: it, data: obj });
-    }
-    return retits;
   }
 
   /**

@@ -11,12 +11,9 @@
 <ion-content>
   <ion-list>
     <ion-item-group *ngFor="let group of groups">
-      <ion-item-divider color="light">{{group.lesson}}</ion-item-divider>
-      <ion-item-sliding *ngFor="let item of group.data">
-        <button ion-item (click)="openItem(item)">
-          <h2 [innerHTML]="item.kana | japanruby"></h2>
-          <p [innerHTML]="item.desc | japanruby"></p>
-          <p item-right [innerHTML]="item.word | japanruby"></p>
+      <ion-item-sliding>
+        <button ion-item (click)="openItem(group)">
+          <h2>{{group.lesson}}</h2>
         </button>
         <ion-item-options>
           <button ion-button color="primary" (click)="deleteItem(item)">
