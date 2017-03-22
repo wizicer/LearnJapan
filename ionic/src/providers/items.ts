@@ -10,6 +10,7 @@ import { Item } from '../models/item';
 @Injectable()
 export class Items {
   groups: any;
+  lessons: any;
 
   defaultItem: any = {
     "name": "Burt Bear",
@@ -17,6 +18,37 @@ export class Items {
     "about": "Burt is a Bear.",
   };
   constructor(public http: Http, public api: Api) {
+  }
+
+  queryLessons(params?: any) {
+    return new Observable(ob => {
+      if (this.lessons == undefined) {
+        this.api.get('/lessons.json', params)
+          .map(resp => resp.json())
+          .subscribe(
+          data => {
+            this.lessons = this.formatLessons(data);
+            ob.next(this.lessons);
+            ob.complete();
+          },
+          error => console.log(error));
+      } else {
+        ob.next(this.lessons);
+        ob.complete();
+      }
+    });
+  }
+
+  formatLessons(data) {
+    console.log(data);
+    data = Object.assign(data.level1, data.level2);
+    let pdata = [];
+    for (let key in data) {
+      let obj = data[key];
+      obj["lesson"] = key;
+      pdata.push(obj);
+    }
+    return pdata;
   }
 
   query(params?: any) {

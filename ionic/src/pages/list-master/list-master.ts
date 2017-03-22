@@ -16,7 +16,7 @@ export class ListMasterPage {
   groups: any;
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.items.query().subscribe(
+    this.items.queryLessons().subscribe(
       data => this.groups = data,
       error => console.log(error));
   }

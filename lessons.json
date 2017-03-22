@@ -1,0 +1,6 @@
+---
+---
+{
+  "level1": {{site.data.lessons | jsonify}},
+  "level2": {{site.data.mlessons | jsonify}}
+}
