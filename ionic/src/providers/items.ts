@@ -50,6 +50,10 @@ export class Items {
       }
       return arr;
     };
+    let cleanline = (line: string) => {
+      return line.replace(/^(> )?\* /, '');
+    };
+    let splittext = (obj, key) => obj[key] = obj[key].split('\n').map(cleanline).filter(o => o != "");
     let grammar = odata.grammar.map(trimall);
     let words = odata.words.map(trimall);
     let pdata = [];
@@ -65,9 +69,14 @@ export class Items {
       }
       obj["grammar"] = grammar.filter(g => g.lesson == lkey);
       obj["words"] = words.filter(w => w.lesson.startsWith(lkey));
+      if (prefix == 'l') {
+        for (let entity of ['basic4', 'basicc', 'context', 'basic4t', 'basicct', 'contextt',]) splittext(obj, entity);
+      } else {
+        for (let entity of ['conversation', 'text',]) splittext(obj, entity);
+      }
       pdata.push(obj);
     }
-    console.log(pdata);
+    console.log(pdata[0], pdata[48]);
     return pdata;
   }
 

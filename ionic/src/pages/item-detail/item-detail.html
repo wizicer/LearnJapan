@@ -11,13 +11,27 @@
   <!--<div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
   </div>-->
 
-  <div class="item-detail" padding>
-    <h2 [innerHTML]="item.title | japanruby"></h2>
-    <p>{{item.basic4}}</p>
-    <p>{{item.basicc}}</p>
+  <div class="item-detail">
+    <h2 [innerHTML]="item.title | japanruby" padding></h2>
+  <ion-card>
+    <ion-card-header>
+     基本课文 
+    </ion-card-header>
+    <ion-card-content>
+    <p *ngFor="let t of item.basic4" [innerHTML]="t | japanruby"></p>
+    </ion-card-content>
+    <ion-card-content>
+    <p *ngFor="let t of item.basicc" [innerHTML]="t | japanruby"></p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
     <h2 [innerHTML]="item.contitle | japanruby"></h2>
-    <p>{{item.context}}</p>
-    <p>{{item.about}}</p>
+    </ion-card-header>
+    <ion-card-content>
+    <p *ngFor="let t of item.context" [innerHTML]="t | japanruby"></p>
+    </ion-card-content>
+  </ion-card>
   <ion-card *ngFor="let g of item.grammar">
     <ion-card-header>
       {{g.expression}}
