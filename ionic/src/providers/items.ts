@@ -39,17 +39,39 @@ export class Items {
     });
   }
 
-  formatLessons(data) {
-    console.log(data);
-    data = Object.assign(data.level1, data.level2);
+  formatLessons(odata) {
+    console.log(odata);
+    let ldata = Object.assign(odata.level1, odata.level2);
+    let trimall = arr => {
+      for (let ek in arr) {
+        if (arr[ek] != null) {
+          arr[ek] = arr[ek].trim();
+        }
+      }
+      return arr;
+    };
+    let grammar = odata.grammar.map(trimall);
+    let words = odata.words.map(trimall);
     let pdata = [];
-    for (let key in data) {
-      let obj = data[key];
-      obj["lesson"] = key;
+    for (let key in ldata) {
+      let obj = ldata[key];
+      let prefix = key.slice(0, 1);
+      let num = parseInt(key.slice(1));
+      let lkey = (prefix == "l" ? "0" : "m") + this.pad(num, 2);
+      obj["key"] = lkey;
+      obj["lesson"] = (prefix == "l" ? "初级" : "中级") +  "第" + num + "課";
+      if (prefix == "l") {
+        obj["title"] = obj.basic4.split('\n')[0].replace('> * ', '');
+      }
+      obj["grammar"] = grammar.filter(g => g.lesson == lkey);
+      obj["words"] = words.filter(w => w.lesson.startsWith(lkey));
       pdata.push(obj);
     }
+    console.log(pdata);
     return pdata;
   }
+
+  pad(num, size) { return ('000000000' + num).substr(-size); }
 
   query(params?: any) {
     return new Observable(ob => {

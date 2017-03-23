@@ -1,18 +1,45 @@
 ﻿<ion-header>
 
   <ion-navbar>
-    <ion-title>{{ item.title }}</ion-title>
+    <ion-title>{{ item.lesson }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
-  </div>
+  <!--<div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+  </div>-->
 
   <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
+    <h2 [innerHTML]="item.title | japanruby"></h2>
+    <p>{{item.basic4}}</p>
+    <p>{{item.basicc}}</p>
+    <h2 [innerHTML]="item.contitle | japanruby"></h2>
+    <p>{{item.context}}</p>
     <p>{{item.about}}</p>
+  <ion-card *ngFor="let g of item.grammar">
+    <ion-card-header>
+      {{g.expression}}
+    </ion-card-header>
+    <ion-card-content>
+      <h2>{{g.shortexplain}}</h2>
+      {{g.explanation}}
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+      <ion-item-sliding *ngFor="let word of item.words">
+        <button ion-item (click)="openItem(word)">
+          <h2 [innerHTML]="word.kana | japanruby"></h2>
+          <p [innerHTML]="word.desc | japanruby"></p>
+          <p item-right [innerHTML]="word.word | japanruby"></p>
+        </button>
+        <ion-item-options>
+          <button ion-button color="primary" (click)="deleteItem(item)">
+            {{ 'DELETE_BUTTON' | translate }}
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+  </ion-list>
   </div>
 </ion-content>
