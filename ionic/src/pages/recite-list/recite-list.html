@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>单词表选择</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-group *ngFor="let item of list">
+      <ion-item-sliding>
+        <button ion-item (click)="openItem(item.words)">
+          <h2>{{item.lesson}}</h2>
+        </button>
+        <ion-item-options>
+          <button ion-button color="primary" (click)="deleteItem(item)">
+            {{ 'DELETE_BUTTON' | translate }}
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>

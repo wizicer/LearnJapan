@@ -1,0 +1,28 @@
+page-recite {
+  ion-card {
+    position: relative;
+    text-align: center;
+    height: 150px;
+  }
+
+  .card-title {
+    position: absolute;
+    top: 30%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    // color: #fff;
+  }
+
+  .card-subtitle {
+    font-size: 1.4em;
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    // color: #fff;
+  }
+
+  .comment {
+    color: color($colors, "light")
+  }
+}

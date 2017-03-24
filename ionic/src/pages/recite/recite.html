@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>背单词 </ion-title>
+    <ion-buttons end> 
+      <ion-badge>5/327(1)</ion-badge>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <div class="card-title">沸く</div>
+    <div class="card-subtitle">わく[動1][读]</div>
+  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-40><button ion-button full>下</button></ion-col>
+      <ion-col width-20><button ion-button full color="secondary">上</button></ion-col>
+      <ion-col width-40><button ion-button full>下</button></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-25>
+        <ion-item>
+          <ion-toggle checked="false"></ion-toggle>
+        </ion-item>
+      </ion-col>
+      <ion-col width-75>
+        <ion-item>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="comment">
+      <ion-col width-25 center text-center>
+        已记住
+      </ion-col>
+      <ion-col width-75 center text-center>
+        记忆单词
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="light">单词选项</ion-item-divider>
+      <ion-item>
+        <ion-label>自动跳过已记住单词</ion-label>
+        <ion-toggle checked="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>自动读单词</ion-label>
+        <ion-toggle checked="false"></ion-toggle>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

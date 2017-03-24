@@ -1,4 +1,6 @@
-﻿import { NgModule, ErrorHandler } from '@angular/core';
+﻿import { RecitePage } from './../pages/recite/recite';
+import { ReciteListPage } from './../pages/recite-list/recite-list';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -72,6 +74,8 @@ let pages : any[] = [
   MenuPage,
   SettingsPage,
   SearchPage,
+  ReciteListPage,
+  RecitePage,
 ];
 let modules = [
   JapanRubyPipe,
