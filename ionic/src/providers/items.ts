@@ -11,6 +11,7 @@ import { Item } from '../models/item';
 export class Items {
   groups: any;
   lessons: any;
+  origindata: any;
 
   defaultItem: any = {
     "name": "Burt Bear",
@@ -21,26 +22,43 @@ export class Items {
   }
 
   queryLessons(params?: any) {
+    let inAnyProp = (obj: any, props: Array<string>, testStr: string) => {
+      for (let i = 0; i < props.length; i++) {
+        if (obj[props[i]] != undefined && obj[props[i]].indexOf(testStr) >= 0) {
+          return true;
+        }
+      }
+      return false;
+    };
     return new Observable(ob => {
       if (this.lessons == undefined) {
         this.api.get('/lessons.json', params)
           .map(resp => resp.json())
           .subscribe(
           data => {
+            this.origindata = data;
             this.lessons = this.formatLessons(data);
             ob.next(this.lessons);
             ob.complete();
           },
           error => console.log(error));
       } else {
-        ob.next(this.lessons);
+        if (params != undefined && params.search != undefined) {
+          let str = params.search;
+          let ret = {
+            words: this.origindata.words.filter(w => inAnyProp(w,["kana","kanji","desc"],str)),
+            grammar: this.origindata.grammar.filter(w => inAnyProp(w,["expression","explaination","shortexplain"],str)),
+          };
+          ob.next(ret);
+        } else {
+          ob.next(this.lessons);
+        }
         ob.complete();
       }
     });
   }
 
   formatLessons(odata) {
-    console.log(odata);
     let ldata = Object.assign(odata.level1, odata.level2);
     let trimall = arr => {
       for (let ek in arr) {
@@ -76,7 +94,6 @@ export class Items {
       }
       pdata.push(obj);
     }
-    console.log(pdata[0], pdata[48]);
     return pdata;
   }
 
