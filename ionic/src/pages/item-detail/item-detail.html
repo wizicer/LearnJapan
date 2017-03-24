@@ -1,7 +1,8 @@
 ﻿<ion-header>
 
   <ion-navbar>
-    <ion-title>{{ item.lesson }}</ion-title>
+    <ion-title *ngIf="item.words">{{ item.lesson }}</ion-title>
+    <ion-title *ngIf="item.word" [innerHTML]="item.word | japanruby"></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -116,6 +117,23 @@
           </button>
         </ion-item-options>
       </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-list *ngIf="item.word">
+    <ion-item [innerHTML]="item.desc">
+    </ion-item>
+    <ion-item [innerHTML]="item.pos | japanruby">
+    </ion-item>
+    <ion-item>
+      <p [innerHTML]="item.kana | japanruby"></p>
+    </ion-item>
+    <ion-item-group>
+      <ion-item-divider color="light">选项</ion-item-divider>
+      <ion-item>
+        <ion-label>已记住</ion-label>
+        <ion-toggle checked="false"></ion-toggle>
+      </ion-item>
     </ion-item-group>
   </ion-list>
 </ion-content>

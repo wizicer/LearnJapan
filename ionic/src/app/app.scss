@@ -20,3 +20,32 @@
   text-overflow: inherit;
   white-space: normal;
 }
+
+.japan,
+.japan a,
+:lang(jp) {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "Yu Gothic", "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+.accent,
+.accent0 {
+  border-top: #f63 1px solid;
+  padding: 1px 0px 0px 0px;
+}
+
+.accent {
+  position: relative;
+  white-space: nowrap;
+
+  &:after {
+    content: "";
+    height: 20%;
+    width: 1px;
+    padding: 0;
+    margin: 0;
+    background-color: #f63;
+    position: absolute;
+    top: -0.5px;
+    right: -0.5px;
+  }
+}
