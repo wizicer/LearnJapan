@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <ion-list>
+  <ion-list *ngIf="item.title">
     <ion-item-group>
       <ion-item-divider color="secondary">
         <h2 [innerHTML]="item.title | japanruby"></h2>
@@ -36,6 +36,58 @@
         <ion-card>
           <ion-card-content>
             <p *ngFor="let t of item.context" [innerHTML]="t | japanruby" class="line-break"></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item-divider color="light">
+        语法
+      </ion-item-divider>
+      <ion-item *ngFor="let g of item.grammar">
+        <h2 [innerHTML]="g.expression"></h2>
+        <p [innerHTML]="g.explanation" class="line-break"></p>
+        <p item-right [innerHTML]="g.shortexplain"></p>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light">
+        单词
+      </ion-item-divider>
+      <ion-item-sliding *ngFor="let word of item.words">
+        <button ion-item (click)="openItem(word)">
+          <h2 [innerHTML]="word.kana | japanruby"></h2>
+          <p [innerHTML]="word.desc | japanruby"></p>
+          <p item-right [innerHTML]="word.word | japanruby"></p>
+        </button>
+        <ion-item-options>
+          <button ion-button color="primary" (click)="deleteItem(item)">
+            {{ 'DELETE_BUTTON' | translate }}
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-list *ngIf="item.texttitle">
+    <ion-item-group>
+      <ion-item-divider color="light">
+        <h2 [innerHTML]="item.contitle | japanruby"></h2>
+      </ion-item-divider>
+      <ion-item>
+        <ion-card>
+          <ion-card-content>
+            <p *ngFor="let t of item.conversation" [innerHTML]="t | japanruby" class="line-break"></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light">
+        <h3 [innerHTML]="item.texttitle | japanruby"></h3>
+      </ion-item-divider>
+      <ion-item>
+        <ion-card>
+          <ion-card-content>
+            <p *ngFor="let t of item.text" [innerHTML]="t | japanruby" class="line-break"></p>
           </ion-card-content>
         </ion-card>
       </ion-item>
