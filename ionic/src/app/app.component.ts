@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+﻿import { Component, ViewChild } from '@angular/core';
 import {Platform, Nav, Config} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
@@ -21,23 +21,7 @@ import { SearchPage } from '../pages/search/search';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-
-  </ion-menu>
-  <ion-nav #content [root]="rootPage"></ion-nav>`
+  templateUrl: 'app.component.html'
 })
 export class MyApp {
   rootPage = FirstRunPage;
