@@ -4,7 +4,8 @@
         {% for link in site.links %}
             <li><a href="{{basepath}}{{ link.url }}">{{ link.title }}</a></li>
         {% endfor %}
-        <li><a class="feed" href="{{basepath}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
+        <li id="rssfeed"><a class="feed" href="{{basepath}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
+        <li id="gobackCordova" style="display: none;"><a class="feed" href="{{basepath}}/../../index.html" title="Go Back">回到新版</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">主题风格<span class="caret"></span></a>
             <ul class="dropdown-menu" id="theme-dropdown" role="menu">
@@ -16,3 +17,11 @@
         </li>
     </ul>
 </nav>
+<script>
+$(document).ready(function() {
+    if (/[?&]cordova=/.test(location.search)) {
+        $("#rssfeed").hide();
+        $("#gobackCordova").show();
+    }
+});
+</script>

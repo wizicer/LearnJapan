@@ -76,7 +76,7 @@ export class SettingsPage {
         {
           text: 'Yes',
           handler: () => {
-            window.location.href = "assets/site/index.html";
+            window.location.href = "assets/site/index.html?cordova=true";
           }
         }
       ]
