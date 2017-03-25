@@ -16,7 +16,7 @@
 
   <form [formGroup]="form" *ngIf="settingsReady">
     <ion-list *ngIf="page == 'main'">
-      <ion-item>
+      <!--<ion-item>
         <ion-label>{{ 'SETTINGS_OPTION1' | translate }}</ion-label>
         <ion-toggle formControlName="option1"></ion-toggle>
       </ion-item>
@@ -33,22 +33,29 @@
           <ion-option value="2">2</ion-option>
           <ion-option value="3">3</ion-option>
         </ion-select>
-      </ion-item>
+      </ion-item>-->
 
       <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
-        {{ 'SETTINGS_PROFILE_BUTTON' | translate }}
+        保存/载入学习记录
       </button>
 
       <button ion-item (click)="gotoLegacySite()">
-        Goto Legacy Site
+        回到老版本
       </button>
     </ion-list>
 
     <ion-list *ngIf="page == 'profile'">
       <ion-item>
+        <ion-label class="line-break" stacked>导出或导入学习记录文件，用于备份或同步到其他设备。</ion-label>
+        <ion-textarea [(ngModel)]="records" [ngModelOptions]="{standalone: true}" rows="10"></ion-textarea>
+      </ion-item>
+      <button ion-item (click)="load()" color="danger">
+        写入记录
+      </button>
+      <!--<ion-item>
         <ion-label>{{ 'SETTINGS_OPTION4' | translate }}</ion-label>
         <ion-input formControlName="option4"></ion-input>
-      </ion-item>
+      </ion-item>-->
     </ion-list>
   </form>
 

@@ -14,6 +14,8 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
+  records: string;
+
   // Our local settings object
   options: any;
 
@@ -38,6 +40,41 @@ export class SettingsPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public translate: TranslateService) {
+    this.records = localStorage.getItem("rwords");
+  }
+
+  load() {
+    let confirm = this.alertCtrl.create({
+      title: "您确定吗？",
+      message: '如果学习记录代码无效，所有数据均可能会丢失。此操作不可撤销。',
+      buttons: [
+        {
+          text: '确定',
+          handler: () => {
+            try {
+              let rwords = JSON.parse(this.records);
+              localStorage.setItem("rwords", JSON.stringify(rwords));
+              let alert = this.alertCtrl.create({
+                title: '恢复记录成功！',
+                buttons: ['确定']
+              });
+              alert.present();
+            } catch (err) {
+              let alert = this.alertCtrl.create({
+                title: '恢复记录失败',
+                subTitle: '有可能是因为记录代码无效，请检查后重试！',
+                buttons: ['确定']
+              });
+              alert.present();
+            }
+          }
+        },
+        {
+          text: '取消'
+        }
+      ]
+    });
+    confirm.present();
   }
 
   _buildForm() {
