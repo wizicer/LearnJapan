@@ -1,10 +1,24 @@
-﻿import { Component, ViewChild } from '@angular/core';
+﻿import { Component, ViewChild, trigger, transition, style, animate } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 
 @Component({
   selector: 'page-item-detail',
+  animations: [
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({ transform: 'translateY(100%)', opacity: 0 }),
+          animate('200ms', style({ transform: 'translateY(0)', opacity: 1 }))
+        ]),
+        transition(':leave', [
+          style({ transform: 'translateY(0)', opacity: 1 }),
+          animate('200ms', style({ transform: 'translateY(-100%)', opacity: 0 }))
+        ])
+      ]
+    ),
+  ],
   templateUrl: 'item-detail.html'
 })
 export class ItemDetailPage {

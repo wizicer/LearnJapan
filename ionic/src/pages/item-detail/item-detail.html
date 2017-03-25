@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <audio #audioplayer [src]="playsrc" controls="false" [hidden]="'false'"></audio>
-    <ion-title *ngIf="playerenable">
+    <ion-title *ngIf="playerenable" [@enterAnimation]="playerenable">
       <ion-grid>
         <ion-row>
           <ion-col>
