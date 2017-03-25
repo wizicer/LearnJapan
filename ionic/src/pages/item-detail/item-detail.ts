@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { Item } from '../../models/item';
@@ -9,6 +9,13 @@ import { Item } from '../../models/item';
 })
 export class ItemDetailPage {
   item: any;
+  playerenable = false;
+  playing = false;
+  @ViewChild('audioplayer') player;
+  playsrc: string;
+  playercontrols = false;
+  playprogress = 0;
+  playprogressmax = 100;
 
   constructor(public navCtrl: NavController, navParams: NavParams) {
     this.item = navParams.get('item');
@@ -18,6 +25,52 @@ export class ItemDetailPage {
     this.navCtrl.push(ItemDetailPage, {
       item: item
     });
+  }
+
+  ngAfterViewInit() {
+    let player = this.player.nativeElement;
+    let addMultipleListener = (el, s, fn) => s.split(' ').forEach(e => el.addEventListener(e, fn, false));
+
+    addMultipleListener(player, "play pause", () => {
+      this.playing = !player.paused;
+    });
+
+    player.addEventListener('timeupdate', () => {
+      this.playprogress = player.currentTime;
+    });
+    player.addEventListener('ended', () => {
+      this.playerenable = false;
+    });
+    player.addEventListener('durationchange', () => {
+      this.playprogressmax = player.duration;
+    });
+  }
+
+  progressChange(ev): void {
+    this.player.nativeElement.currentTime = ev.value;
+  }
+  play(): void {
+    this.player.nativeElement.play();
+  }
+
+  pause(): void {
+    this.player.nativeElement.pause();
+  }
+
+  backward(time: number): void {
+    this.player.nativeElement.currentTime -= time;
+  }
+
+  setPlaybackRate(rate: number): void {
+    this.player.nativeElement.playbackRate = rate;
+  }
+
+  startplay(item: Item, type: string) {
+    let player = this.player.nativeElement;
+    player.src = `assets/site/assets/audio/${type}/${item["okey"]}.mp3`;
+    player.load();
+    player.play();
+    this.playerenable = true;
   }
 
 }

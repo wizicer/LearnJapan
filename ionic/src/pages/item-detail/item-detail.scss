@@ -2,4 +2,7 @@
   .basic4 {
     background: color($colors, light);
   }
+  ion-range, ion-grid {
+    padding: 0 !important;
+  }
 }

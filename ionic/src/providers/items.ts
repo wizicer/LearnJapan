@@ -81,6 +81,7 @@ export class Items {
       let num = parseInt(key.slice(1));
       let lkey = (prefix == "l" ? "0" : "m") + this.pad(num, 2);
       obj["key"] = lkey;
+      obj["okey"] = key;
       obj["lesson"] = (prefix == "l" ? "初级" : "中级") +  "第" + num + "課";
       if (prefix == "l") {
         obj["title"] = obj.basic4.split('\n')[0].replace('> * ', '');

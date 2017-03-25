@@ -1,8 +1,25 @@
 ﻿<ion-header>
 
   <ion-navbar>
-    <ion-title *ngIf="item.words">{{ item.lesson }}</ion-title>
-    <ion-title *ngIf="item.word" [innerHTML]="item.word | japanruby"></ion-title>
+    <audio #audioplayer [src]="playsrc" controls="false" [hidden]="'false'"></audio>
+    <ion-title *ngIf="playerenable">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button small ion-button color="secondary" (click)="backward(2)">短退</button>
+            <button small ion-button (click)="play()" *ngIf="!playing"><ion-icon name="play"></ion-icon></button>
+            <button small ion-button (click)="pause()" *ngIf="playing"><ion-icon name="pause"></ion-icon></button>
+            <button small ion-button color="secondary" (click)="setPlaybackRate(0.8)">慢速</button>
+            <button small ion-button color="secondary" (click)="setPlaybackRate(1)">常速</button>
+          </ion-col>
+          <ion-col>
+            <ion-range [(ngModel)]="playprogress" [max]="playprogressmax" color="primary" (ionChange)="progressChange($event)"></ion-range>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
+    <ion-title *ngIf="!playerenable && item.words">{{ item.lesson }}</ion-title>
+    <ion-title *ngIf="!playerenable && item.word" [innerHTML]="item.word | japanruby"></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,6 +31,7 @@
     <ion-item-group>
       <ion-item-divider color="secondary">
         <h2 [innerHTML]="item.title | japanruby"></h2>
+        <button ion-button item-right (click)="startplay(item, 'lesson')"><ion-icon name="play"></ion-icon></button>
       </ion-item-divider>
       <ion-item-divider color="light">
         基本课文
@@ -52,6 +70,7 @@
     <ion-item-group>
       <ion-item-divider color="light">
         单词
+        <button ion-button item-right (click)="startplay(item, 'word')"><ion-icon name="play"></ion-icon></button>
       </ion-item-divider>
       <ion-item-sliding *ngFor="let word of item.words">
         <button ion-item (click)="openItem(word)">
