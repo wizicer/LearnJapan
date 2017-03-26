@@ -140,18 +140,32 @@
   </ion-list>
 
   <ion-list *ngIf="item.word">
-    <ion-item [innerHTML]="item.desc">
-    </ion-item>
-    <ion-item [innerHTML]="item.pos | japanruby">
+    <ion-item>
+      <ion-icon name='square' item-left></ion-icon>
+      <ion-note item-right>意思</ion-note>
+      <p [innerHTML]="item.desc"></p>
     </ion-item>
     <ion-item>
+      <ion-icon name='pricetag' item-left></ion-icon>
+      <ion-note item-right>词性</ion-note>
+      <p [innerHTML]="item.pos"></p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='quote' item-left></ion-icon>
+      <ion-note item-right>发音</ion-note>
       <p [innerHTML]="item.kana | japanruby"></p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='bookmark' item-left></ion-icon>
+      <ion-note item-right>课本</ion-note>
+      <p [innerHTML]="item.lesson"></p>
     </ion-item>
     <ion-item-group>
       <ion-item-divider color="light">选项</ion-item-divider>
       <ion-item>
+        <ion-icon name='book' item-left></ion-icon>
         <ion-label>已记住</ion-label>
-        <ion-toggle checked="false"></ion-toggle>
+        <ion-toggle disabled checked="false"></ion-toggle>
       </ion-item>
     </ion-item-group>
   </ion-list>
