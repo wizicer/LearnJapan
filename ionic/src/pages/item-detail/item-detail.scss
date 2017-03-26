@@ -5,4 +5,7 @@
   ion-range, ion-grid {
     padding: 0 !important;
   }
+  ion-title.title.title-ios {
+    padding-right: 0;
+  }
 }
