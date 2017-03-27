@@ -13,6 +13,10 @@
       <ion-item-sliding>
         <button ion-item (click)="openItem(item.words)">
           <h2>{{item.lesson}}</h2>
+          <ion-badge item-right>{{item.rwordnum}}/{{item.words.length}}</ion-badge>
+          <div class="progress-bar">
+            <span [style.width]="item.rwordnum * 100 / item.words.length + '%'"></span>
+          </div>
         </button>
       </ion-item-sliding>
     </ion-item-group>
