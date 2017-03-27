@@ -49,7 +49,7 @@ export class MyApp {
     translate.use('en')
 
     translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
-      config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
+      config.set('ios', 'backButtonText', '后退');
     });
 
     platform.ready().then(() => {

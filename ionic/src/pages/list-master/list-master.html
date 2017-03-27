@@ -1,11 +1,6 @@
 ﻿<ion-header>
   <ion-navbar>
-    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title>标日课程</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -15,11 +10,6 @@
         <button ion-item (click)="openItem(group)">
           <h2>{{group.lesson}}</h2>
         </button>
-        <ion-item-options>
-          <button ion-button color="primary" (click)="deleteItem(item)">
-            {{ 'DELETE_BUTTON' | translate }}
-          </button>
-        </ion-item-options>
       </ion-item-sliding>
     </ion-item-group>
   </ion-list>

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>单词表选择</ion-title>
+    <ion-title>背单词列表</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,11 +14,6 @@
         <button ion-item (click)="openItem(item.words)">
           <h2>{{item.lesson}}</h2>
         </button>
-        <ion-item-options>
-          <button ion-button color="primary" (click)="deleteItem(item)">
-            {{ 'DELETE_BUTTON' | translate }}
-          </button>
-        </ion-item-options>
       </ion-item-sliding>
     </ion-item-group>
   </ion-list>

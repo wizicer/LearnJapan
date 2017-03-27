@@ -25,11 +25,13 @@ export class SettingsPage {
 
   profileSettings = {
     page: 'profile',
-    pageTitleKey: 'SETTINGS_PAGE_PROFILE'
+    pageTitleKey: 'SETTINGS_PAGE_PROFILE',
+    pageTitleContent: '学习记录',
   };
 
   page: string = 'main';
   pageTitleKey: string = 'SETTINGS_TITLE';
+  pageTitleContent: string = '设置';
   pageTitle: string;
 
   subSettings: any = SettingsPage;
@@ -103,15 +105,15 @@ export class SettingsPage {
 
   gotoLegacySite() {
     let confirm = this.alertCtrl.create({
-      title: 'Confirm?',
-      message: 'Are you sure to go to the legacy site?',
+      title: '确认吗?',
+      message: '是否确认要回到老版本，老版本并未为iOS系统优化，可能会发生不可恢复的错误，如果出现这样的情况，可以考虑杀掉进程重新打开。',
       buttons: [
         {
-          text: 'No',
+          text: '否',
           handler: () => { }
         },
         {
-          text: 'Yes',
+          text: '是',
           handler: () => {
             window.location.href = "assets/site/index.html?cordova=true";
           }
@@ -132,10 +134,12 @@ export class SettingsPage {
 
     this.page = this.navParams.get('page') || this.page;
     this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
+    this.pageTitleContent = this.navParams.get('pageTitleContent') || this.pageTitleContent;
 
-    this.translate.get(this.pageTitleKey).subscribe((res) => {
-      this.pageTitle = res;
-    })
+    // this.translate.get(this.pageTitleKey).subscribe((res) => {
+    //   this.pageTitle = res;
+    // })
+    this.pageTitle = this.pageTitleContent;
 
     this.settings.load().then(() => {
       this.settingsReady = true;

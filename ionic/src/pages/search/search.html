@@ -1,28 +1,29 @@
 ﻿<ion-header>
   <ion-navbar>
-    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+    <ion-title>搜索</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="搜索单词和语法"></ion-searchbar>
   <ion-list>
     <ion-item-group *ngIf="currentItems.words.length > 0">
-      <ion-item-divider color="light">words</ion-item-divider>
-      <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems.words">
-        <h2>{{item.word}}</h2>
-        <p>{{item.desc}}</p>
-        <ion-note item-right *ngIf="item.kana">{{item.kana}}</ion-note>
+      <ion-item-divider color="light">单词</ion-item-divider>
+      <button ion-item (click)="openItem(word)" *ngFor="let word of currentItems.words">
+        <h2 [innerHTML]="word.kana | japanruby"></h2>
+        <p [innerHTML]="word.desc | japanruby"></p>
+        <p item-right [innerHTML]="word.word | japanruby"></p>
       </button>
-      <button ion-item (click)="moreWords()" *ngIf="wordsShowMore">more</button>
+      <button ion-item (click)="moreWords()" *ngIf="wordsShowMore">查看更多</button>
     </ion-item-group>
     <ion-item-group *ngIf="currentItems.grammar.length > 0">
-      <ion-item-divider color="light">grammar</ion-item-divider>
-      <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems.grammar">
-        <h2>{{item.expression}}</h2>
-        <p>{{item.explaination}}</p>
+      <ion-item-divider color="light">语法</ion-item-divider>
+      <button ion-item (click)="openItem(g)" *ngFor="let g of currentItems.grammar">
+        <h2 [innerHTML]="g.expression"></h2>
+        <p [innerHTML]="g.explanation" class="line-break"></p>
+        <p item-right [innerHTML]="g.shortexplain"></p>
       </button>
-      <button ion-item (click)="moreGrammar()" *ngIf="grammarShowMore">more</button>
+      <button ion-item (click)="moreGrammar()" *ngIf="grammarShowMore">查看更多</button>
     </ion-item-group>
   </ion-list>
 </ion-content>
