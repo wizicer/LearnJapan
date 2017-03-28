@@ -32,7 +32,7 @@
       </ion-col>
       <ion-col width-75>
         <ion-item>
-          <ion-input type="text" [(value)]="trialtext" (keypress)="trialtextchallenge($event)"></ion-input>
+          <ion-input type="text" [(ngModel)]="trialtext" (keypress)="trialtextchallenge($event)"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -47,7 +47,7 @@
     <ion-row *ngIf="!lefthandmode">
       <ion-col width-75>
         <ion-item>
-          <ion-input type="text" [(value)]="trialtext" (keypress)="trialtextchallenge($event)"></ion-input>
+          <ion-input type="text" [(ngModel)]="trialtext" (keypress)="trialtextchallenge($event)"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col width-25>
