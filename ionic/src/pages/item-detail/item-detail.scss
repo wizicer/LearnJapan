@@ -1,11 +1,11 @@
 ﻿page-item-detail {
-  .basic4 {
-    background: color($colors, light);
-  }
   ion-range, ion-grid {
     padding: 0 !important;
   }
   ion-title.title.title-ios {
     padding-right: 0;
+  }
+  button p {
+    font-size: 1.6rem !important;
   }
 }

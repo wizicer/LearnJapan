@@ -36,28 +36,25 @@
       <ion-item-divider color="light">
         基本课文
       </ion-item-divider>
-      <ion-item>
-        <ion-card>
-          <ion-card-content class="basic4" padding>
-            <p *ngFor="let t of item.basic4" [innerHTML]="t | japanruby" class="line-break"></p>
-          </ion-card-content>
-          <ion-card-content>
-            <p *ngFor="let t of item.basicc" [innerHTML]="t | japanruby" class="line-break"></p>
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
+      <button ion-item *ngFor="let t of item.basic4;let i = index">
+        <p class="line-break">
+          <span>{{i + 1}}.</span>
+          <span [innerHTML]="t | japanruby"></span>
+        </p>
+      </button>
+      <ion-item-divider color="light">
+      </ion-item-divider>
+      <button ion-item *ngFor="let t of item.basicc">
+        <p [innerHTML]="t | japanruby" class="line-break"></p>
+      </button>
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">
         <h3 [innerHTML]="item.contitle | japanruby"></h3>
       </ion-item-divider>
-      <ion-item>
-        <ion-card>
-          <ion-card-content>
-            <p *ngFor="let t of item.context" [innerHTML]="t | japanruby" class="line-break"></p>
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
+      <button ion-item *ngFor="let t of item.context">
+        <p [innerHTML]="t | japanruby" class="line-break"></p>
+      </button>
       <ion-item-divider color="light">
         语法
       </ion-item-divider>
@@ -87,25 +84,17 @@
       <ion-item-divider color="light">
         <h2 [innerHTML]="item.contitle | japanruby"></h2>
       </ion-item-divider>
-      <ion-item>
-        <ion-card>
-          <ion-card-content>
-            <p *ngFor="let t of item.conversation" [innerHTML]="t | japanruby" class="line-break"></p>
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
+      <button ion-item *ngFor="let t of item.conversation">
+        <p [innerHTML]="t | japanruby" class="line-break"></p>
+      </button>
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">
         <h3 [innerHTML]="item.texttitle | japanruby"></h3>
       </ion-item-divider>
-      <ion-item>
-        <ion-card>
-          <ion-card-content>
-            <p *ngFor="let t of item.text" [innerHTML]="t | japanruby" class="line-break"></p>
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
+      <button ion-item *ngFor="let t of item.text">
+        <p [innerHTML]="t | japanruby" class="line-break"></p>
+      </button>
       <ion-item-divider color="light">
         语法
       </ion-item-divider>
