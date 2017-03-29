@@ -52,9 +52,13 @@
       <ion-item-divider color="light">
         <h3 [innerHTML]="item.contitle | japanruby"></h3>
       </ion-item-divider>
-      <button ion-item *ngFor="let t of item.context">
-        <p [innerHTML]="t | japanruby" class="line-break"></p>
-      </button>
+      <ng-container *ngFor="let t of item.context">
+        <button ion-item *ngIf="t != '---'">
+          <p [innerHTML]="t | japanruby" class="line-break"></p>
+        </button>
+        <ion-item-divider color="light" *ngIf="t == '---'">
+        </ion-item-divider>
+      </ng-container>
       <ion-item-divider color="light">
         语法
       </ion-item-divider>
