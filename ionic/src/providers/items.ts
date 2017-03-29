@@ -84,7 +84,7 @@ export class Items {
       obj["okey"] = key;
       obj["lesson"] = (prefix == "l" ? "初级" : "中级") +  "第" + num + "課";
       if (prefix == "l") {
-        obj["title"] = obj.basic4.split('\n')[0].replace('> * ', '');
+        obj["title"] = obj.basic4.split('\n')[0].replace('> * ', '').replace('。', '');
       }
       obj["grammar"] = grammar.filter(g => g.lesson == lkey);
       obj["words"] = words.filter(w => w.lesson.startsWith(lkey));

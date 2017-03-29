@@ -5,12 +5,13 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item-group *ngFor="let group of groups">
-      <ion-item-sliding>
-        <button ion-item (click)="openItem(group)">
-          <h2>{{group.lesson}}</h2>
-        </button>
-      </ion-item-sliding>
-    </ion-item-group>
+    <ion-item-sliding *ngFor="let group of groups">
+      <button ion-item (click)="openItem(group)">
+        <h2 *ngIf='group.title' [innerHTML]='group.title | japanruby'></h2>
+        <h2 *ngIf='group.texttitle'>{{group.texttitle}}</h2>
+        <p *ngIf='group.texttitle'>{{group.contitle}}</p>
+        <p item-right>{{group.lesson}}</p>
+      </button>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
