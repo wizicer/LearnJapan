@@ -23,7 +23,7 @@
       <ion-item-divider color="light">语法</ion-item-divider>
       <button ion-item (click)="openItem(g)" *ngFor="let g of currentItems.grammar">
         <h2 [innerHTML]="g.expression"></h2>
-        <p [innerHTML]="g.explanation" class="line-break"></p>
+        <p [innerHTML]="g.explanation | newline" class="line-break"></p>
         <p item-right [innerHTML]="g.shortexplain"></p>
       </button>
       <button ion-item (click)="moreGrammar()" *ngIf="grammarShowMore">查看更多</button>
