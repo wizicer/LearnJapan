@@ -1,4 +1,5 @@
-﻿import { RecitePage } from './../pages/recite/recite';
+﻿import { NewlinePipe } from './../providers/newline.pipe';
+import { RecitePage } from './../pages/recite/recite';
 import { ReciteListPage } from './../pages/recite-list/recite-list';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { Http } from '@angular/http';
@@ -79,6 +80,7 @@ let pages : any[] = [
 ];
 let modules = [
   JapanRubyPipe,
+  NewlinePipe,
 ];
 
 export function declarations() {
