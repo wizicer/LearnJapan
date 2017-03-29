@@ -119,7 +119,7 @@
         <button ion-item (click)="openItem(word)">
           <h2>
             <span [innerHTML]="word.kana | japanruby"></span>
-            {{word.pos}}
+            [{{word.pos}}]
           </h2>
           <p [innerHTML]="word.desc | japanruby"></p>
           <p item-right [innerHTML]="word.word | japanruby"></p>
