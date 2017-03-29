@@ -75,7 +75,10 @@
       </ion-item-divider>
       <ion-item-sliding *ngFor="let word of item.words">
         <button ion-item (click)="openItem(word)">
-          <h2 [innerHTML]="word.kana | japanruby"></h2>
+          <h2>
+            <span [innerHTML]="word.kana | japanruby"></span>
+            [{{word.pos}}]
+          </h2>
           <p [innerHTML]="word.desc | japanruby"></p>
           <p item-right [innerHTML]="word.word | japanruby"></p>
         </button>
@@ -114,7 +117,10 @@
       </ion-item-divider>
       <ion-item-sliding *ngFor="let word of item.words">
         <button ion-item (click)="openItem(word)">
-          <h2 [innerHTML]="word.kana | japanruby"></h2>
+          <h2>
+            <span [innerHTML]="word.kana | japanruby"></span>
+            {{word.pos}}
+          </h2>
           <p [innerHTML]="word.desc | japanruby"></p>
           <p item-right [innerHTML]="word.word | japanruby"></p>
         </button>
