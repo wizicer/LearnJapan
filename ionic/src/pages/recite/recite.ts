@@ -22,6 +22,7 @@ interface IQuizData {
 })
 export class RecitePage {
   wordlist: any;
+  lesson: any;
 
   onlyremember = true;
   wordremember = false;
@@ -45,6 +46,7 @@ export class RecitePage {
 
   constructor(public navCtrl: NavController, navParams: NavParams) {
     this.wordlist = navParams.get('item');
+    this.lesson = navParams.get('lesson');
     if (!this.isLocalstorageExist()) {
       this.disableonlyremember = true;
       this.disablewordremember = true;

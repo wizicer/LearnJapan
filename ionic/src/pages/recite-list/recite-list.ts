@@ -20,9 +20,10 @@ export class ReciteListPage {
   ionViewDidLoad() {
   }
 
-  openItem(item: Item) {
+  openItem(item: any) {
     this.navCtrl.push(RecitePage, {
-      item: item
+      item: item.words,
+      lesson: item.lesson,
     });
   }
 

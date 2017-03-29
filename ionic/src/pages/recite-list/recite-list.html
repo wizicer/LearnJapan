@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item-group *ngFor="let item of list">
       <ion-item-sliding>
-        <button ion-item (click)="openItem(item.words)">
+        <button ion-item (click)="openItem(item)">
           <h2>{{item.lesson}}</h2>
           <ion-badge item-right>{{item.rwordnum}}/{{item.words.length}}</ion-badge>
           <div class="progress-bar">
