@@ -20,6 +20,7 @@
     </ion-title>
     <ion-title *ngIf="!playerenable && item.words">{{ item.lesson }}</ion-title>
     <ion-title *ngIf="!playerenable && item.word" [innerHTML]="item.word | japanruby"></ion-title>
+    <ion-title *ngIf="!playerenable && item.expression" [innerHTML]="item.expression"></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -62,11 +63,11 @@
       <ion-item-divider color="light">
         语法
       </ion-item-divider>
-      <ion-item *ngFor="let g of item.grammar">
+      <button ion-item *ngFor="let g of item.grammar" (click)="openItem(g)">
         <h2 [innerHTML]="g.expression"></h2>
         <p [innerHTML]="g.explanation | newline" class="line-break"></p>
         <p item-right [innerHTML]="g.shortexplain"></p>
-      </ion-item>
+      </button>
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">
@@ -105,11 +106,11 @@
       <ion-item-divider color="light">
         语法
       </ion-item-divider>
-      <ion-item *ngFor="let g of item.grammar">
+      <button ion-item *ngFor="let g of item.grammar" (click)="openItem(g)">
         <h2 [innerHTML]="g.expression"></h2>
         <p [innerHTML]="g.explanation | newline" class="line-break"></p>
         <p item-right [innerHTML]="g.shortexplain"></p>
-      </ion-item>
+      </button>
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">
@@ -157,5 +158,33 @@
         <ion-toggle disabled checked="false"></ion-toggle>
       </ion-item>
     </ion-item-group>
+  </ion-list>
+
+  <ion-list *ngIf="item.expression">
+    <ion-item>
+      <ion-icon name='square' item-left></ion-icon>
+      <ion-note item-right>表达</ion-note>
+      <p [innerHTML]="item.expression"></p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='pricetag' item-left></ion-icon>
+      <ion-note item-right>简义</ion-note>
+      <p *ngIf="item.shortexplain" [innerHTML]="item.shortexplain"></p>
+      <p *ngIf="!item.shortexplain" color="light">&lt;暂无&gt;</p>
+    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-icon name='quote' item-left></ion-icon>
+        解释
+      </ion-card-header>
+      <ion-card-content>
+        <p [innerHTML]="item.explanation | newline" break-line></p>
+      </ion-card-content>
+    </ion-card>
+    <ion-item>
+      <ion-icon name='bookmark' item-left></ion-icon>
+      <ion-note item-right>课本</ion-note>
+      <p [innerHTML]="item.lesson"></p>
+    </ion-item>
   </ion-list>
 </ion-content>

@@ -47,7 +47,7 @@ export class Items {
           let str = params.search;
           let ret = {
             words: this.origindata.words.filter(w => inAnyProp(w,["kana","kanji","desc"],str)),
-            grammar: this.origindata.grammar.filter(w => inAnyProp(w,["expression","explaination","shortexplain"],str)),
+            grammar: this.origindata.grammar.filter(w => inAnyProp(w,["expression","explanation","shortexplain"],str)),
           };
           ob.next(ret);
         } else {
@@ -95,6 +95,7 @@ export class Items {
       }
       pdata.push(obj);
     }
+    console.log(pdata);
     return pdata;
   }
 
