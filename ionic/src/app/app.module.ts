@@ -30,6 +30,8 @@ import { Items } from '../providers/items';
 //import { Items } from '../mocks/providers/items';
 import { JapanRubyPipe } from '../providers/japan-ruby.pipe';
 
+import { ClipboardModule } from 'ngx-clipboard';
+
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
 // The translate loader needs to know where to load i18n files
@@ -109,6 +111,7 @@ export function providers() {
   declarations: declarations(),
   imports: [
     IonicModule.forRoot(MyApp),
+    ClipboardModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),

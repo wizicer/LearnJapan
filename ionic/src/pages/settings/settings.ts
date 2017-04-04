@@ -29,6 +29,16 @@ export class SettingsPage {
     pageTitleContent: '学习记录',
   };
 
+  importSettings = {
+    page: 'import',
+    pageTitleContent: '导入',
+  };
+
+  exportSettings = {
+    page: 'export',
+    pageTitleContent: '导出',
+  };
+
   page: string = 'main';
   pageTitleKey: string = 'SETTINGS_TITLE';
   pageTitleContent: string = '设置';
@@ -42,7 +52,6 @@ export class SettingsPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public translate: TranslateService) {
-    this.records = localStorage.getItem("rwords");
   }
 
   load() {
@@ -151,5 +160,12 @@ export class SettingsPage {
 
   ngOnChanges() {
     console.log('Ng All Changes');
+  }
+
+  getRecords() {
+    this.records = localStorage.getItem("rwords");
+  }
+
+  paste() {
   }
 }
