@@ -30,9 +30,15 @@ export class ItemDetailPage {
   playercontrols = false;
   playprogress = 0;
   playprogressmax = 100;
+  remember: boolean;
 
   constructor(public navCtrl: NavController, navParams: NavParams) {
     this.item = navParams.get('item');
+    if (this.item.idx && this.item.lesson) {
+      let rwords = JSON.parse(localStorage.getItem("rwords")) || {};
+      let key = `${this.item.lesson}|${this.item.idx}`
+      this.remember = rwords[key];
+    }
   }
 
   openItem(item: Item) {
@@ -87,4 +93,10 @@ export class ItemDetailPage {
     this.playerenable = true;
   }
 
+  toggleRemember(item: any) {
+    let rwords = JSON.parse(localStorage.getItem("rwords")) || {};
+    let key = `${item.lesson}|${item.idx}`
+    rwords[key] = this.remember;
+    localStorage.setItem("rwords", JSON.stringify(rwords));
+  }
 }
