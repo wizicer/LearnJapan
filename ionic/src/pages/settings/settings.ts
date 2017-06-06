@@ -2,8 +2,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
-
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider

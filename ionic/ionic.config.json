@@ -1,5 +1,6 @@
 {
   "name": "super",
   "app_id": "",
-  "type": "ionic-angular"
+  "v2": true,
+  "typescript": true
 }
