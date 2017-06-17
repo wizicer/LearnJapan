@@ -1,3 +1,8 @@
+var isCordovaApp = document.URL.indexOf('http://') === -1
+  && document.URL.indexOf('https://') === -1;
+
+console.log("cdv", isCordovaApp);
+
 $(document).ready(function() {
   // Closing menu with ESC
   document.addEventListener('keyup', function(e){
