@@ -7,9 +7,6 @@ var env         = require('minimist')(process.argv.slice(2)),
 	concat      = require('gulp-concat'),
 	ts          = require('gulp-typescript'),
 	merge       = require('event-stream').merge,
-	jeet        = require('jeet'),
-	rupture     = require('rupture'),
-	koutoSwiss  = require('kouto-swiss'),
 	prefixer    = require('autoprefixer-stylus'),
 	cp          = require('child_process');
 
