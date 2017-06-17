@@ -200,11 +200,6 @@ html {
   height: 4px;
   width: 100%;
 }
-.hamburger.is-closed .hamb-top,
-.hamburger.is-closed .hamb-middle,
-.hamburger.is-closed .hamb-bottom {
-  background-color: #1a1a1a;
-}
 .hamburger.is-closed .hamb-top {
   top: 5px;
   -webkit-transition: all 0.35s ease-in-out;
@@ -224,11 +219,6 @@ html {
 .hamburger.is-closed:hover .hamb-bottom {
   bottom: 0;
   -webkit-transition: all 0.35s ease-in-out;
-}
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-middle,
-.hamburger.is-open .hamb-bottom {
-  background-color: #1a1a1a;
 }
 .hamburger.is-open .hamb-top,
 .hamburger.is-open .hamb-bottom {
@@ -275,6 +265,17 @@ html {
   bottom: 0;
   background-color: rgba(250,250,250,0.8);
   z-index: 1;
+}
+#goback {
+  position: fixed;
+  top: 20px;
+  z-index: 999;
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 50px;
+  background: transparent;
+  border: none;
 }
 .japan,
 .japan a,
