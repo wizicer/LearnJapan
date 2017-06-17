@@ -1,10 +1,11 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
     <ul class="nav sidebar-nav">
         <li class="sidebar-brand"><a href="{{basepath}}/index.html">{{ site.sidebartitle }}</a></li>
+        <li id="mobilemenu" class="hidden-sm hidden-md hidden-lg"><a href="{{basepath}}/uwp/menu.html">课程</a></li>
         {% for link in site.links %}
             <li><a href="{{basepath}}{{ link.url }}">{{ link.title }}</a></li>
         {% endfor %}
-        <li id="rssfeed"><a class="feed" href="{{basepath}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
+        <li id="rssfeed" class="hidden-xs"><a class="feed" href="{{basepath}}/feed.xml" title="Atom/RSS feed">订阅RSS</a></li>
         <li id="gobackCordova" style="display: none;"><a class="feed" href="{{basepath}}/../../index.html" title="Go Back">回到新版</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">主题风格<span class="caret"></span></a>

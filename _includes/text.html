@@ -2,7 +2,8 @@
 <style>
 .tags {
   position: fixed;
-  top: 0px;
+  top: 15px;
+  right: 5px;
 }
 .lesson {
   display: none;
@@ -81,7 +82,7 @@
 {% endcapture %}
 {{scss | scssify }}
 </style>
-<div class="tags">
+<div class="flowtags">
   {% if page.lesson %}
   <a class="link btn btn-success" href="lesson{{page.lesson | minus: 1}}.html">前</a>
   <a class="link btn btn-success" href="lesson{{page.lesson | plus: 1}}.html">后</a>
@@ -92,12 +93,14 @@
   <a class="toggle-ruby btn btn-warning" href="#">注音</a>
   <a class="toggle-japan btn btn-warning" href="#">原文</a>
   <br />
+  <audio id="player" controls>
+  </audio>
+</div>
+<div class="tags">
   <a class="player-shortback btn btn-primary" href="#">短退</a>
   <a class="player-play btn btn-success" href="#">播放</a>
   <a class="player-slow btn btn-primary" href="#">慢速</a>
   <a class="player-normal btn btn-primary" href="#">常速</a>
-  <audio id="player" controls>
-  </audio>
 </div>
 <script>
 $(document).ready(function() {
