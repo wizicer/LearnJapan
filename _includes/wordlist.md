@@ -12,6 +12,8 @@
 | 假名    | 汉字 | 词性 | 解释 | 单词 | 课 | 序号 |
 {:.display.table.table-striped.table-bordered width="100%"}
 
+<button class="downloadMidoriCards btn btn-primary">下载MIDORI卡片</button>
+
 <script>
 $(document).ready(function() {
   function inittable() {
@@ -56,6 +58,39 @@ $(document).ready(function() {
         tip += "<span class='card-pos'>[" + p.pos.slice(0,1) + "]</span>";
         return { tip: tip, desc: desc, read: p.purekana, rid: p.rid }});
     (new easyquiz()).start(quizdata);
+  });
+  function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+  $('button.downloadMidoriCards').on('click', function(e) {
+    e.preventDefault();
+    var data = table.rows({filter: 'applied'}).data()
+      .map(function(p) { return p[4]; })
+      .map(function(p) {
+        /* let display = p.replace(/!(.*?)\((.*?)\)/g, '$1'); */
+        let display = p.replace(/\<rt\>(.*?)\<\/rt\>/g, '')
+                       .replace(/\<ruby\>(.*?)\<\/ruby\>/g, '$1');
+        return { t:1, i:display }});
+    var name = $('.dataTables_filter input').val();
+    let output = JSON.stringify({version:1,data:{n:name,b:Array.from(data)},isroot:0});
+    output = output.replace(/"version":/g, 'version:')
+                   .replace(/"data":/g, 'data:')
+                   .replace(/"n":/g, 'n:')
+                   .replace(/"b":/g, 'b:')
+                   .replace(/"t":/g, 't:')
+                   .replace(/"i":/g, 'i:')
+                   .replace(/"isroot":/g, 'isroot:');
+    /* example output: {version:1,data:{n:"漢字2",b:[{t:1,i:"生"},{t:1,i:"下"}]},isroot:0} */
+    download(name + ".midori", output);
   });
 });
 </script>
