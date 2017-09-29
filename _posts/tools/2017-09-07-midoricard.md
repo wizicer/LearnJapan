@@ -26,6 +26,18 @@ category: tools
   <input id="suruverbbylevel" type="checkbox" checked>
   <label for="suruverbbylevel">动3按考试级别分</label>
 </div>
+<div class="list-group-item">
+  <input id="adj1bylevel" type="checkbox" checked>
+  <label for="adj1bylevel">形1按考试级别分</label>
+</div>
+<div class="list-group-item">
+  <input id="adj2bylevel" type="checkbox" checked>
+  <label for="adj2bylevel">形2按考试级别分</label>
+</div>
+<div class="list-group-item">
+  <input id="adjbylevel" type="checkbox" checked>
+  <label for="adjbylevel">所有形容词按考试级别分</label>
+</div>
 
 </div>
 <button class="downloadMidoriCards btn btn-primary">下载MIDORI卡片</button>
@@ -156,6 +168,18 @@ $(document).ready(function() {
         if ($("#suruverbbylevel").prop('checked')) {
           let filterVerb = _ => _[2] == "动3"
           pushWordsByLevel(arr, res.data, "する動詞", filterVerb);
+        }
+        if ($("#adj1bylevel").prop('checked')) {
+          let filterAdj = _ => _[2] == "形1"
+          pushWordsByLevel(arr, res.data, "形1", filterAdj);
+        }
+        if ($("#adj2bylevel").prop('checked')) {
+          let filterAdj = _ => _[2] == "形2"
+          pushWordsByLevel(arr, res.data, "形2", filterAdj);
+        }
+        if ($("#adjbylevel").prop('checked')) {
+          let filterAdj = _ => _[2] == "形1" || _[2] == "形2"
+          pushWordsByLevel(arr, res.data, "形容词", filterAdj);
         }
         let name = '标日词汇';
         let output = formatToMidoriOutput(name, arr);
