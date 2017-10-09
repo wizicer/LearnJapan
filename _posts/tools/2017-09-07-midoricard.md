@@ -11,31 +11,31 @@ category: tools
   <label for="l1bylesson">初级单词按课文分</label>
 </div>
 <div class="list-group-item">
-  <input id="l1byunit" type="checkbox" checked>
+  <input id="l1byunit" type="checkbox">
   <label for="l1byunit">初级单词按单元分</label>
 </div>
 <div class="list-group-item">
-  <input id="l2bylesson" type="checkbox" checked>
+  <input id="l2bylesson" type="checkbox">
   <label for="l2bylesson">中级单词按课文分</label>
 </div>
 <div class="list-group-item">
-  <input id="verbbylevel" type="checkbox" checked>
+  <input id="verbbylevel" type="checkbox">
   <label for="verbbylevel">动1+2按考试级别分</label>
 </div>
 <div class="list-group-item">
-  <input id="suruverbbylevel" type="checkbox" checked>
+  <input id="suruverbbylevel" type="checkbox">
   <label for="suruverbbylevel">动3按考试级别分</label>
 </div>
 <div class="list-group-item">
-  <input id="adj1bylevel" type="checkbox" checked>
+  <input id="adj1bylevel" type="checkbox">
   <label for="adj1bylevel">形1按考试级别分</label>
 </div>
 <div class="list-group-item">
-  <input id="adj2bylevel" type="checkbox" checked>
+  <input id="adj2bylevel" type="checkbox">
   <label for="adj2bylevel">形2按考试级别分</label>
 </div>
 <div class="list-group-item">
-  <input id="adjbylevel" type="checkbox" checked>
+  <input id="adjbylevel" type="checkbox">
   <label for="adjbylevel">所有形容词按考试级别分</label>
 </div>
 
@@ -44,6 +44,9 @@ category: tools
 
 <script>
 $(document).ready(function() {
+  let kanjimap = {};
+  kanjimap["ついていく"] = "付いて行く";
+  kanjimap["なめる"] = "舐める";
   function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -96,10 +99,31 @@ $(document).ready(function() {
                       .replace(/([\u4E00-\u9FAF]{2})する/g, '$1') // remove する
                       .replace(/^[おご]([\u4E00-\u9FAF]+)/g, '$1') // remove おご
                       ;
+      if (kanjimap.hasOwnProperty(display)) display = kanjimap[display]; // replace with custom kanji map
         //let display = p.replace(/\<rt\>(.*?)\<\/rt\>/g, '')
         //              .replace(/\<ruby\>(.*?)\<\/ruby\>/g, '$1');
         return { t:1, i:display }});
     return d;
+  }
+  function pushWordsByLevel(arr, data, suffix, filter) {
+    for(let i = 1; i <= 2; i++) {
+      let warr = [];
+      for(let j = 1; j <= 24; j++) {
+        let lesson = (i - 1) * 24 + j;
+        let lid = " " + ("00" + lesson).slice(-3);
+        warr = warr.concat(getWords(lid, data, filter));
+      }
+      arr.push({ n:"N" + (6 - i) + suffix, b:warr });
+    }
+    for(let i = 1; i <= 2; i++) {
+      let warr = [];
+      for(let j = 1; j <= 16; j++) {
+        let lesson = (i - 1) * 16 + j;
+        let lid = "m" + ("0" + lesson).slice(-2);
+        warr = warr.concat(getWords(lid, data, filter));
+      }
+      arr.push({ n:"N" + (4 - i) + suffix, b:warr });
+    }
   }
   function formatToMidoriOutput(name, arr) {
     // example output: {version:1,data:{n:"漢字2",b:[{t:1,i:"生"},{t:1,i:"下"}]},isroot:0}
@@ -139,26 +163,6 @@ $(document).ready(function() {
           for(let i = 1; i <= 32; i++) {
             let lesson = "m" + ("0" + i).slice(-2);
             arr.push({ n:"中级第" + i + "课", b:getWords(lesson, res.data) });
-          }
-        }
-        function pushWordsByLevel(arr, data, suffix, filter) {
-          for(let i = 1; i <= 2; i++) {
-            let warr = [];
-            for(let j = 1; j <= 24; j++) {
-              let lesson = (i - 1) * 24 + j;
-              let lid = " " + ("00" + lesson).slice(-3);
-              warr = warr.concat(getWords(lid, data, filter));
-            }
-            arr.push({ n:"N" + (6 - i) + suffix, b:warr });
-          }
-          for(let i = 1; i <= 2; i++) {
-            let warr = [];
-            for(let j = 1; j <= 16; j++) {
-              let lesson = (i - 1) * 16 + j;
-              let lid = "m" + ("0" + lesson).slice(-2);
-              warr = warr.concat(getWords(lid, data, filter));
-            }
-            arr.push({ n:"N" + (4 - i) + suffix, b:warr });
           }
         }
         if ($("#verbbylevel").prop('checked')) {
