@@ -27,6 +27,10 @@ category: tools
   <label for="suruverbbylevel">动3按考试级别分</label>
 </div>
 <div class="list-group-item">
+  <input id="allsuruverb" type="checkbox">
+  <label for="allsuruverb">所有动3</label>
+</div>
+<div class="list-group-item">
   <input id="adj1bylevel" type="checkbox">
   <label for="adj1bylevel">形1按考试级别分</label>
 </div>
@@ -38,6 +42,10 @@ category: tools
   <input id="adjbylevel" type="checkbox">
   <label for="adjbylevel">所有形容词按考试级别分</label>
 </div>
+<div class="list-group-item">
+  <input id="alladj" type="checkbox">
+  <label for="alladj">所有形容词</label>
+</div>
 
 </div>
 <button class="downloadMidoriCards btn btn-primary">下载MIDORI卡片</button>
@@ -47,6 +55,56 @@ $(document).ready(function() {
   let kanjimap = {};
   kanjimap["ついていく"] = "付いて行く";
   kanjimap["なめる"] = "舐める";
+
+  // adj
+  kanjimap["おもしろい"] = "面白い";
+  kanjimap["つまらない"] = "詰まらない";
+  kanjimap["おいしい"] = "美味しい";
+  kanjimap["まずい"] = "不味い";
+  kanjimap["あつい"] = "熱い";
+  kanjimap["すばらしい"] = "素晴らしい";
+  kanjimap["かわいい"] = "可愛い";
+  kanjimap["きれい"] = "綺麗";
+  kanjimap["にぎやか"] = "賑やか";
+  kanjimap["だめ"] = "駄目";
+  kanjimap["まじめ"] = "真面目";
+  kanjimap["うるさい"] = "煩い";
+  kanjimap["うれしい"] = "嬉しい";
+  kanjimap["おかしい"] = "可笑しい";
+  kanjimap["すてき"] = "素敵";
+  kanjimap["ひどい"] = "酷い";
+  kanjimap["へん"] = "変";
+  kanjimap["ぜいたく"] = "贅沢";
+  kanjimap["おとなしい"] = "大人しい";
+  kanjimap["さわやか"] = "爽やか";
+  kanjimap["ありがたい"] = "有難い";
+  kanjimap["かわいそう"] = "可哀そう";
+  kanjimap["わずか"] = "僅か";
+  kanjimap["わがまま"] = "我儘";
+  kanjimap["くやしい"] = "悔しい";
+  kanjimap["さまざま"] = "様々";
+  kanjimap["みっともない"] = "見っともない";
+  kanjimap["よろしい"] = "宜しい";
+  kanjimap["ばか"] = "馬鹿";
+  kanjimap["うらやましい"] = "羨ましい";
+  kanjimap["とんでもない"] = "飛んでもない";
+  kanjimap["ちょっとした"] = "一寸した";
+  kanjimap["もっとも"] = "最も";
+  kanjimap["あわただしい"] = "慌しい";
+  kanjimap["おめでたい"] = "御愛でたい";
+  kanjimap["さんざん"] = "散々";
+  kanjimap["おしゃべり"] = "御喋り";
+  kanjimap["かわいらしい"] = "可愛らしい";
+  kanjimap["おろそか"] = "疎か";
+  kanjimap["いいかげん"] = "好い加減";
+  kanjimap["めったに"] = "滅多に";
+  kanjimap["ずるい"] = "狡い";
+  kanjimap["かゆい"] = "痒い";
+  kanjimap["おおざっぱ"] = "大雑把";
+  kanjimap["ずうずうしい"] = "図々しい";
+  kanjimap["はるか"] = "遥か";
+  kanjimap["だるい"] = "怠い";
+
   function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -125,6 +183,24 @@ $(document).ready(function() {
       arr.push({ n:"N" + (4 - i) + suffix, b:warr });
     }
   }
+  function pushAllWords(arr, data, name, filter) {
+    let warr = [];
+    for(let i = 1; i <= 2; i++) {
+      for(let j = 1; j <= 24; j++) {
+        let lesson = (i - 1) * 24 + j;
+        let lid = " " + ("00" + lesson).slice(-3);
+        warr = warr.concat(getWords(lid, data, filter));
+      }
+    }
+    for(let i = 1; i <= 2; i++) {
+      for(let j = 1; j <= 16; j++) {
+        let lesson = (i - 1) * 16 + j;
+        let lid = "m" + ("0" + lesson).slice(-2);
+        warr = warr.concat(getWords(lid, data, filter));
+      }
+    }
+    arr.push({ n:name, b:warr });
+  }
   function formatToMidoriOutput(name, arr) {
     // example output: {version:1,data:{n:"漢字2",b:[{t:1,i:"生"},{t:1,i:"下"}]},isroot:0}
     let json = JSON.stringify({version:1,data:{n:name,f:arr},isroot:0});
@@ -184,6 +260,14 @@ $(document).ready(function() {
         if ($("#adjbylevel").prop('checked')) {
           let filterAdj = _ => _[2] == "形1" || _[2] == "形2"
           pushWordsByLevel(arr, res.data, "形容词", filterAdj);
+        }
+        if ($("#alladj").prop('checked')) {
+          let filterAdj = _ => _[2] == "形1" || _[2] == "形2"
+          pushAllWords(arr, res.data, "形容词", filterAdj);
+        }
+        if ($("#allsuruverb").prop('checked')) {
+          let filterVerb = _ => _[2] == "动3"
+          pushAllWords(arr, res.data, "する動詞", filterVerb);
         }
         let name = '标日词汇';
         let output = formatToMidoriOutput(name, arr);
