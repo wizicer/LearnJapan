@@ -45,6 +45,7 @@ category: grammar
 $(document).ready(function() {
   table = $('table').DataTable({
     ajax: {
+      cache: true,
       url: '{{ basepath }}/verb.json',
       dataSrc: function ( json ) {
         var d = wordhelper.parseverbdata(json);
