@@ -1,0 +1,68 @@
+---
+---
+CACHE MANIFEST
+
+# rev {{ site.time }}
+
+CACHE:
+index.html
+{{ "/assets/img/blog-image.png" | prepend: site.baseurl }}
+{{ basepath }}/assets/img/blog-author.jpg
+
+{{ basepath }}/adj.json
+{{ basepath }}/lessons.json
+{{ basepath }}/verb.json
+{{ basepath }}/words.json
+
+{{ basepath }}/assets/icons/apple-touch-icon.png
+{{ basepath }}/assets/icons/favicon-32x32.png
+{{ basepath }}/assets/icons/favicon-16x16.png
+{{ basepath }}/assets/icons/manifest.json
+{{ basepath }}/assets/icons/safari-pinned-tab.svg
+{{ basepath }}/assets/icons/favicon.ico
+{{ basepath }}/assets/icons/browserconfig.xml
+
+{{ "/assets/css/main.css" | prepend: basepath }}
+{{ basepath }}/assets/3rd/bootstrap/css/bootstrap.min.css
+{{ basepath }}/assets/3rd/dataTables/dataTables.bootstrap.min.css
+{{ basepath }}/assets/3rd/dataTables/buttons.bootstrap.min.css
+{{ basepath }}/assets/3rd/dataTables/responsive.bootstrap.min.css
+{{ basepath }}/assets/3rd/font-awesome/css/font-awesome.min.css
+
+{{ basepath }}/assets/3rd/bootstrap/css/slate.min.css
+{{ basepath }}/assets/3rd/bootstrap/css/darkly.min.css
+{{ basepath }}/assets/3rd/bootstrap/css/paper.min.css
+{{ basepath }}/assets/3rd/bootstrap/fonts/glyphicons-halflings-regular.eot
+{{ basepath }}/assets/3rd/bootstrap/fonts/glyphicons-halflings-regular.svg
+{{ basepath }}/assets/3rd/bootstrap/fonts/glyphicons-halflings-regular.ttf
+{{ basepath }}/assets/3rd/bootstrap/fonts/glyphicons-halflings-regular.woff
+{{ basepath }}/assets/3rd/bootstrap/fonts/glyphicons-halflings-regular.woff2
+{{ basepath }}/assets/3rd/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0
+{{ basepath }}/assets/3rd/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0
+{{ basepath }}/assets/3rd/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0
+{{ basepath }}/assets/3rd/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0
+{{ basepath }}/assets/3rd/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0
+{{ basepath }}/assets/3rd/font-awesome/fonts/FontAwesome.otf
+
+{{ basepath }}/assets/3rd/jquery/jquery-1.12.4.min.js
+{{ basepath }}/assets/3rd/bootstrap/js/bootstrap.min.js
+{{ basepath }}/assets/3rd/dataTables/jquery.dataTables.min.js
+{{ basepath }}/assets/3rd/dataTables/dataTables.bootstrap.min.js
+{{ basepath }}/assets/3rd/dataTables/dataTables.buttons.min.js
+{{ basepath }}/assets/3rd/dataTables/buttons.bootstrap.min.js
+{{ basepath }}/assets/3rd/dataTables/buttons.colVis.min.js
+{{ basepath }}/assets/3rd/dataTables/dataTables.responsive.min.js
+{{ basepath }}/assets/3rd/dataTables/responsive.bootstrap.min.js
+{{ "/assets/js/main.js" | prepend: basepath }}
+
+
+{% for post in site.posts %}
+{{ post.url }}{% endfor %}
+
+#FALLBACK:
+#/ /index.html
+
+NETWORK:
+*
+http://*
+https://*
