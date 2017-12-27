@@ -13,6 +13,7 @@ index.html
 {{ basepath }}/lessons.json
 {{ basepath }}/verb.json
 {{ basepath }}/words.json
+{{ basepath }}/empty.json
 
 {{ basepath }}/assets/icons/apple-touch-icon.png
 {{ basepath }}/assets/icons/favicon-32x32.png
